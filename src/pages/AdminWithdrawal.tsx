@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import Modal from "../components/Modals/Modal";
-import { history, usersInfo } from "../components/dashboards/data";
 import { MdDeleteForever } from "react-icons/md";
-import UploadButton from "../components/sharedUi/UploadButton";
 import { SearchBar } from "../components/sharedUi/Searchbar";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
 import { WithdrawalState } from "../types/types";
 
 const AdminWithdrawal = () => {
-  const [loading, setLoading] = useState<{ [id: string]: boolean }>({});
   const [userId, setUserId] = useState<string | null>(null);
   const [depositId, setDepositId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);

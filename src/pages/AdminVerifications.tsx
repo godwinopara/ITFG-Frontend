@@ -2,23 +2,19 @@ import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import Modal from "../components/Modals/Modal";
 import { FaRegEyeSlash } from "react-icons/fa";
-import UploadButton2 from "../components/sharedUi/UploadButton2";
 import { MdDeleteForever } from "react-icons/md";
 import { VerificationState } from "../types/types";
 import { SearchBar } from "../components/sharedUi/Searchbar";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../lib/firebase";
+
 
 type Props = {};
 
 const AdminVerifications = (props: Props) => {
   const [viewImg, setViewImg] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState<{ [currentUserId: string]: boolean }>(
-    {}
-  );
+ 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredUsers, setFilteredUsers] = useState<VerificationState[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -64,27 +60,10 @@ const AdminVerifications = (props: Props) => {
     setViewImg("");
   };
 
-  const handleVerification = (userId: string) => {
-    setLoading((prevLoading) => ({ ...prevLoading, [userId]: true }));
 
-    if (!userId) {
-      return;
-    }
-
-    setTimeout(() => {
-      try {
-        alert("verified");
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading((prevLoading) => ({ ...prevLoading, [userId]: false }));
-      }
-    }, 1000);
-  };
 
   const handleApprove = async (id: any) => {
     updateVerificationStatus(id);
-    // dispatch({type: ""})
   };
 
   return (

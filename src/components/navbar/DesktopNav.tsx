@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/LOGO-DARK.svg";
+import logo from "../../images/LOGO.svg";
 
 export default function DesktopNav() {
 	const [isMarketMenuOpen, setIsMarketMenuOpen] = useState(false);

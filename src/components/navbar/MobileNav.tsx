@@ -1,9 +1,8 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import logo from "../../images/LOGO-DARK.svg";
+import logo from "../../images/LOGO.svg";
 import { useEffect, useState } from "react";
 
-import { RiArrowRightSLine } from "react-icons/ri";
 
 export default function MobileNav() {
 	const [isMarketMenuOpen, setIsMarketMenuOpen] = useState(false);

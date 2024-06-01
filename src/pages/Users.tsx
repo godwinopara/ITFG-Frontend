@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import UploadButton2 from "../components/sharedUi/UploadButton2";
 import { MdDeleteForever } from "react-icons/md";
 import Modal from "../components/Modals/Modal";
-import { usersInfo } from "../components/dashboards/data";
+// import { usersInfo } from "../components/dashboards/data";
 import { SearchBar } from "../components/sharedUi/Searchbar";
-import { User, UserState } from "../types/types";
+import { User} from "../types/types";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
 
@@ -15,10 +14,6 @@ const Users = (props: Props) => {
   const [currentUserId, setCurrentUserId] = useState<any>("");
   const [showModal, setShowModal] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [loading, setLoading] = useState<{ [currentUserId: string]: boolean }>(
-    {}
-  );
-
   const [allowDeleteUser, setAllowDeleteUser] = useState(false);
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -29,7 +24,7 @@ const Users = (props: Props) => {
 
   useEffect(() => {
     setFilteredUsers(state.users);
-  }, []);
+  }, [state.users]);
 
   useEffect(() => {
     const results = state.users?.filter(

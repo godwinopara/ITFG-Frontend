@@ -4,12 +4,9 @@ import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../lib/firebase";
 import { useUserContext } from "../../context/UserContext";
-import capitalizeFirstLetter from "../../lib/capitalize";
-import { verifications } from "./data";
 
 const DropdownAdmin = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const [status, setStatus] = useState("not-verified");
 	const navigate = useNavigate();
 
 	const trigger = useRef<any>(null);
@@ -17,11 +14,9 @@ const DropdownAdmin = () => {
 
 	const { state, loading } = useUserContext();
 
-	useEffect(() => {
-		if (state && state.verification && state.verification.status) {
-			setStatus(state.verification.status);
-		}
-	}, [state.verification.status]);
+
+
+	
 
 	// close on click outside
 	useEffect(() => {
@@ -64,13 +59,7 @@ const DropdownAdmin = () => {
 					<span className="block  font-medium mb-1 text-white">
 						{loading && "Loading..."} {!loading && state.firstname} {!loading && state.lastname}
 					</span>
-					<span
-						className={`block text-xs  font-medium text-black rounded-md py-1 px-2 text-center ${
-							status === "verified" ? "text-white bg-success" : "text-white bg-warning"
-						}`}
-					>
-						{loading ? "Loading..." : capitalizeFirstLetter(status)}
-					</span>
+					
 				</div>
 				<div className="relative w-[50px] h-[50px] bg-boxdark-2 rounded-full overflow-hidden flex items-center justify-center">
 					{!loading && state.photoUrl ? (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../images/LOGO-DARK.svg";
+import logo from "../images/LOGO.svg";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -22,9 +22,6 @@ interface Country {
 
 export default function SignUp() {
 	const [countries, setCountries] = useState<Country[] | null>(null);
-	const [error, setError] = useState<string | null>(null);
-
-	const [loading, setLoading] = useState(false);
 
 	const [formData, setFormData] = useState({
 		firstname: "",
@@ -128,8 +125,7 @@ export default function SignUp() {
 		e.preventDefault();
 
 		if (formData.password !== formData.confirmPassword) {
-			setError("Password Mismatch: Password and Confirm Password not the same");
-			setLoading(false);
+			toast.error("Password Mismatch: Password and Confirm Password not the same")
 			return;
 		}
 
@@ -196,7 +192,6 @@ export default function SignUp() {
 	};
 
 	useEffect(() => {
-		setError(null);
 
 		const getCountries = async () => {
 			try {
@@ -204,7 +199,7 @@ export default function SignUp() {
 				const data = res.data;
 				setCountries(data.data);
 			} catch (error: any) {
-				setError(error.message);
+				toast.error(error.message)
 			}
 		};
 		getCountries();

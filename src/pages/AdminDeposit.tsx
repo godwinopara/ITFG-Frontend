@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import Modal from "../components/Modals/Modal";
-import { history, usersInfo } from "../components/dashboards/data";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { SearchBar } from "../components/sharedUi/Searchbar";
@@ -13,13 +12,12 @@ import capitalizeFirstLetter from "../lib/capitalize";
 type Props = {};
 
 const AdminDeposit = (props: Props) => {
-  const [loading, setLoading] = useState<{ [id: string]: boolean }>({});
 
   const [viewImg, setViewImg] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const [userId, setUserId] = useState<string | null>(null);
-  const [depositId, setDepositId] = useState<string | null>(null);
+  // const [depositId, setDepositId] = useState<string | null>(null);
 
   const [allowRemoveDeposit, setAllowRemoveDeposit] = useState(false);
   const [showRemoveDepositModal, setShowRemoveDepositModal] = useState(false);
@@ -79,7 +77,7 @@ const AdminDeposit = (props: Props) => {
 
   const openRemoveDepositModal = (userId: string, depositId: string) => {
     setUserId(userId);
-    setDepositId(depositId);
+    // setDepositId(depositId);
     setShowRemoveDepositModal(true);
   };
 

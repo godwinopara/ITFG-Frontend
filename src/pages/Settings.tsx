@@ -3,12 +3,9 @@ import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FaUser } from "react-icons/fa";
 import loader from "../images/spinner.svg";
-import { updatePassword } from "firebase/auth";
-import { storage } from "../lib/firebase";
 import upload from "../lib/upload";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { useUserContext } from "../context/UserContext";
-import axios from "axios";
 
 const Settings = () => {
 	const [image, setImage] = useState<string | null>(null);

@@ -2,7 +2,6 @@ import { AdminLayout } from "../components/layouts/AdminLayout";
 import { StockMarket } from "react-ts-tradingview-widgets";
 import DashboardTable from "../components/dashboards/DashboardTable";
 import { TradingSession } from "../components/dashboards/TradingSession";
-import { AccountSummary } from "../components/dashboards/AccountSummary";
 import { CardDataStats } from "../components/dashboards/CardDataStats";
 import { useUserContext } from "../context/UserContext";
 import VerificationCard from "../components/dashboards/VerificationCard";

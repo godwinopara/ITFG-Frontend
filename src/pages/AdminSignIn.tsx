@@ -2,10 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/LOGO-DARK.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { auth, db } from "../lib/firebase";
-import { useUserContext } from "../context/UserContext";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function AdminSignIn() {

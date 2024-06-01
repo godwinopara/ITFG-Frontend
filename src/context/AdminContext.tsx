@@ -447,7 +447,6 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
 	const updateAccount = async (uid: string, payload: AccountState) => {
 		try {
 			const accountRef = doc(db, "accounts", uid);
-			const accountSnap = await getDoc(accountRef);
 
 			// Update the trade
 			const updatedAccount = payload;

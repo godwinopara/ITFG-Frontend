@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import Modal from "../components/Modals/Modal";
-import { history, usersInfo } from "../components/dashboards/data";
-import UploadButton from "../components/sharedUi/UploadButton";
 import { SearchBar } from "../components/sharedUi/Searchbar";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
@@ -10,25 +8,9 @@ import { TradeState } from "../types/types";
 
 type Props = {};
 
-interface UserTradeHistoriesProps {
-  fullname: string;
-  tradeType: string;
-  tradeOption: string;
-  pairs: string;
-  lotSize: string;
-  entry: string;
-  stopLoss: string;
-  takeProfit: string;
-  profit: string;
-  status: string;
-  result: string;
-  date: string;
-  userId: string;
-  id: string;
-}
+
 
 const AdminTradingSession = (props: Props) => {
-  const [loading, setLoading] = useState<{ [id: string]: boolean }>({});
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [tradeId, setTradeId] = useState("");
@@ -58,7 +40,7 @@ const AdminTradingSession = (props: Props) => {
     }
 
     setFilteredUsers(results);
-  }, [searchTerm, state.trades]);
+  }, [searchTerm, state.trades, trades]);
 
   const pageSize = 5;
 

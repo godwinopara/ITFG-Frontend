@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect} from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { UserProvider, useUserContext } from "./context/UserContext";
+import { UserProvider} from "./context/UserContext";
 import Loader from "./components/ui/Loader";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";

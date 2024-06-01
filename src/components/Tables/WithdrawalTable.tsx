@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../context/UserContext";
-import { Withdrawal, WithdrawalState } from "../../types/types";
+import { Withdrawal} from "../../types/types";
 // import { withdrawalData } from "../dashboards/data";
 
 export default function WithdrawalTable() {

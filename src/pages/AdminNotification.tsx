@@ -3,9 +3,6 @@ import { AdminLayout } from "../components/layouts/AdminLayout";
 import { notifications, usersInfo } from "../components/dashboards/data";
 import Modal from "../components/Modals/Modal";
 import { SearchBar } from "../components/sharedUi/Searchbar";
-import { FaRegEyeSlash } from "react-icons/fa";
-import UploadButton2 from "../components/sharedUi/UploadButton2";
-import { MdDeleteForever } from "react-icons/md";
 import { Pagination } from "../components/sharedUi/Pagination";
 import UploadButton from "../components/sharedUi/UploadButton";
 
@@ -24,7 +21,6 @@ const AdminNotification = (props: Props) => {
     message: "",
     status: "",
   });
-  const [userId, setUserId] = useState("");
   const [tradeId, setTradeId] = useState("");
 
   useEffect(() => {
@@ -63,17 +59,12 @@ const AdminNotification = (props: Props) => {
 
   const handleShowModal = (userId: string, id: string) => {
     setShowModal(true);
-    setUserId(userId);
+    // setUserId(userId);
     setTradeId(id);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = {
-      title: updateNotificationStatus.title,
-      message: updateNotificationStatus.message,
-      status: updateNotificationStatus.status,
-    };
 
     setLoading((prevLoading) => ({ ...prevLoading, [tradeId]: true }));
 
