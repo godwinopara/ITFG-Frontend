@@ -103,7 +103,7 @@ const DropdownAdmin = () => {
 					<li>
 						<Link
 							to="/user/settings"
-							className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-meta-3 lg:text-base"
+							className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary-hover lg:text-base"
 						>
 							<svg
 								className="fill-current"
@@ -128,7 +128,7 @@ const DropdownAdmin = () => {
 				</ul>
 				<button
 					onClick={handleSignOut}
-					className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-meta-3 lg:text-base"
+					className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary-hover lg:text-base"
 				>
 					<svg
 						className="fill-current"

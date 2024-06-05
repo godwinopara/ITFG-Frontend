@@ -65,30 +65,28 @@ const Metatrader4 = (props: Props) => {
     <MainLayout>
       <div className=" xl:mb-0  py-28 xl:my-0 max-w-7xl mx-auto px-6 ">
         <div className=" flex flex-col gap-5">
-          <h2 className="text-3xl font-bold  tracking-wide leading-[120%]  mx-auto">
-            Why choose MetaTrader 4?
-          </h2>
+          <h2 className="text-3xl font-bold  tracking-wide leading-[120%]  mx-auto">Why choose MetaTrader 4?</h2>
+
           <p className="text-lg leading-8 text-[#141e30] ">
-            MetaTrader 4 (MT4) is one of the world's most popular trading
-            platforms for Forex and CFD traders. <br /> It offers a wide range
-            of features, including advanced charting tools, interactive charts,
-            automated trading systems (Expert Advisors), copy trading, custom
-            indicators, algorithmic trading, scripts, and more. <br /> With MT4,
-            you can access the markets from anywhere in the world with an
-            internet connection. <br /> You can also trade on multiple devices
-            at once, allowing you to monitor your positions and manage your
-            trades from any location. <br /> MT4 is designed to be a
-            user-friendly and intuitive online trading platform. Its interface
-            is easy to navigate and it provides a range of helpful features such
-            as one-click trading, real-time quotes and news feeds, technical
-            analysis tools, customizable charts and indicators, and much more.{" "}
-            <br /> It also has a built-in programming language called MQL4 which
-            allows users to create their own Expert Advisors or customise
-            existing ones. <br /> Whether you're a beginner or an experienced
-            trader, MetaTrader 4 provides everything you need to start trading
-            in the financial markets. <br /> With its powerful features and
-            intuitive design, MT4 makes it easy for anyone to get started with
-            online trading.
+            MetaTrader 4 (MT4) is one of the world's most popular trading platforms for Forex and CFD traders. <br /> It
+            offers a wide range of features, including advanced charting tools, interactive charts, automated trading
+            systems (Expert Advisors), copy trading, custom indicators, algorithmic trading, scripts, and more. <br />
+          </p>
+          <p className="text-lg leading-8 text-[#141e30] ">
+            With MT4, you can access the markets from anywhere in the world with an internet connection. You can
+            also trade on multiple devices at once, allowing you to monitor your positions and manage your trades from
+            any location.
+          </p>
+          <p className="text-lg leading-8 text-[#141e30] ">
+            MT4 is designed to be a user-friendly and intuitive online trading platform. Its interface is easy to
+            navigate and it provides a range of helpful features such as one-click trading, real-time quotes and news
+            feeds, technical analysis tools, customizable charts and indicators, and much more.
+          </p>
+          <p className="text-lg leading-8 text-[#141e30] ">
+            It also has a built-in programming language called MQL4 which allows users to create their own Expert
+            Advisors or customise existing ones. <br /> Whether you're a beginner or an experienced trader, MetaTrader 4
+            provides everything you need to start trading in the financial markets. <br /> With its powerful features
+            and intuitive design, MT4 makes it easy for anyone to get started with online trading.
           </p>
           <div className="grid lg:grid-cols-2 gap-8 mt-8">
             {instructions.map((item) => (
@@ -99,9 +97,7 @@ const Metatrader4 = (props: Props) => {
       </div>
       <Who />
       <div className="xl:mb-0  py-28 xl:my-0 max-w-7xl px-6 mx-auto flex flex-col gap-5 ">
-        <h2 className="text-4xl font-bold  tracking-wide leading-[120%]  mx-auto">
-          Key features and benefits
-        </h2>
+        <h2 className="text-4xl font-bold  tracking-wide leading-[120%]  mx-auto">Key features and benefits</h2>
         <div className="grid lg:grid-cols-2 gap-8 mt-8">
           {benefits.map((item) => (
             <Instructions key={item.id} data={item} />

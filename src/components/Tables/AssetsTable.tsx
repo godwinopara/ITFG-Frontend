@@ -60,7 +60,7 @@ export default function AssetsTable() {
                   </h5>
                 </td>
 
-                <td className="border  border-strokedark">
+                <td className="border  border-strokedark pl-5">
                   <Link
                     to="/user/deposit"
                     className="inline-flex items-center justify-center rounded-md border border-primary hover:text-white hover:bg-primary py-2 px-6 text-center font-medium text-primary hover:bg-opacity-90 lg:px-8 xl:px-10"

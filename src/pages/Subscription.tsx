@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { SubscriptionCard } from "../components/dashboards/SuscriptionCard";
 import { useUserContext } from "../context/UserContext";
 import { SubscriptionState } from "../types/types";
@@ -8,11 +8,13 @@ import { SubscriptionState } from "../types/types";
 type Props = {};
 
 const Subscription = (props: Props) => {
+  const { state, updateSubscription } = useUserContext();
+
+
   const [subscription, setSubscriptions] = useState<SubscriptionState | null>(
-    null
+    state.subscription || null
   );
 
-  const { state, updateSubscription } = useUserContext();
 
   useEffect(() => {
     setSubscriptions(state.subscription);
@@ -89,7 +91,7 @@ const Subscription = (props: Props) => {
       {subscription?.plan && (
         <div className="border-stroke  bg-boxdark dark:bg-boxdark flex flex-col items-center justify-center text-center h-full py-20">
           <div className="text-6xl text-primary mb-3">
-            <FaCheckCircle />
+            <FaRegCircleCheck />
           </div>
           <h2 className="text-2xl font-bold mb-3 text-white dark:text-white">
             Subscription Confirmed!

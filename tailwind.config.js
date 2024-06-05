@@ -50,6 +50,7 @@ module.exports = {
         warning: "#FFA70B",
         "gray-2": "#F7F9FC",
         whiter: "#F5F7FD",
+        notify: "rgb(47, 150, 180)"
       },
       boxShadow: {
         default: "0px 8px 13px -3px rgba(0, 0, 0, 0.07)",

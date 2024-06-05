@@ -1,5 +1,5 @@
 import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
-import footerLogo from "../../images/LOGO.svg";
+import footerLogo from "../../images/LOGODARK.svg";
 import { Link } from "react-router-dom";
 
 export default function Footer() {

@@ -76,18 +76,18 @@ const Settings = () => {
 	return (
 		<>
 			<AdminLayout>
-				<div className="mx-auto max-w-270">
+				<div className="mx-auto max-w-270 text-white">
 					<div className="grid grid-cols-5 gap-8">
-						<div className="col-span-5 xl:col-span-3">
-							<div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-								<div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
-									<h3 className="font-medium text-black dark:text-white">Personal Information</h3>
+						<div className="col-span-5 xl:col-span-3 bg-boxdark py-5 rounded-md">
+							<div className="rounded-sm bg-box-dark ">
+								<div className="py-4 px-7 dark:dark">
+									<h3 className="font-bold text-lg text-white">Personal Information</h3>
 								</div>
 								<div className="p-7">
 									<div className="mb-5 flex flex-col gap-5 sm:flex-row">
 										<div className="w-full sm:w-1/2">
 											<label
-												className="mb-3 block text-sm font-medium text-black dark:text-white"
+												className="mb-3 block text-sm font-medium"
 												htmlFor="firstname"
 											>
 												First Name
@@ -119,7 +119,7 @@ const Settings = () => {
 													</svg>
 												</span>
 												<input
-													className="w-full rounded border border-stroke bg-gray py-3 pl-10 pr-5  focus:border-primary text-black focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+													className="w-full rounded border bg-transparent py-3 pl-10 pr-5  focus:border-primary  focus-visible:outline-none"
 													type="text"
 													name="firstname"
 													defaultValue={userInfo.firstname}
@@ -130,7 +130,7 @@ const Settings = () => {
 										</div>
 										<div className="w-full sm:w-1/2">
 											<label
-												className="mb-3 block text-sm font-medium text-black dark:text-white"
+												className="mb-3 block text-sm font-medium"
 												htmlFor="lastname"
 											>
 												Last Name
@@ -162,7 +162,7 @@ const Settings = () => {
 													</svg>
 												</span>
 												<input
-													className="w-full rounded border border-stroke bg-gray py-3 pl-10 pr-4 text-black focus:border-meta3text-meta-3 focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+													className="w-full rounded border bg-transparent  bg-gray py-3 pl-10 pr-4  focus:border-primary text-white focus-visible:outline-none"
 													type="text"
 													name="lastname"
 													required
@@ -176,13 +176,13 @@ const Settings = () => {
 									<div className="mb-5 flex flex-col gap-5 sm:flex-row">
 										<div className="w-full sm:w-1/2 mb-5.5">
 											<label
-												className="mb-3 block text-sm font-medium text-black dark:text-white"
+												className="mb-3 block text-sm font-medium"
 												htmlFor="mobile"
 											>
 												Phone Number
 											</label>
 											<input
-												className="w-full rounded border border-stroke bg-gray py-3 px-4 text-black focus:border-meta3text-meta-3 focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+												className="w-full rounded border  bg-transparent py-3 px-4  focus:border-primary text-white focus-visible:outline-none"
 												type="text"
 												name="mobile"
 												required
@@ -192,14 +192,14 @@ const Settings = () => {
 										</div>
 										<div className="w-full sm:w-1/2">
 											<label
-												className="mb-3 block text-sm font-medium text-black dark:text-white"
+												className="mb-3 block text-sm font-medium"
 												htmlFor="lastname"
 											>
 												Country
 											</label>
 											<div>
 												<input
-													className="w-full rounded border border-stroke bg-gray py-3 px-4 text-black focus:border-meta3text-meta-3 focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+													className="w-full rounded border bg-transparent  bg-gray py-3 px-4  focus:border-meta3text-meta-3 focus-visible:outline-none dark:dark dark:bg-meta- dark:focus:border-meta3text-meta-3"
 													type="text"
 													name="country"
 													required
@@ -211,7 +211,7 @@ const Settings = () => {
 									</div>
 									<div className="mb-5">
 										<label
-											className="mb-3 block text-sm font-medium text-black dark:text-white"
+											className="mb-3 block text-sm font-medium"
 											htmlFor="emailAddress"
 										>
 											Email Address
@@ -243,7 +243,7 @@ const Settings = () => {
 												</svg>
 											</span>
 											<input
-												className="w-full rounded border border-stroke bg-gray py-3 pl-10 pr-4 text-black  focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+												className="w-full rounded border bg-transparent  bg-gray py-3 pl-10 pr-4   focus-visible:outline-none dark:dark dark:bg-meta- dark:focus:border-meta3text-meta-3"
 												type="email"
 												name="emailAddress"
 												required
@@ -256,13 +256,13 @@ const Settings = () => {
 
 									<div className="mb-5">
 										<label
-											className="mb-3 block text-sm font-medium text-black dark:text-white"
+											className="mb-3 block text-sm font-medium"
 											htmlFor="Username"
 										>
 											Username
 										</label>
 										<input
-											className="w-full rounded border border-stroke bg-gray py-3 px-4 focus:border-primary text-black focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+											className="w-full rounded border bg-transparent  bg-gray py-3 px-4 focus:border-primary  focus-visible:outline-none dark:dark dark:bg-meta- dark:focus:border-meta3text-meta-3"
 											type="text"
 											name="username"
 											readOnly
@@ -273,10 +273,10 @@ const Settings = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col-span-5 xl:col-span-2">
-							<div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-								<div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
-									<h3 className="font-medium text-black dark:text-white">Your Photo</h3>
+						<div className="col-span-5 xl:col-span-2 bg-boxdark rounded-md">
+							<div className="rounded-sm">
+								<div className="py-4 px-7 dark:dark">
+									<h3 className="font-bold text-lg">Your Photo</h3>
 								</div>
 								<div className="p-7">
 									<form onSubmit={handleUpdateProfilePic}>
@@ -294,7 +294,7 @@ const Settings = () => {
 													)}
 												</div>
 												<div>
-													<span className="mb-1.5 text-black dark:text-white">Edit your photo</span>
+													<span className="mb-1.5">Edit your photo</span>
 													<span className="flex gap-2.5">
 														<button className="text-sm hover:text-primary-hover">Delete</button>
 														<button className="text-sm hover:text-primary-hover">Update</button>
@@ -311,7 +311,7 @@ const Settings = () => {
 													type="file"
 													accept="image/*"
 													{...getInputProps()}
-													className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
+													className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none bg-transparent"
 												/>
 
 												{loading && (
@@ -327,7 +327,7 @@ const Settings = () => {
 												/>
 											)} */}
 												<div className="flex flex-col items-center justify-center space-y-3">
-													<span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">
+													<span className="flex h-10 w-10 items-center justify-center rounded-full border  bg-white dark:dark dark:bg-boxdark">
 														<svg
 															width="16"
 															height="16"
@@ -385,23 +385,23 @@ const Settings = () => {
 					</div>
 
 					<div className="grid grid-cols-5 gap-8 mt-10">
-						<div className="col-span-5 xl:col-span-3">
-							<div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-								<div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
-									<h3 className="font-medium text-black dark:text-white">Update Password</h3>
+						<div className="col-span-5 xl:col-span-3 bg-boxdark py-5">
+							<div className="rounded-sm  shadow-default dark:dark dark:bg-boxdark">
+								<div className="py-4 px-7 dark:dark">
+									<h3 className="font-bold text-lg">Update Password</h3>
 								</div>
 								<div className="p-7">
 									<form onSubmit={handleChangePassword}>
 										<div className="mb-5.5 flex flex-col gap-5.5 ">
 											<div className="mb-5">
 												<label
-													className="mb-3 block text-sm font-medium text-black dark:text-white"
+													className="mb-3 block text-sm font-medium"
 													htmlFor="Username"
 												>
 													Password
 												</label>
 												<input
-													className="w-full rounded border border-stroke bg-gray py-3 px-4 text-black focus:border-meta3text-meta-3 focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+													className="w-full rounded border bg-transparent  bg-gray py-3 px-4  focus:border-meta3text-meta-3 focus-visible:outline-none dark:dark dark:bg-meta- dark:focus:border-meta3text-meta-3"
 													type="text"
 													name="password"
 													onChange={handlePasswordChange}
@@ -412,13 +412,13 @@ const Settings = () => {
 
 											<div className="mb-55">
 												<label
-													className="mb-3 block text-sm font-medium text-black dark:text-white"
+													className="mb-3 block text-sm font-medium"
 													htmlFor="Username"
 												>
 													Confirm Password
 												</label>
 												<input
-													className="w-full rounded border border-stroke bg-gray py-3 px-4 text-black focus:border-meta3text-meta-3 focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-meta3text-meta-3"
+													className="w-full rounded border bg-transparent py-3 px-4  focus:border-meta3text-meta-3 focus-visible:outline-none dark:dark dark:bg-meta- dark:focus:border-meta3text-meta-3"
 													type="text"
 													name="confirmPassword"
 													onChange={handlePasswordChange}

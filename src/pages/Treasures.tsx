@@ -5,17 +5,20 @@ import MoreThanTreasure from "../components/treasures/MoreThanTreasure";
 import { MoreTreasuresFx } from "../components/treasures/MoreTreasureFx";
 import { Exposure } from "../components/treasures/Exposure";
 import { TreasuresFaq } from "../components/treasures/TreasuresFaq";
+import WithdrawalAlert from "../lib/WithdrawalAlert";
 
 type Props = {};
 
 const Treasures = (props: Props) => {
   return (
     <MainLayout>
-      <TreasureHero />
-      <MoreThanTreasure />
-      <MoreTreasuresFx />
-      <Exposure />
-      <TreasuresFaq />
+      <WithdrawalAlert>
+        <TreasureHero />
+        <MoreThanTreasure />
+        <MoreTreasuresFx />
+        <Exposure />
+        <TreasuresFaq />
+      </WithdrawalAlert>
     </MainLayout>
   );
 };

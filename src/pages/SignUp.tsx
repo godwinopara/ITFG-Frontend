@@ -79,7 +79,7 @@ export default function SignUp() {
 						password: "",
 						gender: "",
 						joinedDate: new Date().toDateString(),
-						status: "Active",
+						status: "pending",
 						// 	// Other user data you may want to save
 					});
 
@@ -154,7 +154,7 @@ export default function SignUp() {
 					gender: formData.gender,
 					photoUrl: res.user.photoURL,
 					joinedDate: new Date().toDateString(),
-					status: "Active",
+					status: "pending",
 				});
 
 				await setDoc(doc(db, "deposits", res.user.uid), {

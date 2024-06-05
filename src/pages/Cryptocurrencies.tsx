@@ -5,17 +5,20 @@ import CryptoMoreThan from "../components/crypto/CryptoThan";
 import { TradeCrypto } from "../components/crypto/TradeCrypto";
 import { CryptoFx } from "../components/crypto/CryptoFx";
 import { CryptoFaq } from "../components/crypto/CryptoFaq";
+import WithdrawalAlert from "../lib/WithdrawalAlert";
 
 type Props = {};
 
 const Cryptocurrencies = (props: Props) => {
   return (
     <MainLayout>
-      <CryptoHero />
-      <CryptoMoreThan />
-      <CryptoFx />
-      <TradeCrypto />
-      <CryptoFaq />
+      <WithdrawalAlert>
+        <CryptoHero />
+        <CryptoMoreThan />
+        <CryptoFx />
+        <TradeCrypto />
+        <CryptoFaq />
+      </WithdrawalAlert>
     </MainLayout>
   );
 };

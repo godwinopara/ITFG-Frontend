@@ -10,22 +10,25 @@ import { ExecutiveControl } from "../components/aboutUs/ExecutiveControl";
 import { RiskManagement } from "../components/aboutUs/RiskManagement";
 import { Support } from "../components/aboutUs/Support";
 import { SharpenSkills } from "../components/aboutUs/SharpenSkills";
+import WithdrawalAlert from "../lib/WithdrawalAlert";
 
 type Props = {};
 
 const About = (props: Props) => {
   return (
     <MainLayout>
-      <WhyUs />
-      <HeartOf />
-      <Value />
-      <TradingOpportunity />
-      <OurPlatform />
-      <ChattingAbility />
-      <ExecutiveControl />
-      <RiskManagement />
-      <Support />
-      <SharpenSkills />
+      <WithdrawalAlert>
+        <WhyUs />
+        <HeartOf />
+        <Value />
+        <TradingOpportunity />
+        <OurPlatform />
+        <ChattingAbility />
+        <ExecutiveControl />
+        <RiskManagement />
+        <Support />
+        <SharpenSkills />
+      </WithdrawalAlert>
     </MainLayout>
   );
 };

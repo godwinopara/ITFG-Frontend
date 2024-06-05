@@ -141,21 +141,21 @@ const Users = (props: Props) => {
               className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3"
             >
               <option value="">Choose Status</option>
-              <option value="Active">Active</option>
-              <option value="Pending">Pending</option>
-              <option value="Signal Fee">Signal Fee</option>
-              <option value="Upgrade">Upgrade</option>
-              <option value="Insurance">Insurance</option>
-              <option value="Stamp Duty">Stamp Duty</option>
-              <option value="Trading Time">Trading Time</option>
-              <option value="IRS">IRS</option>
-              <option value="Broker Fee">Broker Fee</option>
-              <option value="Account Management Fee">
+              <option value="active">Active</option>
+              <option value="pending">Pending</option>
+              <option value="signal fee">Signal Fee</option>
+              <option value="upgrade">Upgrade</option>
+              <option value="insurance">Insurance</option>
+              <option value="stamp duty">Stamp Duty</option>
+              <option value="trading time">Trading Time</option>
+              <option value="irs">IRS</option>
+              <option value="broker fee">Broker Fee</option>
+              <option value="account management fee">
                 Account Management Fee
               </option>
-              <option value="Cost of Transfer">Cost of Transfer</option>
-              <option value="Withdrawal Fee">Withdrawal Fee</option>
-              <option value="Trade Commission Fee">Trade Commission Fee</option>
+              <option value="cost of transfer">Cost of Transfer</option>
+              <option value="withdrawal fee">Withdrawal Fee</option>
+              <option value="trade commission fee">Trade Commission Fee</option>
             </select>
           </div>
 
@@ -262,7 +262,7 @@ const Users = (props: Props) => {
                     <td className="border  py-5 px-4 border-strokedark">
                       <p
                         className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
-                          userItem.status === "Active"
+                          userItem.status === "active"
                             ? "text-success bg-success"
                             : "text-warning bg-warning"
                         }`}

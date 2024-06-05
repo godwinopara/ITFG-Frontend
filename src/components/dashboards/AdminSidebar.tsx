@@ -10,6 +10,7 @@ import { BiMoneyWithdraw } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { HamburgerIcon } from "../ui/HamburgerIcon";
 import { CircleMinus, CirclePlus, CopyPlus } from "lucide-react";
+import { useUserContext } from "../../context/UserContext";
 
 type Props = {
   sidebarOpen: boolean;
@@ -17,6 +18,10 @@ type Props = {
 };
 
 export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
+  const { state } = useUserContext();
+
+  const [status, setStatus] = useState(state.status || "pending");
+
   const location = useLocation();
   const pathname = location.pathname;
   const currentPath = pathname.split("/")[1];
@@ -29,16 +34,17 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
+
+  useEffect(() => {
+    setStatus(state.status)
+  }, [state])
+  
+
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!sidebar.current || !trigger.current) return;
-      if (
-        !sidebarOpen ||
-        sidebar.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target)) return;
       setSidebarOpen(false);
     };
     document.addEventListener("click", clickHandler);
@@ -97,9 +103,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <li>
                 <Link
                   to={`/${currentPath}/dashboard`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                    pathname === `/${currentPath}/dashboard` &&
-                    "bg-[#303030] dark:bg-meta-4"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                    pathname === `/${currentPath}/dashboard` && "bg-primary-hover "
                   }`}
                 >
                   <FaHome />
@@ -111,9 +116,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/users`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("users") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("users") && "bg-primary-hover "
                     }`}
                   >
                     <FaUsers />
@@ -126,9 +130,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/account`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("account") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("account") && "bg-primary-hover "
                     }`}
                   >
                     <FaUsers />
@@ -136,54 +139,67 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </Link>
                 </li>
               )}
+              
+              
               {!pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/${currentPath}/assets`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("assets") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("assets") && "bg-primary-hover "
                     }`}
                   >
                     <CopyPlus />
                     Assets
                   </Link>
                 </li>
+              
               )}
+              
 
               <li>
                 <Link
                   to={`/${currentPath}/deposit`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                    pathname.includes("deposit") &&
-                    "bg-[#303030] dark:bg-meta-4"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                    pathname.includes("deposit") && "bg-primary-hover "
                   }`}
                 >
                   <CirclePlus />
                   Deposits
                 </Link>
               </li>
-
-              <li>
-                <Link
-                  to={`/${currentPath}/withdrawal`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                    pathname.includes("withdrawal") &&
-                    "bg-[#303030] dark:bg-meta-4"
-                  }`}
-                >
-                  <CircleMinus />
-                  Withdrawals
-                </Link>
-              </li>
-
+              {status === "active" && (
+                <li>
+                  <Link
+                    to={`/user/withdrawal`}
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("withdrawal") && "bg-primary-hover "
+                    }`}
+                  >
+                    <CircleMinus />
+                    Withdrawals
+                  </Link>
+                </li>
+              )}
+              {pathname.includes("admin") && (
+                <li>
+                  <Link
+                    to={`/admin/withdrawal`}
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("withdrawal") && "bg-primary-hover "
+                    }`}
+                  >
+                    <CircleMinus />
+                    Withdrawals
+                  </Link>
+                </li>
+              )}
               {pathname.includes("buy-bitcoin") && (
                 <li>
                   <Link
                     to={`/${currentPath}/buy-bitcoin`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("buy-bitcoin") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("buy-bitcoin") && "bg-primary-hover "
                     }`}
                   >
                     <BiMoneyWithdraw />
@@ -195,9 +211,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/trades"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("trades") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("trades") && "bg-primary-hover "
                     }`}
                   >
                     <TbChartCandle />
@@ -209,9 +224,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <li>
                 <Link
                   to={`/${currentPath}/subscriptions`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                    pathname.includes("subscription") &&
-                    "bg-[#303030] dark:bg-meta-4"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                    pathname.includes("subscription") && "bg-primary-hover "
                   }`}
                 >
                   <MdOutlineUnsubscribe />
@@ -222,9 +236,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/verification"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("verification") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("verification") && "bg-primary-hover "
                     }`}
                   >
                     <PiIdentificationBadge />
@@ -236,9 +249,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/user/user-verify`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("user-verify") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("user-verify") && "bg-primary-hover "
                     }`}
                   >
                     <MdAccountBalance />
@@ -251,9 +263,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/notifications"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-[#303030] dark:hover:bg-meta-4 ${
-                      pathname.includes("/admin/notifications") &&
-                      "bg-[#303030] dark:bg-meta-4"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                      pathname.includes("/admin/notifications") && "bg-primary-hover "
                     }`}
                   >
                     <IoIosNotifications />

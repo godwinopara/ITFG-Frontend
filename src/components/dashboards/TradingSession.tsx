@@ -6,6 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 type Props = {};
 
 export const TradingSession = (props: Props) => {
+
+  const {state} = useUserContext()
+
+  
   const [tradeOption, setTradeOption] = useState("");
   const [tradeType, setTradeType] = useState("");
   const [pairs, setPairs] = useState("");
@@ -13,6 +17,10 @@ export const TradingSession = (props: Props) => {
   const [lotSize, setLotSize] = useState("");
   const [takeProfit, setTakeProfit] = useState("");
   const [stopLoss, setStopLoss] = useState("");
+
+  const status = state.status !== "active"
+
+  console.log(status)
 
   const { addTrade } = useUserContext();
 
@@ -190,7 +198,8 @@ export const TradingSession = (props: Props) => {
 
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center rounded-md bg-primary py-3 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10 cursor-pointer"
+          disabled={status}
+          className={`${status ? "cursor-not-allowed" : "cursor-pointer"} inline-flex w-full items-center justify-center rounded-md bg-primary py-3 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10`}
         >
           Place Order
         </button>

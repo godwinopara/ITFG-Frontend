@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { AiOutlineFileSearch } from "react-icons/ai";
-import { MdVerified } from "react-icons/md";
+import { GoVerified } from "react-icons/go";
 import loader from "../images/spinner.svg";
 import ConfettiExplosion from "react-confetti-explosion";
 import { useDropzone } from "react-dropzone";
@@ -12,14 +12,16 @@ import { useUserContext } from "../context/UserContext";
 type Props = {};
 
 const Verify = (props: Props) => {
+  const { state, updateVerification } = useUserContext();
+
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [verificationStatus, setVerificationStatus] = useState("not-verified");
+  const [verificationStatus, setVerificationStatus] = useState(state?.verification?.status || "not-verified");
   const [loading, setLoading] = useState(false);
   const [showCongratsUI, setShowCongratsUI] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [uploaded, setUploaded] = useState(false);
 
-  const { state, updateVerification } = useUserContext();
+  
 
   useEffect(() => {
     const status = state.verification.status;
@@ -108,7 +110,7 @@ const Verify = (props: Props) => {
           {verificationStatus === "verified" && (
             <div className="flex flex-col min-h-[50vh] text-center justify-center items-center text-xl mt-8 pb-8">
               <div className="text-8xl mb-5 text-primary">
-                <MdVerified />
+                <GoVerified />
               </div>
               <br />
               <div>
@@ -116,9 +118,9 @@ const Verify = (props: Props) => {
                   Congratulations🎉🎉🎉 on your verified status!
                 </h2>
                 <p className="mb-3">
-                  Your Account Has been Verified and You're all set to explore{" "}
+                  Your Account Has been Verified
                 </p>
-                <p>Welcome aboard!</p>
+                
               </div>
             </div>
           )}

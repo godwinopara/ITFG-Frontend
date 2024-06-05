@@ -58,9 +58,11 @@ export default function SignIn() {
 			const result = await signInWithPopup(auths, provider);
 			const { user } = result;
 			localStorage.setItem("token", user.refreshToken);
-			notify("Sign Successful");
 			// Check if the user already exists in Firestore
 			const userDoc = await getDoc(doc(db, "users", user.uid));
+			if(user){
+				notify("Sign Successful");
+			}
 			if (user.displayName) {
 				if (!userDoc.exists()) {
 					const [firstname, lastname] = user.displayName?.split(" ");
@@ -77,7 +79,7 @@ export default function SignIn() {
 						password: "",
 						gender: "",
 						joinedDate: new Date().toDateString(),
-						status: "Active",
+						status: "pending",
 					});
 
 					await setDoc(doc(db, "deposits", user.uid), {

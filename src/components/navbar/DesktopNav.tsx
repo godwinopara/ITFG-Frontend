@@ -8,6 +8,8 @@ export default function DesktopNav() {
 	const [isAboutMenuOpen, setIsAboutMenuOpen] = useState(false);
 	const [isEducationMenuOpen, setIsEducationMenuOpen] = useState(false);
 
+
+
 	const handleMarketMenuHover = (isOpen: any) => {
 		setIsMarketMenuOpen(isOpen);
 	};
