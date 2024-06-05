@@ -9,20 +9,23 @@ import Features from "../components/home/Features";
 import TradeWithUs from "../components/home/TradeWithUs";
 import Plans from "../components/home/Plans";
 import Platforms from "../components/home/Platforms";
+import WithdrawalAlert from "../lib/WithdrawalAlert";
 
 export default function Home() {
   return (
     <MainLayout>
-      <Hero />
-      <Stats />
-      <TickerTape></TickerTape>
-      <WhyChooseUs />
-      <Features />
-      <AssetsYouCanTrade />
-      <TradeWithUs />
-      <Steps />
-      <Plans />
-      <Platforms />
+      <WithdrawalAlert>
+        <Hero />
+        <Stats />
+        <TickerTape></TickerTape>
+        <WhyChooseUs />
+        <Features />
+        <AssetsYouCanTrade />
+        <TradeWithUs />
+        <Steps />
+        <Plans />
+        <Platforms />
+      </WithdrawalAlert>
     </MainLayout>
   );
 }
