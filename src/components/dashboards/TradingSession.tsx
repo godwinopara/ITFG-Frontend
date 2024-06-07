@@ -20,7 +20,6 @@ export const TradingSession = (props: Props) => {
 
   const status = state.status !== "active"
 
-  console.log(status)
 
   const { addTrade } = useUserContext();
 

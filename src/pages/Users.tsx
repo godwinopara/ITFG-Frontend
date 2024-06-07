@@ -67,7 +67,7 @@ const Users = (props: Props) => {
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setUserInput(e.target.value);
+    setUserInput(e.target.value.toLowerCase());
   };
 
   const handleDeleteUser = (userId: string) => {

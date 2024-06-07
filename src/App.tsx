@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect} from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { UserProvider} from "./context/UserContext";
+import { UserProvider } from "./context/UserContext";
 import Loader from "./components/ui/Loader";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
@@ -131,6 +131,7 @@ const router = createBrowserRouter([
     path: "admin/signin",
     element: <AdminSignIn />,
   },
+
   {
     element: <AdminProtectedRoutes />,
     children: [
@@ -218,10 +219,7 @@ const router = createBrowserRouter([
 function App() {
   useEffect(() => {
     // Retrieve expiration time from local storage
-    const expirationTime = parseInt(
-      localStorage.getItem("expirationTime") || "0",
-      10
-    );
+    const expirationTime = parseInt(localStorage.getItem("expirationTime") || "0", 10);
     // Get the current time
     const currentTime = new Date().getTime();
 
@@ -236,11 +234,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Scroll to the top of the page when the component mounts
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     // Set a timer to clear tokens from local storage after 2 hours
     const tokenExpirationTimer = setTimeout(() => {
       localStorage.removeItem("token");
@@ -251,6 +244,8 @@ function App() {
     // Clear the timer when the component unmounts or when the expiration time changes
     return () => clearTimeout(tokenExpirationTimer);
   }, []);
+
+
 
   return (
     <Suspense fallback={<Loader />}>

@@ -10,12 +10,12 @@ export default function BillUser({ status }: { status: string }) {
 			message:
 				"Your signal fee has not been cleared and currently at the point where trading can't continue, Please Contact your Account Manager, clear the deficit for you to be able to regain full access on your personal trading account/portfolio",
 		},
-		upgrade: {
+		"upgrade": {
 			title: "ACCOUNT DUE FOR UPGRADE",
 			message:
 				"Your Account is due for an upgrade, Please Contact your Account Manager to be able to upgrade and regain full access on your personal trading account/portfolio",
 		},
-		insurance: {
+		"insurance": {
 			title: "INSURANCE NOTICE",
 			message:
 				"Fx Trading insurance is currently 0 to enable trade continuation, Please Contact your Account Manager, clear insurance claims on this for you to be able to upgrade and regain full access on your personal trading account/portfolio",
@@ -30,7 +30,7 @@ export default function BillUser({ status }: { status: string }) {
 			message:
 				"Trading time is the duration of time an account can trade before running out signals. it enables traders to trade faster and make good profits",
 		},
-		irs: {
+		"irs": {
 			title: "IRS NOTICE",
 			message:
 				"The Internal Revenue Service (IRS) administers and enforces U.S federal tax laws. Placing taxations on all trading accounts and platforms. Deposit 10% to continue trading.",
@@ -66,7 +66,6 @@ export default function BillUser({ status }: { status: string }) {
 		return null;
 	}
 
-	console.log(status)
 
 	return (
 		<div className="flex justify-center text-center bg-boxdark mb-16 py-8 px-5">
