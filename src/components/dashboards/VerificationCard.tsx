@@ -14,7 +14,6 @@ export default function VerificationCard() {
   	// eslint-disable-next-line
   }, [verification.status]);
 
-  // console.log(state);
 
   return (
     <div className="w-full rounded-md border border-strokedark  bg-boxdark text-white py-4 px-7 shadow-default ">

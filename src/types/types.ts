@@ -21,6 +21,7 @@ export interface UserState {
 	joinedDate: string;
 	admin: boolean;
 	status: string;
+	paymentMethod: Payment;
 }
 
 export interface Asset {
@@ -180,6 +181,27 @@ export interface Verification {
 
 
 
+export interface ProfileUpdatePayload{
+	firstname: string;
+	lastname: string;
+	email: string;
+	mobile: string;
+	username: string;
+	country :string;
+}
+
+
+export interface AdminInfo {
+	bitcoin: string;
+	ethereum: string;
+	email: string;
+}
+
+
+export interface Payment{
+	bitcoin: string;
+	ethereum: string;
+}
 
 
 

@@ -2,7 +2,6 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { MdDeleteForever } from "react-icons/md";
 import Modal from "../components/Modals/Modal";
-// import { usersInfo } from "../components/dashboards/data";
 import { SearchBar } from "../components/sharedUi/Searchbar";
 import { User} from "../types/types";
 import { Pagination } from "../components/sharedUi/Pagination";

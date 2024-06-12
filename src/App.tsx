@@ -45,6 +45,7 @@ const AdminSubscription = lazy(() => import("./pages/AdminSubscription"));
 const AdminVerifications = lazy(() => import("./pages/AdminVerifications"));
 const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
+const AdminSettings = lazy(() => import("./pages/AdminSettings"));
 
 const router = createBrowserRouter([
   {
@@ -174,6 +175,10 @@ const router = createBrowserRouter([
       {
         path: "admin/notifications",
         element: <AdminNotification />,
+      },
+      {
+        path: "admin/settings",
+        element: <AdminSettings />,
       },
     ],
   },

@@ -20,7 +20,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-x-3 mb-16">
                 <FaPhoneAlt />
-                <p>321-321-321</p>
+                <p>+1 626-323-3829</p>
               </div>
             </div>
 

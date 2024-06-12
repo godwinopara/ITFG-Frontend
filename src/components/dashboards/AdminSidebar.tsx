@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/LOGO.svg";
-import { FaHome, FaMoneyBillAlt, FaUsers } from "react-icons/fa";
+import { FaHome, FaUsers } from "react-icons/fa";
 import { PiIdentificationBadge } from "react-icons/pi";
 import { MdOutlineUnsubscribe, MdAccountBalance } from "react-icons/md";
 import { TbChartCandle } from "react-icons/tb";
@@ -76,7 +76,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="flex items-center justify-between gap-2 px-6 py-6 lg:py-7 text-white">
+      <div className="flex items-center justify-between gap-2 px-10 py-6 lg:py-7 text-white">
         <Link to={`/${currentPath}/dashboard`}>
           <img src={logo} alt="Logo" />
         </Link>
@@ -168,7 +168,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   Deposits
                 </Link>
               </li>
-              {status === "active" && (
+              {(status === "active" && !pathname.includes("admin") )&& (
                 <li>
                   <Link
                     to={`/user/withdrawal`}

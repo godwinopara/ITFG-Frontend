@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../images/LOGO-DARK.svg";
+import logo from "../images/LOGO.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { auth, db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";

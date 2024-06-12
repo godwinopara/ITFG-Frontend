@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import { FaCheckCircle } from "react-icons/fa";
 import { SubscriptionCard } from "../components/dashboards/SuscriptionCard";
 import { useUserContext } from "../context/UserContext";
 import { SubscriptionState } from "../types/types";
@@ -9,23 +8,6 @@ type Props = {};
 
 const Subscription = (props: Props) => {
   const { state, updateSubscription } = useUserContext();
-
-
-  const [subscription, setSubscriptions] = useState<SubscriptionState | null>(
-    state.subscription || null
-  );
-
-
-  useEffect(() => {
-    setSubscriptions(state.subscription);
-    const subscribed = state.subscription.plan;
-    if (subscribed) {
-      setSubscriptions(state.subscription);
-      return;
-    }
-
-    setSubscriptions(null);
-  }, [state?.subscription]);
 
   const subscribe = (plan: string, planAmount: string) => {
     const payload: SubscriptionState = {
@@ -45,10 +27,10 @@ const Subscription = (props: Props) => {
 
   return (
     <AdminLayout>
-      <div className="mb-10 rounded-md border border-strokedark  bg-boxdark py-4 px-7 shadow-default dark:border-strokedark ">
+      <div className="mb-10 rounded-md border text-white py-4 px-7 shadow-default border-strokedark bg-boxdark">
         <div className="my-1 flex items-end justify-between">
           <div>
-            <h4 className="text-sm font-bold text-white dark:text-white mb-1">
+            <h4 className="text-sm font-bold text-white  mb-1">
               GET SUBSCRIPTION
             </h4>
             <div>
@@ -59,7 +41,7 @@ const Subscription = (props: Props) => {
           </div>
         </div>
       </div>
-      {!subscription && (
+      {!state.subscription.plan && (
         <div className="grid md:grid-cols-2 gap-10">
           <SubscriptionCard
             plan="STANDARD"
@@ -88,26 +70,26 @@ const Subscription = (props: Props) => {
         </div>
       )}
 
-      {subscription?.plan && (
-        <div className="border-stroke  bg-boxdark dark:bg-boxdark flex flex-col items-center justify-center text-center h-full py-20">
+      {state.subscription.plan && (
+        <div className="border-strokedark  bg-boxdark flex flex-col items-center justify-center text-center h-full py-20">
           <div className="text-6xl text-primary mb-3">
-            <FaRegCircleCheck />
+            <FaCheckCircle />
           </div>
-          <h2 className="text-2xl font-bold mb-3 text-white dark:text-white">
+          <h2 className="text-2xl font-bold mb-3 text-white ">
             Subscription Confirmed!
           </h2>
-          <p className="max-w-150 mb-5 text-white dark:text-white">
+          <p className="max-w-150 mb-5 text-white ">
             Your Subscription to{" "}
             <span className="text-primary">{state.subscription.plan}</span> plan
             was successful and actively running, <br />
             Returns attached to the plan will start reflecting on your Portfolio
             Balance shortly.
           </p>
-          <h3 className="font-bold mb-3 text-white dark:text-white">
+          <h3 className="font-bold mb-3 text-white ">
             Plan Name:{" "}
             <span className="text-primary">{state.subscription.plan}</span>
           </h3>
-          <p className="font-bold text-white dark:text-white">
+          <p className="font-bold text-white ">
             Subscribed Amount:{" "}
             <span className="text-primary">{state.subscription.amount}</span>
           </p>
