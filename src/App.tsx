@@ -221,7 +221,35 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+declare global {
+  interface Window {
+    Tawk_API: any;
+    Tawk_LoadStart: Date;
+  }
+}
+
+
+
 function App() {
+  useEffect(() => {
+    // Create a script element
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+
+    (function() {
+      const s1 = document.createElement('script');
+      const s0 = document.getElementsByTagName('script')[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/666c36349a809f19fb3dac1f/1i0bb7gcf';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode?.insertBefore(s1, s0);
+    })();
+    
+  }, []);
+
+
+
   useEffect(() => {
     // Retrieve expiration time from local storage
     const expirationTime = parseInt(localStorage.getItem("expirationTime") || "0", 10);
