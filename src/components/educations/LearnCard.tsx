@@ -32,7 +32,7 @@ export const LearnCard = ({ item }: Props) => {
           {item.desc.length > 50 && "..."}
         </span>
         <div className="flex items-center gap-x-6 text-primary font-bold  mt-auto">
-          <Link to={"/"}>Read More</Link>
+          <Link to={"#"}>Read More</Link>
           <HiOutlineArrowNarrowRight />
         </div>
       </div>

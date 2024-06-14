@@ -45,7 +45,7 @@ const Dashboard = (props: Props) => {
             desc={`${pendingVerification.length}`}
             icon={<MdOutlineVerifiedUser size={64} />}
             action="More info"
-            url="/admin/id-verification"
+            url="admin/verification"
             classname="bg-[#03a9f3]"
             linkClassname="bg-[#0398da]"
           />
@@ -54,7 +54,7 @@ const Dashboard = (props: Props) => {
             desc={`${pendingWithdrawal.length}`}
             icon={<IoWalletOutline size={64} />}
             action="More info"
-            url="/admin/withdrawals"
+            url="/admin/withdrawal"
             classname="bg-[#465161]"
             linkClassname="bg-[#3f4957]"
           />

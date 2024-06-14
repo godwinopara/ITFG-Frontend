@@ -30,7 +30,7 @@ export default function AdminSignIn() {
         formData.password
       );
 
-      const adminRef = doc(db, "admin", "QX6jHyNRZzKBDoIrVFD0");
+      const adminRef = doc(db, "admin", "iLOKFyIVfGUQuu07XGLIiJ7g73w2");
       const adminSnap = await getDoc(adminRef);
       const adminData = adminSnap.data();
 

@@ -177,12 +177,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await axios.get("https://api.coingecko.com/api/v3/simple/price", {
         params: {
-          ids: "bitcoin, litcoin, ethereum",
+          ids: "bitcoin, ethereum",
           vs_currencies: "usd",
         },
       });
 
       const bitcoinRate = response.data.bitcoin.usd;
+	//   const ethereumRate = response.data.ethereum.usd
+
 
       dispatch({
         type: "SET_CRYPTOCURRENCY_RATES",

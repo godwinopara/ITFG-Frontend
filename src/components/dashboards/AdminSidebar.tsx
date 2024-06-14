@@ -184,7 +184,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               {pathname.includes("admin") && (
                 <li>
                   <Link
-                    to={`/admin/withdrawal`}
+                    to={`/${currentPath}/withdrawal`}
                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
                       pathname.includes("withdrawal") && "bg-primary-hover "
                     }`}
