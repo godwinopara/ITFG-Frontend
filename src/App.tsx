@@ -221,34 +221,18 @@ const router = createBrowserRouter([
   },
 ]);
 
-
-declare global {
-  interface Window {
-    Tawk_API: any;
-    Tawk_LoadStart: Date;
-  }
-}
-
-
-
 function App() {
   useEffect(() => {
-    // Create a script element
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_LoadStart = new Date();
+    // Paste your Tidio JavaScript code snippet here
+    const tidioScript = document.createElement("script");
+    tidioScript.src = "//code.tidio.co/afmvrvgovdjzha35jublgcapo6hxe2co.js";
+    tidioScript.async = true;
+    document.body.appendChild(tidioScript);
 
-    (function() {
-      const s1 = document.createElement('script');
-      const s0 = document.getElementsByTagName('script')[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/666c36349a809f19fb3dac1f/1i0bb7gcf';
-      s1.setAttribute('crossorigin', '*');
-      s0.parentNode?.insertBefore(s1, s0);
-    })();
-    
+    return () => {
+      document.body.removeChild(tidioScript);
+    };
   }, []);
-
-
 
   useEffect(() => {
     // Retrieve expiration time from local storage
@@ -277,8 +261,6 @@ function App() {
     // Clear the timer when the component unmounts or when the expiration time changes
     return () => clearTimeout(tokenExpirationTimer);
   }, []);
-
-
 
   return (
     <Suspense fallback={<Loader />}>
