@@ -8,7 +8,7 @@ type Props = {
 
 export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
   return (
-    <header className="sticky top-0 z-[999] flex w-full bg-boxdark  drop-shadow-none">
+    <header className="sticky border-b top-0 z-[999] flex w-full text-boxdark-2  drop-shadow-none">
       <div className="flex flex-grow items-center justify-between xl:justify-end px-4 py-4 shadow-2 md:px-6 2xl:px-10">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -18,7 +18,7 @@ export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
               e.stopPropagation();
               setSidebarOpen(!sidebarOpen);
             }}
-            className="z-[99999] block rounded-sm border p-1.5 shadow-sm border-strokedark bg-boxdark lg:hidden"
+            className="z-[99999] block rounded-sm border p-1.5 shadow-sm lg:hidden"
           >
             <span className="relative block h-5 w-5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">

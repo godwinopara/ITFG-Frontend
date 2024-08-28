@@ -16,7 +16,7 @@ export const AdminLayout = ({ children }: Props) => {
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
         />
-        <main className="bg-boxdark-2 text-bodydark">
+        <main className="bg-gray-100">
           <div className="min-h-screen mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
             {children}
           </div>

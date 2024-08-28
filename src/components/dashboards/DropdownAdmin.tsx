@@ -22,7 +22,12 @@ const DropdownAdmin = () => {
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
-      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
+      if (
+        !dropdownOpen ||
+        dropdown.current.contains(target) ||
+        trigger.current.contains(target)
+      )
+        return;
       setDropdownOpen(false);
     };
     document.addEventListener("click", clickHandler);
@@ -49,24 +54,35 @@ const DropdownAdmin = () => {
 
   return (
     <div className="relative">
-      <Link ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-4" to="#">
+      <Link
+        ref={trigger}
+        onClick={() => setDropdownOpen(!dropdownOpen)}
+        className="flex items-center gap-4"
+        to="#"
+      >
         {!pathname.includes("admin") && (
           <div className="hidden text-right lg:block">
-            <span className="block  font-medium mb-1 text-white">
-              {loading && "Loading..."} {!loading && state.firstname} {!loading && state.lastname}
+            <span className="block  font-semibold mb-1">
+              {loading && "Loading..."} {!loading && state.firstname}{" "}
+              {!loading && state.lastname}
             </span>
           </div>
         )}
         {pathname.includes("admin") && (
           <div className="hidden text-right lg:block">
             <span className="block  font-medium mb-1 text-white">
-              {loading && "Loading..."} {!loading && "Invest"} {!loading && "Inspire"}
+              {loading && "Loading..."} {!loading && "Invest"}{" "}
+              {!loading && "Inspire"}
             </span>
           </div>
         )}
         <div className="relative w-[50px] h-[50px] bg-boxdark-2 rounded-full overflow-hidden flex items-center justify-center">
           {!loading && state.photoUrl ? (
-            <img src={state.photoUrl} alt="user profie pic" className="rounded-[100%] w-full h-full object-cover" />
+            <img
+              src={state.photoUrl}
+              alt="user profie pic"
+              className="rounded-[100%] w-full h-full object-cover"
+            />
           ) : (
             <FaUser />
           )}

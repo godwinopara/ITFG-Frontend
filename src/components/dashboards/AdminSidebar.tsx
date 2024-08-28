@@ -34,17 +34,20 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-
   useEffect(() => {
-    setStatus(state.status)
-  }, [state])
-  
+    setStatus(state.status);
+  }, [state]);
 
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!sidebar.current || !trigger.current) return;
-      if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target)) return;
+      if (
+        !sidebarOpen ||
+        sidebar.current.contains(target) ||
+        trigger.current.contains(target)
+      )
+        return;
       setSidebarOpen(false);
     };
     document.addEventListener("click", clickHandler);
@@ -72,7 +75,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
 
   return (
     <aside
-      className={`absolute left-0 top-0 z-[9999] flex h-screen  flex-col overflow-y-hidden bg-boxdark duration-300 ease-linear  lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-[9999] flex h-screen  flex-col overflow-y-hidden duration-300 ease-linear  lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -96,15 +99,18 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">MENU</h3>
+            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+              MENU
+            </h3>
 
             <ul className="mb-6 flex flex-col gap-3.5 text-lg">
               {/* <!-- Menu Item Dashboard --> */}
               <li>
                 <Link
                   to={`/${currentPath}/dashboard`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                    pathname === `/${currentPath}/dashboard` && "bg-primary-hover "
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                    pathname === `/${currentPath}/dashboard` &&
+                    "text-primary-hover "
                   }`}
                 >
                   <FaHome />
@@ -116,8 +122,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/users`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("users") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("users") && "text-primary-hover "
                     }`}
                   >
                     <FaUsers />
@@ -130,7 +136,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/account`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:bg-primary-hover ${
                       pathname.includes("account") && "bg-primary-hover "
                     }`}
                   >
@@ -139,41 +145,38 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </Link>
                 </li>
               )}
-              
-              
+
               {!pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/${currentPath}/assets`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("assets") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("assets") && "text-primary-hover "
                     }`}
                   >
                     <CopyPlus />
                     Assets
                   </Link>
                 </li>
-              
               )}
-              
 
               <li>
                 <Link
                   to={`/${currentPath}/deposit`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                    pathname.includes("deposit") && "bg-primary-hover "
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                    pathname.includes("deposit") && "text-primary-hover "
                   }`}
                 >
                   <CirclePlus />
                   Deposits
                 </Link>
               </li>
-              {(status === "active" && !pathname.includes("admin") )&& (
+              {status === "active" && !pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/user/withdrawal`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("withdrawal") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("withdrawal") && "text-primary-hover "
                     }`}
                   >
                     <CircleMinus />
@@ -185,8 +188,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/withdrawal`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("withdrawal") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("withdrawal") && "text-primary-hover "
                     }`}
                   >
                     <CircleMinus />
@@ -198,8 +201,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/${currentPath}/buy-bitcoin`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("buy-bitcoin") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("buy-bitcoin") && "text-primary-hover "
                     }`}
                   >
                     <BiMoneyWithdraw />
@@ -211,8 +214,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/trades"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("trades") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("trades") && "text-primary-hover "
                     }`}
                   >
                     <TbChartCandle />
@@ -224,8 +227,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <li>
                 <Link
                   to={`/${currentPath}/subscriptions`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                    pathname.includes("subscription") && "bg-primary-hover "
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                    pathname.includes("subscription") && "text-primary-hover "
                   }`}
                 >
                   <MdOutlineUnsubscribe />
@@ -236,8 +239,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/verification"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("verification") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("verification") && "text-primary-hover "
                     }`}
                   >
                     <PiIdentificationBadge />
@@ -249,8 +252,8 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to={`/user/user-verify`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("user-verify") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("user-verify") && "text-primary-hover "
                     }`}
                   >
                     <MdAccountBalance />
@@ -263,8 +266,9 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <li>
                   <Link
                     to="/admin/notifications"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("/admin/notifications") && "bg-primary-hover "
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-dark duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("/admin/notifications") &&
+                      "text-primary-hover "
                     }`}
                   >
                     <IoIosNotifications />
