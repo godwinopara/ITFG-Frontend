@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
   
+
+
+.tradingview-widget-copyright{
+    display: none;
+}

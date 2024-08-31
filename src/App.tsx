@@ -46,6 +46,7 @@ const AdminVerifications = lazy(() => import("./pages/AdminVerifications"));
 const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
 const AdminSettings = lazy(() => import("./pages/AdminSettings"));
+const UserAccount = lazy(() => import("./pages/UserAccount"));
 
 const router = createBrowserRouter([
   {
@@ -190,6 +191,10 @@ const router = createBrowserRouter([
         element: <UserDashboard />,
       },
       {
+        path: "user/account",
+        element: <UserAccount />,
+      },
+      {
         path: "user/deposit",
         element: <Deposit />,
       },
@@ -222,17 +227,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  useEffect(() => {
-    // Paste your Tidio JavaScript code snippet here
-    const tidioScript = document.createElement("script");
-    tidioScript.src = "//code.tidio.co/afmvrvgovdjzha35jublgcapo6hxe2co.js";
-    tidioScript.async = true;
-    document.body.appendChild(tidioScript);
+  // useEffect(() => {
+  //   // Paste your Tidio JavaScript code snippet here
+  //   const tidioScript = document.createElement("script");
+  //   tidioScript.src = "//code.tidio.co/afmvrvgovdjzha35jublgcapo6hxe2co.js";
+  //   tidioScript.async = true;
+  //   document.body.appendChild(tidioScript);
 
-    return () => {
-      document.body.removeChild(tidioScript);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(tidioScript);
+  //   };
+  // }, []);
 
   useEffect(() => {
     // Retrieve expiration time from local storage
