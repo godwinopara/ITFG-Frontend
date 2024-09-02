@@ -1,9 +1,72 @@
+@font-face {
+    font-family: 'maisonNeue';
+    src: url('/public/fonts/MaisonNeue-Light.woff') format('woff'),
+     url('/public/fonts/MaisonNeue-Light.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+@font-face {
+    font-family: 'maisonNeueMedium';
+    src: url('/public/fonts/MaisonNeue-Medium.woff') format('woff'),
+     url('/public/fonts/MaisonNeue-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+  }
+@font-face {
+    font-family: 'maisonNeueSemiBold';
+    src: url('/public/fonts/MaisonNeue-Demi.woff') format('woff'),
+     url('/public/fonts/MaisonNeue-Demi.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+  }
+@font-face {
+    font-family: 'maisonNeueBold';
+    src: url('/public/fonts/MaisonNeue-Bold.woff') format('woff'),
+     url('/public/fonts/MaisonNeue-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
   
 
 
+body{
+    font-family: maisonNeue;
+    font-weight: 400;
+}
+
 .tradingview-widget-copyright{
     display: none;
 }
+
+
+.collapsible-content-enter {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .collapsible-content-enter-active {
+    max-height: 500px; /* Adjust based on your content's expected height */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .collapsible-content-exit {
+    max-height: 500px; /* Same value as in enter-active */
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .collapsible-content-exit-active {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  

@@ -23,7 +23,7 @@ export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
             <span className="relative block h-5 w-5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
                 <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm  delay-[0] duration-200 ease-in-out bg-white ${
+                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm duration-200 ease-in-out bg-white ${
                     !sidebarOpen && "!w-full delay-300"
                   }`}
                 ></span>
@@ -41,7 +41,7 @@ export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <span className="absolute right-0 h-full w-full rotate-45">
                 <span
                   className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm  delay-300 duration-200 ease-in-out bg-white ${
-                    !sidebarOpen && "!h-0 !delay-[0]"
+                    !sidebarOpen && "!h-0"
                   }`}
                 ></span>
                 <span

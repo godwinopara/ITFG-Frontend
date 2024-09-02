@@ -2,20 +2,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/LOGO.svg";
-import { FaHome, FaUsers } from "react-icons/fa";
-import { PiIdentificationBadge } from "react-icons/pi";
-import { MdOutlineUnsubscribe, MdAccountBalance } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { PiIdentificationBadge, PiUsersThree } from "react-icons/pi";
+import { MdOutlineUnsubscribe, MdAccountBalance, MdVerifiedUser } from "react-icons/md";
 import { TbChartCandle } from "react-icons/tb";
-import { BiMoneyWithdraw } from "react-icons/bi";
+import { BiMoneyWithdraw, BiWallet } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { HamburgerIcon } from "../ui/HamburgerIcon";
 import { CircleMinus, CirclePlus, CopyPlus } from "lucide-react";
 import { useUserContext } from "../../context/UserContext";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineAccountCircle } from "react-icons/md";
-import { BsWallet } from "react-icons/bs";
-import { MdChevronRight } from "react-icons/md";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../components/ui/collapsible";
+import ReuseableCollapseable from "../sharedUi/ReuseableCollapseable";
+import { TiChartBar } from "react-icons/ti";
+import { RxDashboard } from "react-icons/rx";
 
 type Props = {
   sidebarOpen: boolean;
@@ -96,17 +96,17 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
       </div>
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+        <nav className="mt-5 py-4 px-2 lg:mt-9">
           {/* <!-- Menu Group --> */}
           <div>
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">MENU</h3>
 
-            <ul className="mb-6 flex flex-col gap-3.5 text-lg">
+            <ul className="mb-6 flex flex-col gap-3.5 text-base text-gray-600 font-maisonSemiBold leading-4">
               {/* <!-- Menu Item Dashboard --> */}
               <li>
                 <Link
                   to={`/${currentPath}/dashboard`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold  duration-300 ease-in-out hover:text-primary-hover ${
                     pathname === `/${currentPath}/dashboard` && "text-primary-hover "
                   }`}
                 >
@@ -117,7 +117,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <li>
                 <Link
                   to={`/${currentPath}/account`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold  duration-300 ease-in-out hover:text-primary-hover ${
                     pathname === `/${currentPath}/account` && "text-primary-hover "
                   }`}
                 >
@@ -125,37 +125,109 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   Account
                 </Link>
               </li>
-              <Collapsible className="relative rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out">
-                <CollapsibleTrigger className="mb-2">
-                  <div className="flex items-center justify-between gap-x-2.5 hover:text-primary-hover">
-                    <div>
-                      <BsWallet />
-                    </div>
-                    <p>Transactions</p>
-                    <div className="flex items-center text-xl">
-                      <MdChevronRight />
-                    </div>
-                  </div>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="ml-7 mt-2">
-                  <ul className="grid gap-y-3">
-                    <li
-                      className={`relative text-base font-semibold duration-300 ease-in-out hover:text-primary-hover ${
-                        pathname.includes("deposit") && "text-primary-hover "
-                      }`}
-                    >
-                      <Link to={`/${currentPath}/deposit`}>Deposits</Link>
-                    </li>
-                    <li
-                      className={`relative text-base font-semibold duration-300 ease-in-out hover:text-primary-hover ${
-                        pathname.includes("withdrawal") && "text-primary-hover "
-                      }`}
-                    >
-                      <Link to={`/${currentPath}/withdrawal`}>Withdrawals</Link>
-                    </li>
-                  </ul>
-                </CollapsibleContent>
-              </Collapsible>
+
+              <ReuseableCollapseable links={["deposit", "withdrawal"]} title="Transactions" icon={<BiWallet />}>
+                <ul className="grid gap-y-3 mt-4 text-sm">
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("deposit") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/deposit`}>Deposits</Link>
+                  </li>
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("withdrawal") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/withdrawal`}>Withdrawal</Link>
+                  </li>
+                </ul>
+              </ReuseableCollapseable>
+              <ReuseableCollapseable
+                links={["investment-options", "active-investments", "ended-investments"]}
+                title="Investments"
+                icon={<TiChartBar />}
+              >
+                <ul className="grid gap-y-3 mt-4 text-sm">
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("investment-options") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/investment-options`}>Investment Options</Link>
+                  </li>
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("active-investments") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/active-investments`}>Active Investment</Link>
+                  </li>
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("ended-investments") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/ended-investments`}>Ended Investment</Link>
+                  </li>
+                </ul>
+              </ReuseableCollapseable>
+              <ReuseableCollapseable
+                links={["password-settings", "profile-settings"]}
+                title="Profile"
+                icon={<RxDashboard />}
+              >
+                <ul className="grid gap-y-3 mt-4 text-sm">
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("profile-settings") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/profile-settings`}>Profile Settings</Link>
+                  </li>
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("password-setting") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/password-settings`}>Password Settings</Link>
+                  </li>
+                </ul>
+              </ReuseableCollapseable>
+              <ReuseableCollapseable
+                links={["referral-list", "referral-bonus"]}
+                title="Referral"
+                icon={<PiUsersThree />}
+              >
+                <ul className="grid gap-y-3 mt-4 text-sm">
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("referral-list") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/referral-list`}>Referral List</Link>
+                  </li>
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("referral-bonus") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/referral-bonus`}>Referral Bonus</Link>
+                  </li>
+                </ul>
+              </ReuseableCollapseable>
+              <ReuseableCollapseable links={["kyc"]} title="KYC" icon={<MdVerifiedUser />}>
+                <ul className="grid gap-y-3 mt-4 text-sm">
+                  <li
+                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("kyc-application") && "text-primary-hover "
+                    }`}
+                  >
+                    <Link to={`/${currentPath}/kyc-application`}>KYC Application</Link>
+                  </li>
+                </ul>
+              </ReuseableCollapseable>
 
               {pathname.includes("admin") && (
                 <li>
@@ -185,7 +257,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 </li>
               )}
 
-              {!pathname.includes("admin") && (
+              {/* {!pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/${currentPath}/assets`}
@@ -197,9 +269,9 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     Assets
                   </Link>
                 </li>
-              )}
+              )} */}
 
-              <li>
+              {/* <li>
                 <Link
                   to={`/${currentPath}/deposit`}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
@@ -222,7 +294,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     Withdrawals
                   </Link>
                 </li>
-              )}
+              )} */}
               {pathname.includes("admin") && (
                 <li>
                   <Link
@@ -263,7 +335,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 </li>
               )}
 
-              <li>
+              {/* <li>
                 <Link
                   to={`/${currentPath}/subscriptions`}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
@@ -273,7 +345,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   <MdOutlineUnsubscribe />
                   Subscriptions
                 </Link>
-              </li>
+              </li> */}
               {pathname.includes("admin") && (
                 <li>
                   <Link
@@ -287,7 +359,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </Link>
                 </li>
               )}
-              {pathname.includes("user") && (
+              {/* {pathname.includes("user") && (
                 <li>
                   <Link
                     to={`/user/user-verify`}
@@ -299,7 +371,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     Verify Account
                   </Link>
                 </li>
-              )}
+              )} */}
 
               {pathname.includes("admin") && (
                 <li>

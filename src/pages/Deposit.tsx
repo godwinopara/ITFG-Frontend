@@ -1,21 +1,12 @@
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { GiMoneyStack } from "react-icons/gi";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../components/ui/dialog";
 import { DataTable } from "../components/ui/data-table";
 import { columnDeposit } from "../components/dashboards/TableCol";
 import { deposits } from "../components/dashboards/data";
 import { Button } from "../components/ui/button";
 import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
 import { useRef } from "react";
-import { BsPlus } from "react-icons/bs";
 import QRCode from "../components/dashboards/QRcode";
+import { BsCreditCard2BackFill } from "react-icons/bs";
 
 type Props = {};
 
@@ -42,12 +33,12 @@ const Deposit = (props: Props) => {
   return (
     <AdminLayout>
       <div className="flex justify-between items-center">
-        <h1 className="text-primary font-bold text-xl">Transactions</h1>
+        <h1 className="text-primary font-maisonBold text-xl">Transactions</h1>
         <button
           onClick={() => firstDialog?.current?.open()}
-          className="flex items-center justify-center py-2 px-3 rounded-[6px] text-white bg-primary hover:bg-primary-hover"
+          className="flex items-center justify-center gap-x-2 py-2 px-3 rounded-[6px] text-white bg-primary hover:bg-primary-hover"
         >
-          <BsPlus className="text-2xl" />
+          <BsCreditCard2BackFill className="text-sm" />
           Deposit
         </button>
       </div>
@@ -138,8 +129,8 @@ const Deposit = (props: Props) => {
         </div>
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
-        <h2 className="font-semibold mb-1 text-primary">Deposits</h2>
-        <p className="text-gray-600">Deposits made by you. A total of 0 deposit(s)</p>
+        <h2 className="font-maisonBold mb-1 text-primary text-base">Deposits</h2>
+        <p className="text-gray-600 text-sm">Deposits made by you. A total of 0 deposit(s)</p>
       </div>
       <div>
         <DataTable columns={columnDeposit} data={deposits} />

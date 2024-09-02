@@ -25,9 +25,7 @@ export default function StatiscticsCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="mb-2">
-              <h2 className="text-base font-semibold">{title}</h2>
-            </CardTitle>
+            <CardTitle className="mb-2 text-base font-semibold">{title}</CardTitle>
             <CardDescription>
               <p className={`text-xl font-bold ${classname ? "text-white" : "text-primary"}`}>{amount}</p>
             </CardDescription>

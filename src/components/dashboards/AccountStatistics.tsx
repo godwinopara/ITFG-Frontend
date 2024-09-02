@@ -10,9 +10,9 @@ export default function AccountStatistics() {
         <CardHeader className="mb-3">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4">
-                <h2 className="text-base">Wallet Balance</h2>
-                <p className="text-sm text-green-600">(confirmed)</p>
+              <CardTitle className="mb-4 text-base">
+                Wallet Balance
+                <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
                 <p className="text-xl font-bold">$0.00</p>
@@ -31,9 +31,9 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4">
-                <h2 className="text-base">Total Deposits</h2>
-                <p className="text-sm text-green-600">(confirmed)</p>
+              <CardTitle className="mb-4 text-base">
+                Total Deposits
+                <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
                 <p className="text-xl font-bold">$0.00</p>
@@ -57,9 +57,9 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4">
-                <h2 className="text-base">Total Withdrawal</h2>
-                <p className="text-sm text-green-600">(processed)</p>
+              <CardTitle className="mb-4 text-base">
+                Total Withdrawal
+                <span className="block text-sm text-green-600">(processed)</span>
               </CardTitle>
               <CardDescription>
                 <p className="text-xl font-bold">$0.00</p>
@@ -83,9 +83,9 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4">
-                <h2 className="text-base">Total Profits</h2>
-                <p className="text-sm text-green-600">(paid out)</p>
+              <CardTitle className="mb-4 text-base">
+                Total Profits
+                <p className="text-sm block text-green-600">(paid out)</p>
               </CardTitle>
               <CardDescription>
                 <p className="text-xl font-bold">$0.00</p>

@@ -1,201 +1,79 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useRef } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { CardDataStats } from "../components/dashboards/CardDataStats";
-import WithdrawalTable from "../components/Tables/WithdrawalTable";
-import { useUserContext } from "../context/UserContext";
-import { v4 as uuidv4 } from "uuid";
+import { deposits } from "../components/dashboards/data";
+import { columnDeposit } from "../components/dashboards/TableCol";
+import { DataTable } from "../components/ui/data-table";
+import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
+import { Button } from "../components/ui/button";
+import { BsFillCreditCard2BackFill } from "react-icons/bs";
 
 type Props = {};
 
 const Withdrawal = (props: Props) => {
-  const [formData, setFormData] = useState({
-    paymentMethod: "",
-    amount: "",
-    walletAddress: "",
-    bankName: "",
-    accountName: "",
-    accountNumber: "",
-  });
+  const firstDialog = useRef<DialogHandle>(null);
 
-  const [loading, setLoading] = useState(false);
-
-  const { addWithdrawal } = useUserContext();
-
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const payload = {
-      method: formData.paymentMethod,
-      amount: formData.amount,
-      status: "Pending",
-      date: new Date().toDateString(),
-      id: uuidv4(),
-    };
-
-    try {
-      addWithdrawal(payload);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-      setFormData({
-        paymentMethod: "",
-        amount: "",
-        walletAddress: "",
-        bankName: "",
-        accountName: "",
-        accountNumber: "",
-      });
-    }
+  const handleWithdrawal = () => {
+    console.log("withdrawal");
   };
 
   return (
     <AdminLayout>
-      <div className="grid xl:grid-cols-3 gap-y-8 xl:gap-y-0 xl:gap-x-10 mb-16">
-        <CardDataStats title="Total Balance in Dollars" totalUsd={`100`} />
-        <CardDataStats
-          title="Total Balance in Bitcoin"
-          totalBtc={`0.00155436`}
-        />
-        <CardDataStats
-          title="Total Balance in Etherium"
-          totalEth={`0.03185058 `}
-        />
+      <div className="flex justify-between items-center">
+        <h1 className="text-primary font-bold text-xl">Transactions</h1>
+        <button
+          onClick={() => firstDialog?.current?.open()}
+          className="flex items-center justify-center gap-x-2 py-2 px-3 rounded-[6px] text-white bg-primary hover:bg-primary-hover"
+        >
+          <BsFillCreditCard2BackFill className="text-sm" />
+          Withdrawal
+        </button>
       </div>
-      <div className="mb-20 rounded-sm w-full p-6  bg-boxdark shadow-default  dark:bg-transparent">
-        <div className="border-b  py-4 border-strokedark">
-          <h3 className="font-medium text-white">
-            Withdrawal Transaction
-          </h3>
+      <ReusableDialog title="Make Withdrawal" ref={firstDialog}>
+        <div className="flex items-center justify-between py-2 text-gray-600">
+          <p className="font-semibold">Wallet Balance</p>
+          <p className="font-semibold">$0.00</p>
         </div>
-        <div>
-          <p className="my-8">
-            To make a withdrawal, Enter amount and verify the address you wish
-            for payment to be made into.
-          </p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="">
-            <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Account To Withdraw from
-              </label>
-              <input
-                type="text"
-                readOnly
-                value="Account Balance"
-                className="w-full rounded border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-              />
-            </div>
-
-            <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Select Payment Method
-              </label>
-              <div className="bg-boxdark bg-form-input mb-3">
-                <select
-                  value={formData.paymentMethod}
-                  name="paymentMethod"
-                  onChange={handleInputChange}
-                  required
-                  className="z-20 w-full appearance-none rounded border border-strokedark bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3 dark:border-form-strokedark dark:bg-form-input"
-                >
-                  <option value="">Select Payment Method</option>
-                  <option value="Bitcoin">Bitcoin</option>
-                  <option value="Ethereum">Ethereum</option>
-                  {/* <option value="Bank Transfer">Bank Transfer</option> */}
-                </select>
-              </div>
-            </div>
-            <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Amount
-              </label>
-              <input
-                value={formData.amount}
-                name="amount"
-                onChange={handleInputChange}
-                required
-                type="text"
-                placeholder="500"
-                className="w-full rounded-lg border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-              />
-            </div>
-            {(formData.paymentMethod === "Bitcoin" ||
-              formData.paymentMethod === "Ethereum") && (
-              <div>
-                <div className="mb-5">
-                  <label className="mb-3 block text-white dark:text-white">
-                    Wallet Address
-                  </label>
-                  <input
-                    type="text"
-                    name="walletAddress"
-                    value={formData.walletAddress}
-                    onChange={handleInputChange}
-                    placeholder="Wallet Address"
-                    className="w-full rounded border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* {formData.paymentMethod === "Bank Transfer" && (
-							<div>
-								<div className="mb-5">
-									<label className="mb-3 block text-white dark:text-white">Bank Name</label>
-									<input
-										type="text"
-										value={formData.bankName}
-										name="bankName"
-										onChange={handleInputChange}
-										placeholder="Chase Bank"
-										className="w-full rounded border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-									/>
-								</div>
-								<div className="mb-5">
-									<label className="mb-3 block text-white dark:text-white">Account Name</label>
-									<input
-										type="text"
-										value={formData.accountName}
-										name="accountName"
-										onChange={handleInputChange}
-										placeholder="Benjamin Chad"
-										className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-									/>
-								</div>
-								<div className="mb-5">
-									<label className="mb-3 block text-white dark:text-white">Account Number</label>
-									<input
-										type="text"
-										value={formData.accountNumber}
-										name="accountNumber"
-										onChange={handleInputChange}
-										placeholder="001578903344"
-										className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
-									/>
-								</div>
-							</div>
-						)} */}
-
-            <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-white hover:bg-primary-hover">
-              {loading ? "Loading.........." : "Withdraw"}
-            </button>
+        <div className="relative w-full">
+          <label htmlFor="payment" className="block text-sm text-left font-semibold mb-3">
+            Withdrawal Method :
+          </label>
+          <select className="block w-full rounded-[5px]  px-4 py-3 pr-8 leading-tight text-gray-700 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:border-blue-500">
+            <option value="bitcoin">Bitcoin</option>
+            <option value="usdt">USDT</option>
+          </select>
+          <div className="absolute bottom-0 top-9 right-0 flex items-center px-2 pointer-events-none">
+            <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
-        </form>
+        </div>
+        <div className="mb-5">
+          <label htmlFor="amount" className="font-semibold mb-3 text-left block text-sm">
+            Withdrawal Amount :
+          </label>
+          <div className="flex items-center w-full border border-gray-300 rounded-[5px] overflow-hidden">
+            <span className="bg-gray-200 text-gray-700 px-3 py-3">Amount</span>
+            <input
+              type="number"
+              min={200}
+              className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
+            />
+            <span className="bg-gray-200 text-gray-700 px-3 py-3">$</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-end">
+          <Button onClick={handleWithdrawal} className="bg-primary hover:bg-primary-hover rounded-[5px] ">
+            Make Withdrawal
+          </Button>
+        </div>
+      </ReusableDialog>
+      <div className="border rounded-t-[6px] p-4 mt-5">
+        <h2 className="font-semibold mb-1 text-primary">Withdrawals</h2>
+        <p className="text-gray-600">Withdrawals made by you. A total of 0 Withdrawal(s)</p>
       </div>
-      <WithdrawalTable />
+      <div>
+        <DataTable columns={columnDeposit} data={deposits} />
+      </div>
     </AdminLayout>
   );
 };

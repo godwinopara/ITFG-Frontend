@@ -7,7 +7,6 @@ import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import AdminProvider from "./context/AdminContext";
-
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -47,6 +46,9 @@ const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
 const AdminSettings = lazy(() => import("./pages/AdminSettings"));
 const UserAccount = lazy(() => import("./pages/UserAccount"));
+const InvestmentOptions = lazy(() => import("./pages/InvestmentOptions"));
+const ActiveInvestments = lazy(() => import("./pages/ActiveInvestments"));
+const EndedInvestments = lazy(() => import("./pages/EndedInvestments"));
 
 const router = createBrowserRouter([
   {
@@ -201,6 +203,18 @@ const router = createBrowserRouter([
       {
         path: "user/withdrawal",
         element: <Withdrawal />,
+      },
+      {
+        path: "user/investment-options",
+        element: <InvestmentOptions />,
+      },
+      {
+        path: "user/active-investments",
+        element: <ActiveInvestments />,
+      },
+      {
+        path: "user/ended-investments",
+        element: <EndedInvestments />,
       },
       {
         path: "user/assets",

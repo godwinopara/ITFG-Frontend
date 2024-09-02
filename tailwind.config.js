@@ -53,6 +53,12 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        maison: ['maisonNeue', 'sans-serif'],
+        maisonMedium: ['maisonNeueMedium', 'sans-serif'],
+        maisonSemiBold: ['maisonNeueSemiBold', 'sans-serif'],
+        maisonBold: ['maisonNeueBold', 'sans-serif']
+      },
       
       keyframes: {
         "accordion-down": {
