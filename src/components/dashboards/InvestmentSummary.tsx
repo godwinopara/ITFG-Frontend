@@ -11,7 +11,7 @@ export default function InvestmentSummary() {
     <>
       <Card className="col-span-4">
         <CardHeader>
-          <CardTitle className="text-base text-primary">Wallet Balance</CardTitle>
+          <CardTitle className="text-base text-primary font-maisonMedium">Wallet Balance</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-2">
           <div></div>
@@ -24,8 +24,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">Bitcoin</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-bold">0.00BTC = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-maisonBold">0.00BTC = </p>
+                <p className="font-maisonBold"> $0.00</p>
               </div>
             </div>
             <div className="mb-5">
@@ -34,8 +34,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">Ethereum</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-bold">0 ETH = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-maisonBold">0 ETH = </p>
+                <p className="font-maisonBold"> $0.00</p>
               </div>
             </div>
             <div className="">
@@ -46,8 +46,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">USDT Tether</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-bold">0 USDT = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-maisonBold">0 USDT = </p>
+                <p className="font-maisonBold"> $0.00</p>
               </div>
             </div>
           </div>
@@ -55,14 +55,14 @@ export default function InvestmentSummary() {
       </Card>
       <Card className="col-span-5">
         <CardHeader>
-          <CardTitle className="text-base text-primary">Investment Overview</CardTitle>
+          <CardTitle className="text-base text-primary font-maisonMedium">Investment Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 mb-6">
             <div>
               <div className="mb-8">
                 <h3 className="mb-1">Invested Amount</h3>
-                <p className="font-bold text-2xl mb-2 text-primary"> $0.00</p>
+                <p className="font-maisonBold text-2xl mb-2 text-primary"> $0.00</p>
                 <div className="flex items-center gap-x-2 text-sm">
                   <p>+ $0.00 ( profits )</p>
 
@@ -72,14 +72,14 @@ export default function InvestmentSummary() {
               <div className="mb-3">
                 <h3 className="text-xs mb-1">PAID OUT PROFITS</h3>
                 <div className="flex items-center gap-x-1">
-                  <p className="font-bold text-primary text-lg"> $0.00</p>
+                  <p className="font-maisonBold text-primary text-lg"> $0.00</p>
                 </div>
               </div>
             </div>
             <div>
               <div className="mb-8">
                 <h3 className="mb-1">Next Investment</h3>
-                <p className="font-bold text-2xl mb-2 text-primary"> $0.00</p>
+                <p className="font-maisonBold text-2xl mb-2 text-primary"> $0.00</p>
                 <div className="flex items-center gap-x-2 text-sm">
                   <p>+ $0.00 ( profits )</p>
 
@@ -89,7 +89,7 @@ export default function InvestmentSummary() {
               <div className="mb-3">
                 <h3 className="text-xs mb-1">ACCURED PROFITS</h3>
                 <div className="flex items-center gap-x-1">
-                  <p className="font-bold text-primary text-lg"> $0.00</p>
+                  <p className="font-maisonBold text-primary text-lg"> $0.00</p>
                 </div>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function InvestmentSummary() {
               className="flex items-center justify-center rounded-lg w-[150px] gap-x-2 bg-primary text-white text-sm px-4 py-3"
             >
               View More
-              <span className="block text-lg font-bold">
+              <span className="block text-lg font-maisonMedium">
                 <IoIosArrowRoundForward />
               </span>
             </Link>
@@ -114,20 +114,20 @@ export default function InvestmentSummary() {
               <GiTruck />
             </div>
           </CardDescription>
-          <CardTitle className="text-center text-lg">Oil and Gas Option</CardTitle>
+          <CardTitle className="text-center text-lg font-maisonMedium">Oil and Gas Option</CardTitle>
         </CardHeader>
         <CardContent className="flex text-center items-center justify-center flex-col text-sm">
           <div className="mb-3">
-            <p className="font-bold">Min: $1000</p>
+            <p className="font-maisonMedium">Min: $1000</p>
           </div>
           <div className="mb-3">
-            <p className="font-bold">Max: Unlimited</p>
+            <p className="font-maisonMedium">Max: Unlimited</p>
           </div>
           <div className="mb-3">
-            <p className="font-bold">RIO: 25%</p>
+            <p className="font-maisonMedium">RIO: 25%</p>
           </div>
           <div className="mb-5">
-            <p className="font-bold">Capital Return: Yes</p>
+            <p className="font-maisonMedium">Capital Return: Yes</p>
           </div>
           <Link
             to="/dashboard/investment-options"

@@ -11,7 +11,7 @@ import { GiFuelTank } from "react-icons/gi";
 export default function InvestmentOptions() {
   return (
     <AdminLayout>
-      <h2 className="font-maisonMedium text-slate-600 uppercase text-2xl mt-4 mb-10">Investment Options</h2>
+      <h1 className="text-slate-600 font-maisonBold  text-xl mt-4 mb-10">Investment Options</h1>
       <div className="grid grid-cols-3 gap-6">
         <InvestOptionsCard
           title="FOREX INVESTMENT OPTION"

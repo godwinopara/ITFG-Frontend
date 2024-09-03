@@ -10,12 +10,12 @@ export default function AccountStatistics() {
         <CardHeader className="mb-3">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4 text-base">
+              <CardTitle className="mb-4 text-slate-600 text-base">
                 Wallet Balance
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-bold">$0.00</p>
+                <p className="text-xl font-maisonBold">$0.00</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -31,12 +31,12 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4 text-base">
+              <CardTitle className="mb-4 text-slate-600 text-base">
                 Total Deposits
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-bold">$0.00</p>
+                <p className="text-xl font-maisonBold">$0.00</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -45,7 +45,7 @@ export default function AccountStatistics() {
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-sm flex items-center gap-x-1 font-semibold text-gray-500">
+          <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
               0
             </span>
@@ -57,12 +57,12 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4 text-base">
+              <CardTitle className="mb-4 text-slate-600 text-base">
                 Total Withdrawal
                 <span className="block text-sm text-green-600">(processed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-bold">$0.00</p>
+                <p className="text-xl font-maisonBold">$0.00</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -71,7 +71,7 @@ export default function AccountStatistics() {
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-sm flex items-center gap-x-1 font-semibold text-gray-500">
+          <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-xs border flex items-center justify-center border-none bg-red-200 text-red-600 px-2 py-[3px] rounded-md">
               0
             </span>
@@ -83,12 +83,12 @@ export default function AccountStatistics() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="mb-4 text-base">
+              <CardTitle className="mb-4 text-slate-600 text-base">
                 Total Profits
                 <p className="text-sm block text-green-600">(paid out)</p>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-bold">$0.00</p>
+                <p className="text-xl font-maisonBold">$0.00</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -97,7 +97,7 @@ export default function AccountStatistics() {
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-sm flex items-center gap-x-1 font-semibold text-gray-500">
+          <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
               0.00%
             </span>

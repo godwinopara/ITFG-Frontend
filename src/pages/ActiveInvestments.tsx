@@ -1,7 +1,7 @@
 import { DataTable } from "../components/ui/data-table";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { columnDeposit } from "../components/dashboards/TableCol";
-import { deposits } from "../components/dashboards/data";
+import { columnsInvestment } from "../components/dashboards/TableCol";
+import { investments } from "../components/dashboards/data";
 
 function ActiveInvestments() {
   return (
@@ -14,7 +14,7 @@ function ActiveInvestments() {
         <p className="text-gray-600 text-sm">Your currently active investment(s). A total of 0 investment(s)</p>
       </div>
       <div>
-        <DataTable columns={columnDeposit} data={deposits} />
+        <DataTable columns={columnsInvestment} data={investments} />
       </div>
     </AdminLayout>
   );

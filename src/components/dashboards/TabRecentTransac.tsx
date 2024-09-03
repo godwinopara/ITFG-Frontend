@@ -16,7 +16,7 @@ function TabRecentTransac() {
     <>
       <Tabs defaultValue="deposits">
         <div className="flex justify-between items-center border px-5 py-3">
-          <h3 className="font-bold text-primary">Transactions</h3>
+          <h3 className="font-bold text-primary font-maisonMedium">Transactions</h3>
           <TabsList className=" w-[30%] grid grid-cols-2 gap-x-5 bg-white">
             <TabsTrigger
               value="deposits"

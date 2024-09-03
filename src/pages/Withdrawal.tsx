@@ -19,7 +19,8 @@ const Withdrawal = (props: Props) => {
   return (
     <AdminLayout>
       <div className="flex justify-between items-center">
-        <h1 className="text-primary font-bold text-xl">Transactions</h1>
+        <h1 className="text-slate-600 font-bold text-xl">Transactions</h1>
+
         <button
           onClick={() => firstDialog?.current?.open()}
           className="flex items-center justify-center gap-x-2 py-2 px-3 rounded-[6px] text-white bg-primary hover:bg-primary-hover"

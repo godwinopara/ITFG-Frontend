@@ -20,8 +20,6 @@ const ReuseableCollapseable = ({ children, title, icon, links }: ReuseableCollap
 
   const isActive = links.includes(pathname);
 
-  console.log(isActive);
-
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger asChild>

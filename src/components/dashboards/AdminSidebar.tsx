@@ -217,7 +217,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </li>
                 </ul>
               </ReuseableCollapseable>
-              <ReuseableCollapseable links={["kyc"]} title="KYC" icon={<MdVerifiedUser />}>
+              <ReuseableCollapseable links={["kyc-application"]} title="KYC" icon={<MdVerifiedUser />}>
                 <ul className="grid gap-y-3 mt-4 text-sm">
                   <li
                     className={`relative duration-300 ease-in-out hover:text-primary-hover ${

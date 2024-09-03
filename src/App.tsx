@@ -49,6 +49,11 @@ const UserAccount = lazy(() => import("./pages/UserAccount"));
 const InvestmentOptions = lazy(() => import("./pages/InvestmentOptions"));
 const ActiveInvestments = lazy(() => import("./pages/ActiveInvestments"));
 const EndedInvestments = lazy(() => import("./pages/EndedInvestments"));
+const ProfileSettings = lazy(() => import("./pages/ProfileSetting"));
+const PasswordSettings = lazy(() => import("./pages/PasswordSetting"));
+const ReferralList = lazy(() => import("./pages/ReferralList"));
+const ReferralBonus = lazy(() => import("./pages/ReferralBonus"));
+const KycApplications = lazy(() => import("./pages/KycApplication"));
 
 const router = createBrowserRouter([
   {
@@ -215,6 +220,26 @@ const router = createBrowserRouter([
       {
         path: "user/ended-investments",
         element: <EndedInvestments />,
+      },
+      {
+        path: "user/profile-settings",
+        element: <ProfileSettings />,
+      },
+      {
+        path: "user/password-settings",
+        element: <PasswordSettings />,
+      },
+      {
+        path: "user/referral-list",
+        element: <ReferralList />,
+      },
+      {
+        path: "user/referral-bonus",
+        element: <ReferralBonus />,
+      },
+      {
+        path: "user/kyc-application",
+        element: <KycApplications />,
       },
       {
         path: "user/assets",
