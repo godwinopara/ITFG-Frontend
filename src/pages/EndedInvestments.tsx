@@ -1,9 +1,10 @@
 import { DataTable } from "../components/ui/data-table";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { columnsInvestment } from "../components/dashboards/TableCol";
-import { investments } from "../components/dashboards/data";
+import { useUserAdminContext } from "../context/MainContext";
 
 function EndedInvestments() {
+  const { state } = useUserAdminContext();
   return (
     <AdminLayout>
       <div className="flex justify-between items-center">
@@ -14,7 +15,7 @@ function EndedInvestments() {
         <p className="text-gray-600 text-sm">Your already elasped investment(s). A total of 0 investment(s)</p>
       </div>
       <div>
-        <DataTable columns={columnsInvestment} data={investments} />
+        <DataTable columns={columnsInvestment} data={state.investments} />
       </div>
     </AdminLayout>
   );

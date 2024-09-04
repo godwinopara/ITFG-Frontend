@@ -1,0 +1,156 @@
+{
+  "users": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2003",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "hashed_password",
+      "wallet_balance": {
+        "usd": 5000,
+        "btc": 0.25,
+        "eth": 2.5,
+        "usdt": 5000
+      },
+      "total_deposit": 10000,
+      "total_withdrawal": 3000,
+      "total_profit": 5000,
+      "total_investments": 8000,
+      "referral_bonus": 500,
+      "bonus": 1000,
+      "confirmedDeposits": 8000,
+      "confirmedWithdrawals": 2000,
+      "pendingWithdrawal": 1000,
+      "pendingDeposit": 2000,
+      "referral": null,
+      "referralLink": "https://indextradefinancialgroup.com/ITFG2030",
+      "referralCode": "ITFG2030",
+      "noOfReferralBonus": 3,
+      "referralLevel": 1
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2004",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "password": "hashed_password",
+      "wallet_balance": {
+        "usd": 7000,
+        "btc": 0.5,
+        "eth": 5,
+        "usdt": 7000
+      },
+      "total_deposit": 15000,
+      "total_withdrawal": 5000,
+      "total_profit": 7000,
+      "total_investments": 9000,
+      "referral_bonus": 0,
+      "bonus":0,
+      "confirmedDeposits": 10000,
+      "confirmedWithdrawals": 4000,
+      "pendingWithdrawal": 1000,
+      "pendingDeposit": 5000,
+      "referral": "john.doe@example.com",
+      "referralLink": "https://indextradefinancialgroup.com/ITFG2000",
+      "referralCode": "ITFG2000",
+      "noOfReferralBonus": 0,
+      "referralLevel": 1
+    }
+  ],
+  "deposits": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2005",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "transactionType": "Deposit",
+      "paymentMethod": "Bank Transfer",
+      "amount": 2000,
+      "status": "confirmed",
+      "time": "2023-09-01T10:00:00Z"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2006",
+      "userId": "64e1bfa4b64efc1a7dfe2004",
+      "transactionType": "Deposit",
+      "paymentMethod": "Crypto Transfer",
+      "amount": 3000,
+      "status": "confirmed",
+      "time": "2023-09-02T11:00:00Z"
+    }
+  ],
+  "withdrawals": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2007",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "transactionType": "Withdrawal",
+      "paymentMethod": "Bank Transfer",
+      "amount": 1000,
+      "status": "processed",
+      "time": "2023-09-01T15:00:00Z"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2008",
+      "userId": "64e1bfa4b64efc1a7dfe2004",
+      "transactionType": "Withdrawal",
+      "paymentMethod": "Crypto Transfer",
+      "amount": 2000,
+      "status": "pending",
+      "time": "2023-09-02T16:00:00Z"
+    }
+  ],
+  "investments": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2009",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "investmentOption": "Crypto",
+      "capital": 1000,
+      "profit": 150,
+      "start": "2023-08-01",
+      "end": "2023-09-01",
+      "status": "completed"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2010",
+      "userId": "64e1bfa4b64efc1a7dfe2004",
+      "investmentOption": "Stocks",
+      "capital": 5000,
+      "profit": 1000,
+      "start": "2023-08-10",
+      "end": "2023-09-10",
+      "status": "active"
+    }
+  ],
+  "referrals": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2011",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "fullname": "Alice Johnson",
+      "email": "alice.j@example.com",
+      "date": "2023-07-20",
+      "status": "active"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2013",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "fullname": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "date": "2023-08-25",
+      "status": "pending"
+    }
+  ],
+  "referralBonuses": [
+    {
+      "id": "64e1bfa4b64efc1a7dfe2013",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "referralName": "Alice Johnson",
+      "email": "alice.j@example.com",
+      "amount": 50,
+      "date": "2023-09-01"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2013",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "referralName": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "amount": 70,
+      "date": "2023-09-02"
+    }
+  ]
+}

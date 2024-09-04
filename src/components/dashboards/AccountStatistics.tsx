@@ -2,8 +2,11 @@ import { FaMoneyBill, FaWallet } from "react-icons/fa";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
+import { useUserAdminContext } from "../../context/MainContext";
+import { calculatePercentageProfit } from "../../lib/calculatePercentage";
 
 export default function AccountStatistics() {
+  const { state } = useUserAdminContext();
   return (
     <>
       <Card>
@@ -15,7 +18,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">$0.00</p>
+                <p className="text-xl font-maisonBold">${state.user?.wallet_balance?.usd.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -36,7 +39,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">$0.00</p>
+                <p className="text-xl font-maisonBold">${state.user?.total_deposit.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -47,7 +50,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
-              0
+              {state.deposits.length}
             </span>
             No of deposits
           </p>
@@ -62,7 +65,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(processed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">$0.00</p>
+                <p className="text-xl font-maisonBold">${state.user?.total_withdrawal.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -73,7 +76,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-xs border flex items-center justify-center border-none bg-red-200 text-red-600 px-2 py-[3px] rounded-md">
-              0
+              {state.withdrawals.length}
             </span>
             No of withdrawals
           </p>
@@ -88,7 +91,7 @@ export default function AccountStatistics() {
                 <p className="text-sm block text-green-600">(paid out)</p>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">$0.00</p>
+                <p className="text-xl font-maisonBold">${state.user?.total_profit.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -99,7 +102,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
-              0.00%
+              {state.user ? calculatePercentageProfit(state.user?.total_deposit, state.user?.total_profit) : "0.00"}%
             </span>
             Profit Percentage
           </p>

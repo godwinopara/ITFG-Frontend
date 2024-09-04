@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { GiTruck } from "react-icons/gi";
 import { TiArrowUp } from "react-icons/ti";
 import { SiTether, SiEthereum, SiBitcoin } from "react-icons/si";
+import { useUserAdminContext } from "../../context/MainContext";
+import { calculatePercentageProfit } from "../../lib/calculatePercentage";
 
 export default function InvestmentSummary() {
+  const { state } = useUserAdminContext();
   return (
     <>
       <Card className="col-span-4">
@@ -24,8 +27,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">Bitcoin</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-maisonBold">0.00BTC = </p>
-                <p className="font-maisonBold"> $0.00</p>
+                <p className="font-maisonBold">{state.user?.wallet_balance.btc}BTC = </p>
+                <p className="font-maisonBold">${state.user?.wallet_balance.usd}</p>
               </div>
             </div>
             <div className="mb-5">
@@ -34,8 +37,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">Ethereum</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-maisonBold">0 ETH = </p>
-                <p className="font-maisonBold"> $0.00</p>
+                <p className="font-maisonBold">{state.user?.wallet_balance.eth} ETH = </p>
+                <p className="font-maisonBold">${state.user?.wallet_balance.usd}</p>
               </div>
             </div>
             <div className="">
@@ -46,8 +49,8 @@ export default function InvestmentSummary() {
                 <h3 className="mb-1">USDT Tether</h3>
               </div>
               <div className="flex items-center gap-x-1">
-                <p className="font-maisonBold">0 USDT = </p>
-                <p className="font-maisonBold"> $0.00</p>
+                <p className="font-maisonBold">{state.user?.wallet_balance.eth}USDT = </p>
+                <p className="font-maisonBold"> ${state.user?.wallet_balance.usd}</p>
               </div>
             </div>
           </div>
@@ -61,10 +64,12 @@ export default function InvestmentSummary() {
           <div className="grid grid-cols-2 mb-6">
             <div>
               <div className="mb-8">
-                <h3 className="mb-1">Invested Amount</h3>
-                <p className="font-maisonBold text-2xl mb-2 text-primary"> $0.00</p>
+                <h3 className="mb-1">Total Invested Amount</h3>
+                <p className="font-maisonBold text-2xl mb-2 text-primary">
+                  ${state.user?.total_investments.toLocaleString()}
+                </p>
                 <div className="flex items-center gap-x-2 text-sm">
-                  <p>+ $0.00 ( profits )</p>
+                  <p>+ ${state.user?.total_profit.toLocaleString()} ( profits )</p>
 
                   <TiArrowUp className="text-green-500 text-lg" />
                 </div>
@@ -72,13 +77,13 @@ export default function InvestmentSummary() {
               <div className="mb-3">
                 <h3 className="text-xs mb-1">PAID OUT PROFITS</h3>
                 <div className="flex items-center gap-x-1">
-                  <p className="font-maisonBold text-primary text-lg"> $0.00</p>
+                  <p className="font-maisonBold text-primary text-lg">${state.user?.total_profit.toLocaleString()}</p>
                 </div>
               </div>
             </div>
             <div>
               <div className="mb-8">
-                <h3 className="mb-1">Next Investment</h3>
+                <h3 className="mb-1">Active Investment</h3>
                 <p className="font-maisonBold text-2xl mb-2 text-primary"> $0.00</p>
                 <div className="flex items-center gap-x-2 text-sm">
                   <p>+ $0.00 ( profits )</p>

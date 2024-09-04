@@ -5,34 +5,19 @@ import Loader from "../components/ui/Loader";
 import AccountStatistics from "../components/dashboards/AccountStatistics";
 import InvestmentSummary from "../components/dashboards/InvestmentSummary";
 import { DataTable } from "../components/ui/data-table";
-import { columns, Payment } from "../components/dashboards/TableCol";
+import { columnsInvestment, Payment } from "../components/dashboards/TableCol";
 import TabRecentTransac from "../components/dashboards/TabRecentTransac";
 import ReferralCard from "../components/dashboards/ReferralCard";
 import ReferralCardStat from "../components/dashboards/ReferralCardStat";
+import { useUserAdminContext } from "../context/MainContext";
 
 type Props = {};
 
 const UserDashboard = (props: Props) => {
   const { loading } = useUserContext();
-
-  // const totalWithdrawal = state.withdrawals?.reduce(
-  //   (acc, curr) => (curr.status === "Completed" ? acc + Number(curr.amount) : 0),
-  //   0
-  // );
-  // const totalDeposit = state.deposits?.reduce(
-  //   (acc, curr) => (curr.status === "Completed" ? acc + Number(curr.amount) : 0),
-  //   0
-  // );
-
-  const data: Payment[] = [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ];
+  const {
+    state: { user, investments },
+  } = useUserAdminContext();
 
   return (
     <AdminLayout>
@@ -42,7 +27,7 @@ const UserDashboard = (props: Props) => {
         <div className="flex flex-col gap-6">
           <div>
             <p className="text-slate-600 mb-1">Welcome!</p>
-            <h2 className="text-3xl font-maisonMedium text-slate-600">Franklin Jameson</h2>
+            <h2 className="text-3xl font-maisonMedium text-slate-600">{user?.name}</h2>
           </div>
           <div className="grid grid-cols-4 gap-x-2">
             <AccountStatistics />
@@ -55,7 +40,7 @@ const UserDashboard = (props: Props) => {
             <TabRecentTransac />
             <div>
               <h2 className="py-5 px-5 font-maisonBold text-primary border rounded-md mb-2">Recent Investments</h2>
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={columnsInvestment} data={investments} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6">

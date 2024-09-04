@@ -1,3 +1,4 @@
+import { InvestmentProps } from "@/types/investment";
 import { ColumnDef } from "@tanstack/react-table";
 
 // This type is used to define the shape of our data.
@@ -96,7 +97,7 @@ export const columnsReferral: ColumnDef<Referral>[] = [
   },
 ];
 
-export const columnsInvestment: ColumnDef<Investment>[] = [
+export const columnsInvestment: ColumnDef<InvestmentProps>[] = [
   {
     accessorKey: "investmentOption",
     header: "Investment Option",

@@ -7,6 +7,7 @@ import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import AdminProvider from "./context/AdminContext";
+import { UserAdminProvider } from "./context/MainContext";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -308,12 +309,14 @@ function App() {
 
   return (
     <Suspense fallback={<Loader />}>
-      <UserProvider>
-        <AdminProvider>
-          <Toaster position="top-right" reverseOrder={false} />
-          <RouterProvider router={router} />
-        </AdminProvider>
-      </UserProvider>
+      <UserAdminProvider>
+        <UserProvider>
+          <AdminProvider>
+            <Toaster position="top-right" reverseOrder={false} />
+            <RouterProvider router={router} />
+          </AdminProvider>
+        </UserProvider>
+      </UserAdminProvider>
     </Suspense>
   );
 }

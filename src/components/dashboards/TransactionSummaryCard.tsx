@@ -1,6 +1,10 @@
+import { useUserAdminContext } from "../../context/MainContext";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function TransactionSummaryCard() {
+  const {
+    state: { user },
+  } = useUserAdminContext();
   return (
     <>
       <Card className="text-gray-600">
@@ -17,7 +21,7 @@ export default function TransactionSummaryCard() {
               </div>
               <div className="flex items-center gap-x-1">
                 <p className="font-bold">Total = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-bold"> ${user?.total_deposit.toLocaleString()}</p>
               </div>
             </div>
             <div className="mb-6">
@@ -27,7 +31,7 @@ export default function TransactionSummaryCard() {
               </div>
               <div className="flex items-center gap-x-1">
                 <p className="font-bold">Total = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-bold"> ${user?.total_withdrawal.toLocaleString()}</p>
               </div>
             </div>
             <div className="mb-6">
@@ -37,7 +41,7 @@ export default function TransactionSummaryCard() {
               </div>
               <div className="flex items-center gap-x-1">
                 <p className="font-bold">Total = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-bold"> ${user?.referral_bonus.toLocaleString()}</p>
               </div>
             </div>
             <div className="">
@@ -47,7 +51,7 @@ export default function TransactionSummaryCard() {
               </div>
               <div className="flex items-center gap-x-1">
                 <p className="font-bold">Total = </p>
-                <p className="font-bold"> $0.00</p>
+                <p className="font-bold"> ${user?.bonus.toLocaleString()}</p>
               </div>
             </div>
           </div>

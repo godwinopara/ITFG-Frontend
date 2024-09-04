@@ -6,8 +6,13 @@ import StatiscticsCard from "../components/dashboards/StatiscticsCard";
 import TransactionSummaryCard from "../components/dashboards/TransactionSummaryCard";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { useUserAdminContext } from "../context/MainContext";
 
 export default function UserAccount() {
+  const {
+    state: { user, deposits, withdrawals },
+  } = useUserAdminContext();
+
   return (
     <AdminLayout>
       <TickerTape></TickerTape>
@@ -19,16 +24,16 @@ export default function UserAccount() {
         <div className="col-span-2 grid grid-cols-2 gap-6">
           <StatiscticsCard
             title="Confirmed Deposit"
-            amount="$0.00"
-            totalTransaction="0"
+            amount={`${user?.confirmedDeposits.toLocaleString()}`}
+            totalTransaction={`${deposits.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
             deposit
           />
           <StatiscticsCard
             title="Pending Deposit"
-            amount="$0.00"
-            totalTransaction="0"
+            amount={`$${user?.pendingDeposit.toLocaleString()}`}
+            totalTransaction={`${deposits.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
             deposit={false}
@@ -37,8 +42,8 @@ export default function UserAccount() {
           <StatiscticsCard
             classname="bg-primary text-white"
             title="Processed Withdrawal"
-            amount="$0.00"
-            totalTransaction="0"
+            amount={`$${user?.confirmedWithdrawals.toLocaleString()}`}
+            totalTransaction={`${withdrawals.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
             deposit
@@ -46,8 +51,8 @@ export default function UserAccount() {
 
           <StatiscticsCard
             title="Pending Withdrawal"
-            amount="$0.00"
-            totalTransaction="0"
+            amount={`$${user?.pendingWithdrawal.toLocaleString()}`}
+            totalTransaction={`${withdrawals.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
             deposit={false}
