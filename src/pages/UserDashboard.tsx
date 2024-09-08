@@ -4,19 +4,19 @@ import { useUserContext } from "../context/UserContext";
 import Loader from "../components/ui/Loader";
 import AccountStatistics from "../components/dashboards/AccountStatistics";
 import InvestmentSummary from "../components/dashboards/InvestmentSummary";
-import { DataTable } from "../components/ui/data-table";
-import { columnsInvestment, Payment } from "../components/dashboards/TableCol";
+import { columnsInvestment } from "../components/dashboards/TableCol";
 import TabRecentTransac from "../components/dashboards/TabRecentTransac";
 import ReferralCard from "../components/dashboards/ReferralCard";
 import ReferralCardStat from "../components/dashboards/ReferralCardStat";
 import { useUserAdminContext } from "../context/MainContext";
+import { DashboardDataTable } from "../components/ui/dashboard-data-table";
 
 type Props = {};
 
 const UserDashboard = (props: Props) => {
   const { loading } = useUserContext();
   const {
-    state: { user, investments },
+    state: { user },
   } = useUserAdminContext();
 
   return (
@@ -36,11 +36,11 @@ const UserDashboard = (props: Props) => {
           <div className="grid grid-cols-12 gap-4 md:gap-6">
             <InvestmentSummary />
           </div>
-          <div className="grid grid-cols-2 gap-x-6">
+          <div className="grid grid-cols-1 gap-x-6">
             <TabRecentTransac />
             <div>
               <h2 className="py-5 px-5 font-maisonBold text-primary border rounded-md mb-2">Recent Investments</h2>
-              <DataTable columns={columnsInvestment} data={investments} />
+              <DashboardDataTable columns={columnsInvestment} data={user?.investments || []} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6">

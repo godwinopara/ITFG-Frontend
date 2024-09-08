@@ -1,12 +1,12 @@
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { DataTable } from "../components/ui/data-table";
 import { columnDeposit } from "../components/dashboards/TableCol";
-import { deposits } from "../components/dashboards/data";
 import { Button } from "../components/ui/button";
 import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
 import { useRef } from "react";
 import QRCode from "../components/dashboards/QRcode";
 import { BsCreditCard2BackFill } from "react-icons/bs";
+import { useUserAdminContext } from "../context/MainContext";
 
 type Props = {};
 
@@ -14,6 +14,10 @@ const Deposit = (props: Props) => {
   const firstDialog = useRef<DialogHandle>(null);
   const secondDialog = useRef<DialogHandle>(null);
   const thirdDialog = useRef<DialogHandle>(null);
+
+  const {
+    state: { user },
+  } = useUserAdminContext();
 
   const handleOpenPaymentDialog = () => {
     firstDialog?.current?.close();
@@ -130,10 +134,10 @@ const Deposit = (props: Props) => {
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Deposits</h2>
-        <p className="text-gray-600 text-sm">Deposits made by you. A total of 0 deposit(s)</p>
+        <p className="text-gray-600 text-sm">Deposits made by you. A total of {user?.deposits.length} deposit(s)</p>
       </div>
       <div>
-        <DataTable columns={columnDeposit} data={deposits} />
+        <DataTable columns={columnDeposit} data={user?.deposits || []} />
       </div>
     </AdminLayout>
   );

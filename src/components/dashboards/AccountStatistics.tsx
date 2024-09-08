@@ -6,7 +6,16 @@ import { useUserAdminContext } from "../../context/MainContext";
 import { calculatePercentageProfit } from "../../lib/calculatePercentage";
 
 export default function AccountStatistics() {
-  const { state } = useUserAdminContext();
+  const {
+    state: { user },
+  } = useUserAdminContext();
+
+  const usd = user?.wallet_balance;
+  const deposits = [];
+  const withdrawals = [];
+
+  console.log(user);
+
   return (
     <>
       <Card>
@@ -18,7 +27,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">${state.user?.wallet_balance?.usd.toLocaleString()}</p>
+                <p className="text-xl font-maisonBold">${usd?.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -39,7 +48,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(confirmed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">${state.user?.total_deposit.toLocaleString()}</p>
+                <p className="text-xl font-maisonBold">${user?.total_deposit.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -50,7 +59,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
-              {state.deposits.length}
+              {deposits.length}
             </span>
             No of deposits
           </p>
@@ -65,7 +74,7 @@ export default function AccountStatistics() {
                 <span className="block text-sm text-green-600">(processed)</span>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">${state.user?.total_withdrawal.toLocaleString()}</p>
+                <p className="text-xl font-maisonBold">${user?.total_withdrawal.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -76,7 +85,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-xs border flex items-center justify-center border-none bg-red-200 text-red-600 px-2 py-[3px] rounded-md">
-              {state.withdrawals.length}
+              {withdrawals.length}
             </span>
             No of withdrawals
           </p>
@@ -91,7 +100,7 @@ export default function AccountStatistics() {
                 <p className="text-sm block text-green-600">(paid out)</p>
               </CardTitle>
               <CardDescription>
-                <p className="text-xl font-maisonBold">${state.user?.total_profit.toLocaleString()}</p>
+                <p className="text-xl font-maisonBold">${user?.total_profit.toLocaleString()}</p>
               </CardDescription>
             </div>
             <div className="text-4xl">
@@ -102,7 +111,7 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
-              {state.user ? calculatePercentageProfit(state.user?.total_deposit, state.user?.total_profit) : "0.00"}%
+              {user ? calculatePercentageProfit(user?.total_deposit, user?.total_profit) : "0.00"}%
             </span>
             Profit Percentage
           </p>

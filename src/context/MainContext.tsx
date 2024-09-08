@@ -1,4 +1,3 @@
-import { investments } from "@/components/dashboards/data";
 import {
   getUserData,
   getUserDeposits,
@@ -24,6 +23,7 @@ interface InitialStateProps {
 
 interface UserAdminContextType {
   state: InitialStateProps;
+  getUserData: (user: any) => void;
 }
 
 type Action =
@@ -43,7 +43,10 @@ const initialState: InitialStateProps = {
   referralBonuses: [],
 };
 
-const UserAdminContext = createContext<UserAdminContextType>({ state: initialState });
+const UserAdminContext = createContext<UserAdminContextType>({
+  state: initialState,
+  getUserData: () => null,
+});
 
 const UserAdminReducer = (state: InitialStateProps, action: Action) => {
   switch (action.type) {
@@ -65,42 +68,11 @@ const UserAdminReducer = (state: InitialStateProps, action: Action) => {
 export const UserAdminProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(UserAdminReducer, initialState);
 
-  useEffect(() => {
-    // fetch user data from API
-    const fetchUserData = async () => {
-      const userData = await getUserData({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_DATA", payload: userData });
-    };
-    const fetchUserDeposits = async () => {
-      const userDeposits = await getUserDeposits({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_DEPOSITS", payload: userDeposits });
-    };
-    const fetchUserWithdrawals = async () => {
-      const userWithdrawals = await getUserWithdrawals({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_WITHDRAWALS", payload: userWithdrawals });
-    };
-    const fetchUserInvestments = async () => {
-      const userInvestments = await getUserInvestments({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_INVESTMENTS", payload: userInvestments });
-    };
-    const fetchUserReferrals = async () => {
-      const userReferrals = await getUserReferrals({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_REFERRALS", payload: userReferrals });
-    };
-    const fetchUserReferralBonuses = async () => {
-      const userReferralBonuses = await getUserReferralBonuses({ userId: "64e1bfa4b64efc1a7dfe2003" });
-      dispatch({ type: "GET_USER_REFERRAL_BONUSES", payload: userReferralBonuses });
-    };
+  const getUserData = (user: any) => {
+    dispatch({ type: "GET_USER_DATA", payload: user });
+  };
 
-    fetchUserData();
-    fetchUserDeposits();
-    fetchUserWithdrawals();
-    fetchUserInvestments();
-    fetchUserReferrals();
-    fetchUserReferralBonuses();
-  }, []);
-
-  return <UserAdminContext.Provider value={{ state }}>{children}</UserAdminContext.Provider>;
+  return <UserAdminContext.Provider value={{ state, getUserData }}>{children}</UserAdminContext.Provider>;
 };
 
 export const useUserAdminContext = () => {

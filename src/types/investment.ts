@@ -1,6 +1,5 @@
 export interface InvestmentProps {
-  id: string;
-  userId: string;
+  user: string;
   investmentOption: string;
   capital: number;
   profit: number;

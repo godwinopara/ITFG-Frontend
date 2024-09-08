@@ -1,11 +1,15 @@
 import { columnsReferral } from "../components/dashboards/TableCol";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { referrals } from "../components/dashboards/data";
+// import { referrals } from "../components/dashboards/data";
 import { DataTable } from "../components/ui/data-table";
 import ReferralCard from "../components/dashboards/ReferralCard";
 import ReferralCardStat from "../components/dashboards/ReferralCardStat";
+import { useUserAdminContext } from "../context/MainContext";
 
 function ReferralList() {
+  const {
+    state: { user },
+  } = useUserAdminContext();
   return (
     <AdminLayout>
       <div className="flex justify-between items-center mb-5">
@@ -20,7 +24,7 @@ function ReferralList() {
         <p className="text-gray-600 text-sm">You have a total of 0 referral(s)</p>
       </div>
       <div>
-        <DataTable columns={columnsReferral} data={referrals} />
+        <DataTable columns={columnsReferral} data={user?.referrals || []} />
       </div>
     </AdminLayout>
   );

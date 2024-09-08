@@ -1,8 +1,11 @@
 export interface ReferralProps {
   id: string;
   userId: string;
-  fullname: string;
-  email: string;
+  referred_user: {
+    name: string;
+    email: string;
+    id: string;
+  };
   date: string;
   status: string;
 }

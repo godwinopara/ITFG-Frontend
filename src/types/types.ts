@@ -89,8 +89,6 @@ export interface Deposit {
   uid?: string;
 }
 
-export interface Deposit {}
-
 export interface WithdrawalState {
   amount: string;
   date: string;

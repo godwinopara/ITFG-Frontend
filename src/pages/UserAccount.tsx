@@ -24,7 +24,7 @@ export default function UserAccount() {
         <div className="col-span-2 grid grid-cols-2 gap-6">
           <StatiscticsCard
             title="Confirmed Deposit"
-            amount={`${user?.confirmedDeposits.toLocaleString()}`}
+            amount={`${user?.total_confirmed_deposits_amount.toLocaleString()}`}
             totalTransaction={`${deposits.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
@@ -32,7 +32,7 @@ export default function UserAccount() {
           />
           <StatiscticsCard
             title="Pending Deposit"
-            amount={`$${user?.pendingDeposit.toLocaleString()}`}
+            amount={`$${user?.total_pending_deposit_amount.toLocaleString()}`}
             totalTransaction={`${deposits.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
@@ -42,7 +42,7 @@ export default function UserAccount() {
           <StatiscticsCard
             classname="bg-primary text-white"
             title="Processed Withdrawal"
-            amount={`$${user?.confirmedWithdrawals.toLocaleString()}`}
+            amount={`$${user?.total_confirmed_withdrawals_amount.toLocaleString()}`}
             totalTransaction={`${withdrawals.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}
@@ -51,7 +51,7 @@ export default function UserAccount() {
 
           <StatiscticsCard
             title="Pending Withdrawal"
-            amount={`$${user?.pendingWithdrawal.toLocaleString()}`}
+            amount={`$${user?.total_pending_withdrawal_amount.toLocaleString()}`}
             totalTransaction={`${withdrawals.length}`}
             transactionDesc="No of Deposits"
             icon={<FaMoneyBillTransfer />}

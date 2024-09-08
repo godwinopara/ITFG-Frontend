@@ -1,11 +1,14 @@
 import { DataTable } from "../components/ui/data-table";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { columnsReferralBonus } from "../components/dashboards/TableCol";
-import { referralBonuses } from "../components/dashboards/data";
 import ReferralCard from "../components/dashboards/ReferralCard";
 import ReferralCardStat from "../components/dashboards/ReferralCardStat";
+import { useUserAdminContext } from "../context/MainContext";
 
 function ReferralBonus() {
+  const {
+    state: { referralBonuses },
+  } = useUserAdminContext();
   return (
     <AdminLayout>
       <div className="flex justify-between items-center mb-5">

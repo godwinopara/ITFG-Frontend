@@ -4,10 +4,21 @@ interface getUserProps {
   userId: string;
 }
 
-export const getUserData = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/users/${userId}`);
+interface Body {
+  email: string;
+  password: string;
+}
+
+export const getUserData = async () => {
+  const response = await axiosInstance.get("/users");
   return response.data;
 };
+
+export const login = async ({ email, password }: Body) => {
+  const response = await axiosInstance.post("/auth/login", {email, password});
+  return response.data;
+};
+
 export const getUserDeposits = async ({ userId }: getUserProps) => {
   const response = await axiosInstance.get(`/deposits?userId=${userId}`);
   return response.data;

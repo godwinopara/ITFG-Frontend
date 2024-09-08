@@ -1,16 +1,20 @@
 import { useRef } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { deposits } from "../components/dashboards/data";
 import { columnDeposit } from "../components/dashboards/TableCol";
 import { DataTable } from "../components/ui/data-table";
 import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
 import { Button } from "../components/ui/button";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
+import { useUserAdminContext } from "../context/MainContext";
 
 type Props = {};
 
 const Withdrawal = (props: Props) => {
   const firstDialog = useRef<DialogHandle>(null);
+
+  const {
+    state: { user },
+  } = useUserAdminContext();
 
   const handleWithdrawal = () => {
     console.log("withdrawal");
@@ -70,10 +74,10 @@ const Withdrawal = (props: Props) => {
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-semibold mb-1 text-primary">Withdrawals</h2>
-        <p className="text-gray-600">Withdrawals made by you. A total of 0 Withdrawal(s)</p>
+        <p className="text-gray-600">Withdrawals made by you. A total of {user?.withdrawals.length} Withdrawal(s)</p>
       </div>
       <div>
-        <DataTable columns={columnDeposit} data={deposits} />
+        <DataTable columns={columnDeposit} data={user?.withdrawals || []} />
       </div>
     </AdminLayout>
   );

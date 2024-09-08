@@ -62,8 +62,17 @@
       "transactionType": "Deposit",
       "paymentMethod": "Bank Transfer",
       "amount": 2000,
-      "status": "confirmed",
+      "status": "success",
       "time": "2023-09-01T10:00:00Z"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2005",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "transactionType": "Deposit",
+      "paymentMethod": "Bank Transfer",
+      "amount": 10000,
+      "status": "pending",
+      "time": "2023-09-03T10:00:00Z"
     },
     {
       "id": "64e1bfa4b64efc1a7dfe2006",
@@ -71,7 +80,7 @@
       "transactionType": "Deposit",
       "paymentMethod": "Crypto Transfer",
       "amount": 3000,
-      "status": "confirmed",
+      "status": "success",
       "time": "2023-09-02T11:00:00Z"
     }
   ],
@@ -82,7 +91,16 @@
       "transactionType": "Withdrawal",
       "paymentMethod": "Bank Transfer",
       "amount": 1000,
-      "status": "processed",
+      "status": "success",
+      "time": "2023-09-01T15:00:00Z"
+    },
+    {
+      "id": "64e1bfa4b64efc1a7dfe2007",
+      "userId": "64e1bfa4b64efc1a7dfe2003",
+      "transactionType": "Withdrawal",
+      "paymentMethod": "Bank Transfer",
+      "amount": 1000,
+      "status": "pending",
       "time": "2023-09-01T15:00:00Z"
     },
     {

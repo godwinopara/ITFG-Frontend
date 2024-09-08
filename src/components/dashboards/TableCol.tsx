@@ -1,4 +1,6 @@
-import { InvestmentProps } from "@/types/investment";
+import { ReferralBonusProps, ReferralProps } from "../../types/referral";
+import { InvestmentProps } from "../../types/investment";
+import { TransactionProps } from "../../types/transaction";
 import { ColumnDef } from "@tanstack/react-table";
 
 // This type is used to define the shape of our data.
@@ -10,36 +12,7 @@ export type Payment = {
   email: string;
 };
 
-export type Deposit = {
-  transactionType: string;
-  paymentMethod: string;
-  amount: string;
-  status: "pending" | "success" | "failed";
-  time: string;
-};
-export type Investment = {
-  investmentOption: string;
-  capital: string;
-  profit: string;
-  start: string;
-  end: string;
-  status: "active" | "completed";
-};
-
-export type Referral = {
-  fullname: string;
-  email: string;
-  date: string;
-  status: "pending" | "active";
-};
-export type ReferralBonus = {
-  referralName: string;
-  email: string;
-  amount: string;
-  date: string;
-};
-
-export const columnsReferralBonus: ColumnDef<ReferralBonus>[] = [
+export const columnsReferralBonus: ColumnDef<ReferralBonusProps>[] = [
   {
     accessorKey: "referralName",
     header: "Referral Name",
@@ -58,14 +31,20 @@ export const columnsReferralBonus: ColumnDef<ReferralBonus>[] = [
   },
 ];
 
-export const columnsReferral: ColumnDef<Referral>[] = [
+export const columnsReferral: ColumnDef<ReferralProps>[] = [
   {
     accessorKey: "fullname",
     header: "Full Name",
+    cell: ({ row }) => {
+      return row.original.referred_user.name;
+    },
   },
   {
     accessorKey: "email",
     header: "Email",
+    cell: ({ row }) => {
+      return row.original.referred_user.email;
+    },
   },
   {
     accessorKey: "date",
@@ -163,7 +142,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export const columnDeposit: ColumnDef<Deposit>[] = [
+export const columnDeposit: ColumnDef<TransactionProps>[] = [
   {
     accessorKey: "transactionType",
     header: "Transaction Type",
@@ -203,7 +182,7 @@ export const columnDeposit: ColumnDef<Deposit>[] = [
     },
   },
   {
-    accessorKey: "time",
-    header: "Time",
+    accessorKey: "date",
+    header: "Date",
   },
 ];

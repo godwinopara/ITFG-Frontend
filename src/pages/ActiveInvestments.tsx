@@ -4,7 +4,9 @@ import { columnsInvestment } from "../components/dashboards/TableCol";
 import { useUserAdminContext } from "../context/MainContext";
 
 function ActiveInvestments() {
-  const { state } = useUserAdminContext();
+  const {
+    state: { user },
+  } = useUserAdminContext();
   return (
     <AdminLayout>
       <div className="flex justify-between items-center">
@@ -12,10 +14,12 @@ function ActiveInvestments() {
       </div>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Active Investments</h2>
-        <p className="text-gray-600 text-sm">Your currently active investment(s). A total of 0 investment(s)</p>
+        <p className="text-gray-600 text-sm">
+          Your currently active investment(s). A total of {user?.investments.length} investment(s)
+        </p>
       </div>
       <div>
-        <DataTable columns={columnsInvestment} data={state.investments} />
+        <DataTable columns={columnsInvestment} data={user?.investments || []} />
       </div>
     </AdminLayout>
   );
