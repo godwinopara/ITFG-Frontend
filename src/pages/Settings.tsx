@@ -3,9 +3,8 @@ import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FaUser } from "react-icons/fa";
 import loader from "../images/spinner.svg";
-import upload from "../lib/upload";
+// import upload from "../lib/upload";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { useUserContext } from "../context/UserContext";
 
 const Settings = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -24,26 +23,17 @@ const Settings = () => {
     confirmPassword: "",
   });
 
-  const { state, updateUserProfile, updateProfilePicture, updatePassword } = useUserContext();
-
-  useMemo(() => {
-    const { username, email, firstname, lastname, mobile, country, photoUrl } = state;
-
-    setUserInfo({ username, email, firstname, lastname, mobile, country });
-    setImage(photoUrl);
-  }, [state]);
-
   const onDrop = useCallback(async (acceptedFiles: any) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       setLoading(true);
 
       const file = acceptedFiles[0];
-      const imgUrl = await upload(file);
+      // const imgUrl = await upload(file);
 
-      if (imgUrl) {
-        setLoading(false);
-        setImage(imgUrl);
-      }
+      // if (imgUrl) {
+      //   setLoading(false);
+      //   setImage(imgUrl);
+      // }
     }
   }, []);
 
@@ -51,10 +41,6 @@ const Settings = () => {
 
   const handleUpdateProfilePic = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (image) {
-      updateProfilePicture(image);
-    }
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,12 +56,10 @@ const Settings = () => {
     if (resetPassword.password !== resetPassword.confirmPassword) {
       return;
     }
-    updatePassword(resetPassword.password);
   };
 
   const handleUpdateUserInfo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateUserProfile(userInfo);
   };
 
   return (

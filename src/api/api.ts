@@ -9,33 +9,45 @@ interface Body {
   password: string;
 }
 
-export const getUserData = async () => {
-  const response = await axiosInstance.get("/users");
-  return response.data;
-};
+interface DepositProps {
+  transactionType: string;
+  paymentMethod: string;
+  amount: number;
+  type: string;
+  walletAddress: string;
+  transactionId: string;
+}
+
+interface WithdrawalProps {
+  transactionType: string;
+  paymentMethod: string;
+  amount: number;
+  type: string;
+  walletAddress: string;
+  transactionId?: string;
+}
+
+interface InvestProps {
+  investmentOption: string;
+  capital: number;
+  end: string;
+}
 
 export const login = async ({ email, password }: Body) => {
-  const response = await axiosInstance.post("/auth/login", {email, password});
+  const response = await axiosInstance.post("/auth/login", { email, password });
   return response.data;
 };
 
-export const getUserDeposits = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/deposits?userId=${userId}`);
+export const deposit = async (body: DepositProps) => {
+  const response = await axiosInstance.post("/deposits", body);
   return response.data;
 };
-export const getUserWithdrawals = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/withdrawals?userId=${userId}`);
+export const withdrawal = async (body: WithdrawalProps) => {
+  const response = await axiosInstance.post("/withdrawals", body);
   return response.data;
 };
-export const getUserInvestments = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/investments?userId=${userId}`);
-  return response.data;
-};
-export const getUserReferrals = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/referrals?userId=${userId}`);
-  return response.data;
-};
-export const getUserReferralBonuses = async ({ userId }: getUserProps) => {
-  const response = await axiosInstance.get(`/referralBonuses?userId=${userId}`);
+
+export const invest = async (body: InvestProps) => {
+  const response = await axiosInstance.post("/investments", body);
   return response.data;
 };

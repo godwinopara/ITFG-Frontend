@@ -1,29 +1,23 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import { useAdminContext } from "../context/AdminContext";
-
 
 export default function AdminSettings() {
-  const { state, updatePayment } = useAdminContext();
-
   const [paymentMethod, setPaymentMethod] = useState({
-   bitcoin: "", 
-   ethereum: "",
-   email: ""
-  } || state.adminData);
+    bitcoin: "",
+    ethereum: "",
+    email: "",
+  });
 
   const [resetPassword, setResetPassword] = useState({
     password: "",
     confirmPassword: "",
   });
 
-
-  useEffect(() => {
-    const { bitcoin, ethereum, email } = state.adminData;
-    console.log(state.adminData)
-    setPaymentMethod({bitcoin, ethereum, email})
-  }, [state.adminData]);
-
+  // useEffect(() => {
+  //   const { bitcoin, ethereum, email } = state.adminData;
+  //   console.log(state.adminData)
+  //   setPaymentMethod({bitcoin, ethereum, email})
+  // }, [state.adminData]);
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,7 +37,7 @@ export default function AdminSettings() {
 
   const handleUpdatePaymentMethod = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updatePayment(paymentMethod)
+    // updatePayment(paymentMethod)
   };
   return (
     <>
@@ -97,7 +91,6 @@ export default function AdminSettings() {
                 </form>
               </div>
             </div>
-           
           </div>
 
           <div className="grid grid-cols-5 gap-8 mt-10">

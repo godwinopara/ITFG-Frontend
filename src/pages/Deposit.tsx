@@ -3,10 +3,12 @@ import { DataTable } from "../components/ui/data-table";
 import { columnDeposit } from "../components/dashboards/TableCol";
 import { Button } from "../components/ui/button";
 import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
-import { useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import QRCode from "../components/dashboards/QRcode";
 import { BsCreditCard2BackFill } from "react-icons/bs";
 import { useUserAdminContext } from "../context/MainContext";
+import { deposit } from "../api/api";
+import toast from "react-hot-toast";
 
 type Props = {};
 
@@ -17,7 +19,11 @@ const Deposit = (props: Props) => {
 
   const {
     state: { user },
+    updateDeposit,
   } = useUserAdminContext();
+
+  const [firstDialogForm, setFirstDialogForm] = useState({ paymentMethod: "bitcoin", amount: 200 });
+  const [lastDialogForm, setLastDialogForm] = useState({ senderAddress: "", transactionId: "" });
 
   const handleOpenPaymentDialog = () => {
     firstDialog?.current?.close();
@@ -30,8 +36,30 @@ const Deposit = (props: Props) => {
   };
 
   const handleOpenConfirmPaymentDialog = () => {
+    console.log(firstDialogForm);
     secondDialog?.current?.close();
     thirdDialog?.current?.open();
+  };
+
+  const handleSubmitDeposit = async (e: FormEvent) => {
+    e.preventDefault();
+    const data = {
+      transactionType: "deposit",
+      paymentMethod: firstDialogForm.paymentMethod,
+      amount: firstDialogForm.amount,
+      type: "deposit",
+      walletAddress: lastDialogForm.senderAddress,
+      transactionId: lastDialogForm.transactionId,
+    };
+
+    try {
+      const newDepositData = await deposit(data);
+      updateDeposit(newDepositData);
+      toast.success("Deposit Submitted Successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Error");
+    }
   };
 
   return (
@@ -55,7 +83,10 @@ const Deposit = (props: Props) => {
           <label htmlFor="payment" className="block text-sm text-left font-semibold mb-3">
             Payment Method :
           </label>
-          <select className="block w-full rounded-[5px]  px-4 py-3 pr-8 leading-tight text-gray-700 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:border-blue-500">
+          <select
+            onChange={(e) => setFirstDialogForm({ ...firstDialogForm, paymentMethod: e.target.value })}
+            className="block w-full rounded-[5px]  px-4 py-3 pr-8 leading-tight text-gray-700 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:border-blue-500"
+          >
             <option value="bitcoin">Bitcoin</option>
             <option value="usdt">USDT</option>
           </select>
@@ -74,6 +105,8 @@ const Deposit = (props: Props) => {
             <input
               type="number"
               min={200}
+              value={firstDialogForm.amount}
+              onChange={(e) => setFirstDialogForm({ ...firstDialogForm, amount: Number(e.target.value) })}
               className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
             />
             <span className="bg-gray-200 text-gray-700 px-3 py-3">$</span>
@@ -98,39 +131,49 @@ const Deposit = (props: Props) => {
       </ReusableDialog>
       <ReusableDialog title="Confirm Deposit" ref={thirdDialog}>
         <p className="mb-2">Submit your sender's wallet address and transaction ID/Hash</p>
-        <div className="mb-1">
-          <label htmlFor="amount" className="font-semibold text-gray-700 mb-3 text-left block text-sm">
-            Sender's Wallet Address :
-          </label>
-          <div className="flex items-center w-full border border-gray-300 rounded-[5px] overflow-hidden">
-            <input
-              type="text"
-              placeholder="Enter Sender's Address"
-              className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
-            />
+        <form onSubmit={handleSubmitDeposit}>
+          <div className="mb-5">
+            <label htmlFor="amount" className="font-semibold text-gray-700 mb-3 text-left block text-sm">
+              Sender's Wallet Address :
+            </label>
+            <div className="flex items-center w-full border border-gray-300 rounded-[5px] overflow-hidden">
+              <input
+                type="text"
+                placeholder="Enter Sender's Address"
+                required
+                value={lastDialogForm.senderAddress}
+                onChange={(e) => setLastDialogForm({ ...lastDialogForm, senderAddress: e.target.value })}
+                className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <label htmlFor="amount" className="font-semibold text-gray-700 mb-3 text-left block text-sm">
-            Transaction ID/Hash :
-          </label>
-          <div className="flex items-center w-full border border-gray-300 rounded-[5px] overflow-hidden">
-            <input
-              type="text"
-              placeholder="Enter Transaction ID"
-              className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
-            />
+          <div className="mb-5">
+            <label htmlFor="amount" className="font-semibold text-gray-700 mb-3 text-left block text-sm">
+              Transaction ID/Hash :
+            </label>
+            <div className="flex items-center w-full border border-gray-300 rounded-[5px] overflow-hidden">
+              <input
+                type="text"
+                placeholder="Enter Transaction ID"
+                required
+                value={lastDialogForm.transactionId}
+                onChange={(e) => setLastDialogForm({ ...lastDialogForm, transactionId: e.target.value })}
+                className="flex-1 px-4 py-2 text-gray-700 focus:outline-none focus:border-blue-500"
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-x-4 justify-end">
-          <Button
-            onClick={() => thirdDialog?.current?.close()}
-            className="bg-gray-600 hover:bg-gray-700 rounded-[5px] px-4 "
-          >
-            Cancel
-          </Button>
-          <Button className="bg-primary hover:bg-primary-hover rounded-[5px] ">Continue</Button>
-        </div>
+          <div className="flex items-center gap-x-4 justify-end">
+            <Button
+              onClick={() => thirdDialog?.current?.close()}
+              className="bg-gray-600 hover:bg-gray-700 rounded-[5px] px-4 "
+            >
+              Cancel
+            </Button>
+            <Button type="submit" className="bg-primary hover:bg-primary-hover rounded-[5px] ">
+              Continue
+            </Button>
+          </div>
+        </form>
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Deposits</h2>

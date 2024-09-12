@@ -1,12 +1,10 @@
 import { lazy, Suspense, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { UserProvider } from "./context/UserContext";
 import Loader from "./components/ui/Loader";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
-import AdminProvider from "./context/AdminContext";
 import { UserAdminProvider } from "./context/MainContext";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -32,16 +30,10 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const Deposit = lazy(() => import("./pages/Deposit"));
 const Withdrawal = lazy(() => import("./pages/Withdrawal"));
-const Asset = lazy(() => import("./pages/Asset"));
-const Subscription = lazy(() => import("./pages/Subscription"));
-const Verify = lazy(() => import("./pages/Verify"));
 const BuyBitcoin = lazy(() => import("./pages/BuyBitcoin"));
-const Users = lazy(() => import("./pages/Users"));
 const Account = lazy(() => import("./pages/Account"));
 const AdminDeposit = lazy(() => import("./pages/AdminDeposit"));
 const AdminWithdrawal = lazy(() => import("./pages/AdminWithdrawal"));
-const AdminTradingSession = lazy(() => import("./pages/AdminTradingSession"));
-const AdminSubscription = lazy(() => import("./pages/AdminSubscription"));
 const AdminVerifications = lazy(() => import("./pages/AdminVerifications"));
 const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
@@ -149,10 +141,7 @@ const router = createBrowserRouter([
         path: "admin/dashboard",
         element: <Dashboard />,
       },
-      {
-        path: "admin/users",
-        element: <Users />,
-      },
+
       {
         path: "admin/account",
         element: <Account />,
@@ -165,18 +154,7 @@ const router = createBrowserRouter([
         path: "admin/withdrawal",
         element: <AdminWithdrawal />,
       },
-      {
-        path: "admin/trades",
-        element: <AdminTradingSession />,
-      },
-      {
-        path: "admin/subscriptions",
-        element: <AdminSubscription />,
-      },
-      {
-        path: "admin/trades",
-        element: <AdminTradingSession />,
-      },
+
       {
         path: "admin/verification",
         element: <AdminVerifications />,
@@ -242,18 +220,7 @@ const router = createBrowserRouter([
         path: "user/kyc-application",
         element: <KycApplications />,
       },
-      {
-        path: "user/assets",
-        element: <Asset />,
-      },
-      {
-        path: "user/subscriptions",
-        element: <Subscription />,
-      },
-      {
-        path: "user/user-verify",
-        element: <Verify />,
-      },
+
       {
         path: "user/settings",
         element: <Settings />,
@@ -267,55 +234,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // useEffect(() => {
-  //   // Paste your Tidio JavaScript code snippet here
-  //   const tidioScript = document.createElement("script");
-  //   tidioScript.src = "//code.tidio.co/afmvrvgovdjzha35jublgcapo6hxe2co.js";
-  //   tidioScript.async = true;
-  //   document.body.appendChild(tidioScript);
-
-  //   return () => {
-  //     document.body.removeChild(tidioScript);
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    // Retrieve expiration time from local storage
-    const expirationTime = parseInt(localStorage.getItem("expirationTime") || "0", 10);
-    // Get the current time
-    const currentTime = new Date().getTime();
-
-    // Check if the expiration time is valid and if it's expired
-    if (expirationTime && currentTime >= expirationTime) {
-      // Clear tokens from local storage
-      localStorage.removeItem("token");
-      localStorage.removeItem("adminToken");
-      // Redirect to the sign-in page
-      window.location.href = "/signin";
-    }
-  }, []);
-
-  useEffect(() => {
-    // Set a timer to clear tokens from local storage after 2 hours
-    const tokenExpirationTimer = setTimeout(() => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("adminToken");
-      // window.location.href = "/signin";
-    }, 2 * 60 * 60 * 1000); // 2 hours in milliseconds
-
-    // Clear the timer when the component unmounts or when the expiration time changes
-    return () => clearTimeout(tokenExpirationTimer);
-  }, []);
-
   return (
     <Suspense fallback={<Loader />}>
       <UserAdminProvider>
-        <UserProvider>
-          <AdminProvider>
-            <Toaster position="top-right" reverseOrder={false} />
-            <RouterProvider router={router} />
-          </AdminProvider>
-        </UserProvider>
+        <Toaster position="top-right" reverseOrder={false} />
+        <RouterProvider router={router} />
       </UserAdminProvider>
     </Suspense>
   );

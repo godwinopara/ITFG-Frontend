@@ -1,11 +1,4 @@
-import {
-  getUserData,
-  getUserDeposits,
-  getUserInvestments,
-  getUserReferralBonuses,
-  getUserReferrals,
-  getUserWithdrawals,
-} from "../api/api";
+import Withdrawal from "../pages/Withdrawal";
 import { InvestmentProps } from "../types/investment";
 import { ReferralBonusProps, ReferralProps } from "../types/referral";
 import { TransactionProps } from "../types/transaction";
@@ -19,11 +12,14 @@ interface InitialStateProps {
   investments: InvestmentProps[];
   referrals: ReferralProps[];
   referralBonuses: ReferralBonusProps[];
+  loading: boolean;
 }
 
 interface UserAdminContextType {
   state: InitialStateProps;
   getUserData: (user: any) => void;
+  updateDeposit: (data: TransactionProps) => void;
+  updateWithdrawal: (data: TransactionProps) => void;
 }
 
 type Action =
@@ -32,7 +28,9 @@ type Action =
   | { type: "GET_USER_WITHDRAWALS"; payload: TransactionProps[] }
   | { type: "GET_USER_INVESTMENTS"; payload: InvestmentProps[] }
   | { type: "GET_USER_REFERRALS"; payload: ReferralProps[] }
-  | { type: "GET_USER_REFERRAL_BONUSES"; payload: ReferralBonusProps[] };
+  | { type: "GET_USER_REFERRAL_BONUSES"; payload: ReferralBonusProps[] }
+  | { type: "ADD_NEW_DEPOSIT"; payload: TransactionProps }
+  | { type: "ADD_NEW_WITHDRAWAL"; payload: TransactionProps };
 
 const initialState: InitialStateProps = {
   user: null,
@@ -41,11 +39,14 @@ const initialState: InitialStateProps = {
   investments: [],
   referrals: [],
   referralBonuses: [],
+  loading: false,
 };
 
 const UserAdminContext = createContext<UserAdminContextType>({
   state: initialState,
   getUserData: () => null,
+  updateDeposit: () => null,
+  updateWithdrawal: () => null,
 });
 
 const UserAdminReducer = (state: InitialStateProps, action: Action) => {
@@ -62,6 +63,13 @@ const UserAdminReducer = (state: InitialStateProps, action: Action) => {
       return { ...state, referrals: action.payload };
     case "GET_USER_REFERRAL_BONUSES":
       return { ...state, referralBonuses: action.payload };
+    case "ADD_NEW_DEPOSIT":
+      return { ...state, deposits: [...state.deposits, action.payload] };
+    case "ADD_NEW_WITHDRAWAL":
+      return { ...state, Withdrawals: [...state.withdrawals, action.payload] };
+
+    default:
+      return state;
   }
 };
 
@@ -72,7 +80,18 @@ export const UserAdminProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: "GET_USER_DATA", payload: user });
   };
 
-  return <UserAdminContext.Provider value={{ state, getUserData }}>{children}</UserAdminContext.Provider>;
+  const updateDeposit = (data: TransactionProps) => {
+    dispatch({ type: "ADD_NEW_DEPOSIT", payload: data });
+  };
+  const updateWithdrawal = (data: TransactionProps) => {
+    dispatch({ type: "ADD_NEW_WITHDRAWAL", payload: data });
+  };
+
+  return (
+    <UserAdminContext.Provider value={{ state, getUserData, updateDeposit, updateWithdrawal }}>
+      {children}
+    </UserAdminContext.Provider>
+  );
 };
 
 export const useUserAdminContext = () => {

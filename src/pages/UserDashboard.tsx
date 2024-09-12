@@ -1,6 +1,5 @@
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { TickerTape } from "react-ts-tradingview-widgets";
-import { useUserContext } from "../context/UserContext";
 import Loader from "../components/ui/Loader";
 import AccountStatistics from "../components/dashboards/AccountStatistics";
 import InvestmentSummary from "../components/dashboards/InvestmentSummary";
@@ -14,7 +13,9 @@ import { DashboardDataTable } from "../components/ui/dashboard-data-table";
 type Props = {};
 
 const UserDashboard = (props: Props) => {
-  const { loading } = useUserContext();
+  const {
+    state: { loading },
+  } = useUserAdminContext();
   const {
     state: { user },
   } = useUserAdminContext();

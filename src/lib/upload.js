@@ -1,11 +1,11 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "./firebase";
+// import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+// import { storage } from "./firebase";
 
-const upload = async (file) => {
-	const date = new Date();
-	const storageRef = ref(storage, `images/${date + file.name}`);
-	await uploadBytes(storageRef, file);
-	return await getDownloadURL(storageRef);
-};
+// const upload = async (file) => {
+// 	const date = new Date();
+// 	const storageRef = ref(storage, `images/${date + file.name}`);
+// 	await uploadBytes(storageRef, file);
+// 	return await getDownloadURL(storageRef);
+// };
 
-export default upload;
+// export default upload;

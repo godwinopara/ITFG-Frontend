@@ -10,12 +10,12 @@ import { BiMoneyWithdraw, BiWallet } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { HamburgerIcon } from "../ui/HamburgerIcon";
 import { CircleMinus, CirclePlus, CopyPlus } from "lucide-react";
-import { useUserContext } from "../../context/UserContext";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import ReuseableCollapseable from "../sharedUi/ReuseableCollapseable";
 import { TiChartBar } from "react-icons/ti";
 import { RxDashboard } from "react-icons/rx";
+import { useUserAdminContext } from "../../context/MainContext";
 
 type Props = {
   sidebarOpen: boolean;
@@ -23,9 +23,11 @@ type Props = {
 };
 
 export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
-  const { state } = useUserContext();
+  const {
+    state: { loading },
+  } = useUserAdminContext();
 
-  const [status, setStatus] = useState(state.status || "pending");
+  const [status, setStatus] = useState(loading || "pending");
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -39,9 +41,9 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-  useEffect(() => {
-    setStatus(state.status);
-  }, [state]);
+  // useEffect(() => {
+  //   setStatus(state.status);
+  // }, [state]);
 
   // close on click outside
   useEffect(() => {

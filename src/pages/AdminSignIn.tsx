@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/LOGO.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { auth, db } from "../lib/firebase";
+// import { auth, db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 // import { v4 as uuidv4 } from "uuid";
@@ -12,9 +12,7 @@ export default function AdminSignIn() {
 
   const navigate = useNavigate();
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -22,55 +20,50 @@ export default function AdminSignIn() {
     }));
   };
 
-  const confirmAdmin = async () => {
-    try {
-      const data = await signInWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
+  // const confirmAdmin = async () => {
+  //   try {
+  //     const data = await signInWithEmailAndPassword(
+  //       auth,
+  //       formData.email,
+  //       formData.password
+  //     );
 
-      const adminRef = doc(db, "admin", "iLOKFyIVfGUQuu07XGLIiJ7g73w2");
-      const adminSnap = await getDoc(adminRef);
-      const adminData = adminSnap.data();
+  //     const adminRef = doc(db, "admin", "iLOKFyIVfGUQuu07XGLIiJ7g73w2");
+  //     const adminSnap = await getDoc(adminRef);
+  //     const adminData = adminSnap.data();
 
-      const userEmail = data.user.email;
-      if (userEmail === adminData?.email) {
-        localStorage.setItem("adminToken", data.user.refreshToken);
-        navigate("/admin/dashboard");
-        return true;
-      } else {
-        throw new Error("Invalid Email or Password");
-      }
-    } catch (error) {
-      throw new Error("Invalid Email or Password");
-    }
-  };
+  //     const userEmail = data.user.email;
+  //     if (userEmail === adminData?.email) {
+  //       localStorage.setItem("adminToken", data.user.refreshToken);
+  //       navigate("/admin/dashboard");
+  //       return true;
+  //     } else {
+  //       throw new Error("Invalid Email or Password");
+  //     }
+  //   } catch (error) {
+  //     throw new Error("Invalid Email or Password");
+  //   }
+  // };
 
   const handleSubmitSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.promise(confirmAdmin(), {
-      loading: "Hold on, we're signing  you in!",
-      success: "Sign in Successful",
-      error: (error) => error.message,
-    });
+    // toast.promise(confirmAdmin(), {
+    //   loading: "Hold on, we're signing  you in!",
+    //   success: "Sign in Successful",
+    //   error: (error) => error.message,
+    // });
   };
 
   return (
     <section className="px-6 xl:px-0 xl:grid xl:grid-cols-2">
       <div className="hidden xl:block xl:w-[85%] min-h-screen bg-authImg bg-center bg-cover"></div>
       <div className="xl:w-[75%] my-20">
-        <Link
-          to="/"
-          className="flex justify-center items-center mb-16 cursor-pointer"
-        >
+        <Link to="/" className="flex justify-center items-center mb-16 cursor-pointer">
           <img src={logo} alt="" className="w-[50%]" />
         </Link>
         <form onSubmit={handleSubmitSignIn}>
           <div className="mb-4">
-            <label className="mb-2.5 block font-medium text-black ">
-              Email
-            </label>
+            <label className="mb-2.5 block font-medium text-black ">Email</label>
             <div className="relative">
               <input
                 type="email"
@@ -103,9 +96,7 @@ export default function AdminSignIn() {
 
           <div className="mb-6 w-full">
             <div>
-              <label className="mb-2.5 block font-medium text-black">
-                Password
-              </label>
+              <label className="mb-2.5 block font-medium text-black">Password</label>
               <div className="relative">
                 <input
                   type="password"
