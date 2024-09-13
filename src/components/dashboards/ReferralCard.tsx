@@ -1,20 +1,10 @@
 import clsx from "clsx";
 import { useUserAdminContext } from "../../context/MainContext";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function ReferralCard() {
   const {
     state: { user },
   } = useUserAdminContext();
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/signin");
-    }
-  }, [user, navigate]);
 
   if (!user) {
     return null;

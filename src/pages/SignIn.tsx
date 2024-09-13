@@ -9,7 +9,7 @@ import { useUserAdminContext } from "../context/MainContext";
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
-  const { getUserData } = useUserAdminContext();
+  const { fetchUserData } = useUserAdminContext();
 
   const navigate = useNavigate();
 
@@ -33,11 +33,11 @@ export default function SignIn() {
         error: "Invalid Username or Password",
       });
 
-      const { token, user } = response;
+      const { token } = response;
 
       localStorage.setItem("token", token);
 
-      getUserData(user);
+      fetchUserData();
 
       // Redirect user after successful login
       //   if (user.email === "adeyemooladunjoye@gmail.com") {

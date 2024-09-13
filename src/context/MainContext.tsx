@@ -1,9 +1,10 @@
+import { getDeposit, getReferralBonus, getReferrals, getUser, getWithdrawal } from "../api/api";
 import Withdrawal from "../pages/Withdrawal";
 import { InvestmentProps } from "../types/investment";
 import { ReferralBonusProps, ReferralProps } from "../types/referral";
 import { TransactionProps } from "../types/transaction";
 import { UserProps } from "../types/user";
-import { createContext, ReactNode, useContext, useEffect, useReducer } from "react";
+import { createContext, ReactNode, useContext, useEffect, useMemo, useReducer } from "react";
 
 interface InitialStateProps {
   user: UserProps | null;
@@ -17,13 +18,14 @@ interface InitialStateProps {
 
 interface UserAdminContextType {
   state: InitialStateProps;
-  getUserData: (user: any) => void;
   updateDeposit: (data: TransactionProps) => void;
   updateWithdrawal: (data: TransactionProps) => void;
+  fetchUserData: () => void;
 }
 
 type Action =
   | { type: "GET_USER_DATA"; payload: UserProps }
+  | { type: "LOADING"; payload: boolean }
   | { type: "GET_USER_DEPOSITS"; payload: TransactionProps[] }
   | { type: "GET_USER_WITHDRAWALS"; payload: TransactionProps[] }
   | { type: "GET_USER_INVESTMENTS"; payload: InvestmentProps[] }
@@ -44,9 +46,9 @@ const initialState: InitialStateProps = {
 
 const UserAdminContext = createContext<UserAdminContextType>({
   state: initialState,
-  getUserData: () => null,
   updateDeposit: () => null,
   updateWithdrawal: () => null,
+  fetchUserData: () => null,
 });
 
 const UserAdminReducer = (state: InitialStateProps, action: Action) => {
@@ -67,7 +69,8 @@ const UserAdminReducer = (state: InitialStateProps, action: Action) => {
       return { ...state, deposits: [...state.deposits, action.payload] };
     case "ADD_NEW_WITHDRAWAL":
       return { ...state, Withdrawals: [...state.withdrawals, action.payload] };
-
+    case "LOADING":
+      return { ...state, loading: action.payload };
     default:
       return state;
   }
@@ -76,8 +79,43 @@ const UserAdminReducer = (state: InitialStateProps, action: Action) => {
 export const UserAdminProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(UserAdminReducer, initialState);
 
-  const getUserData = (user: any) => {
-    dispatch({ type: "GET_USER_DATA", payload: user });
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        dispatch({ type: "LOADING", payload: true });
+
+        const userInfo = await getUser();
+        dispatch({ type: "GET_USER_DATA", payload: userInfo });
+
+        const userDeposits = await getDeposit();
+        dispatch({ type: "GET_USER_DEPOSITS", payload: userDeposits });
+
+        const userWithdrawals = await getWithdrawal();
+        dispatch({ type: "GET_USER_WITHDRAWALS", payload: userWithdrawals });
+
+        const userInvestments = await getWithdrawal();
+        dispatch({ type: "GET_USER_INVESTMENTS", payload: userInvestments });
+
+        const userReferrals = await getReferrals();
+        dispatch({ type: "GET_USER_REFERRALS", payload: userReferrals });
+
+        const userReferralBonus = await getReferralBonus();
+        dispatch({ type: "GET_USER_REFERRAL_BONUSES", payload: userReferralBonus });
+
+        //
+        //
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    dispatch({ type: "LOADING", payload: false });
   };
 
   const updateDeposit = (data: TransactionProps) => {
@@ -88,7 +126,7 @@ export const UserAdminProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserAdminContext.Provider value={{ state, getUserData, updateDeposit, updateWithdrawal }}>
+    <UserAdminContext.Provider value={{ state, fetchUserData, updateDeposit, updateWithdrawal }}>
       {children}
     </UserAdminContext.Provider>
   );

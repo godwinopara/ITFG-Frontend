@@ -47,18 +47,22 @@ const Deposit = (props: Props) => {
       transactionType: "deposit",
       paymentMethod: firstDialogForm.paymentMethod,
       amount: firstDialogForm.amount,
-      type: "deposit",
       walletAddress: lastDialogForm.senderAddress,
       transactionId: lastDialogForm.transactionId,
     };
 
     try {
-      const newDepositData = await deposit(data);
+      const newDepositData = await toast.promise(deposit(data), {
+        loading: "Submitting Deposit",
+        success: "Deposit Submitted Successfully",
+        error: "Error Submitting Deposit",
+      });
       updateDeposit(newDepositData);
-      toast.success("Deposit Submitted Successfully");
     } catch (error) {
       console.log(error);
       toast.error("Error");
+    } finally {
+      thirdDialog?.current?.close();
     }
   };
 

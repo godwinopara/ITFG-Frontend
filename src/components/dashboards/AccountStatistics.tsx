@@ -14,8 +14,6 @@ export default function AccountStatistics() {
   const deposits = [];
   const withdrawals = [];
 
-  console.log(user);
-
   return (
     <>
       <Card>
@@ -111,7 +109,10 @@ export default function AccountStatistics() {
         <CardContent>
           <p className="text-sm flex items-center gap-x-1 font-maisonMedium text-gray-500">
             <span className="text-green text-xs border flex items-center justify-center border-none bg-green-200 text-green-600 px-2 py-[3px] rounded-md">
-              {user ? calculatePercentageProfit(user?.total_deposit, user?.total_profit) : "0.00"}%
+              {user && user.total_deposit > 0
+                ? calculatePercentageProfit(user?.total_deposit, user?.total_profit)
+                : "0.00"}
+              %
             </span>
             Profit Percentage
           </p>
