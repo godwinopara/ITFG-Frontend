@@ -18,7 +18,7 @@ const Withdrawal = (props: Props) => {
   const [withdrawalData, setWithdrawalData] = useState({ paymentMethod: "usdt", walletAddress: "", amount: 0 });
 
   const {
-    state: { user },
+    state: { user, withdrawals },
     updateWithdrawal,
   } = useUserAdminContext();
 
@@ -31,24 +31,31 @@ const Withdrawal = (props: Props) => {
       toast.error("all field required");
       return;
     }
-    // try {
-    //   const newWithdrawalData = await withdrawal(withdrawalRequestData);
-    //   const savedWithdrawal:TransactionProps = {
-    //     transactionType: "withdrawal",
-    //     paymentMethod: newWithdrawalData.paymentMethod,
-    //     amount: newWithdrawalData.amount,
-    //     status: newWithdrawalData.status,
-    //     date: newWithdrawalData.date,
-    //     walletAddress: newWithdrawalData.walletAddress,
-    //     transactionId: ""
-    //   };
-    //   console.log(newWithdrawalData, "withdrawal");
-    //   updateWithdrawal(savedWithdrawal);
-    //   toast.success("Withdrawal Submitted Successfully");
-    // } catch (error) {
-    //   console.error(error);
-    //   toast.error("Error Occured");
-    // }
+    try {
+      const newWithdrawalData = await toast.promise(withdrawal(withdrawalRequestData), {
+        loading: "Submitting Withdrawal Request",
+        success: "Withdrawal Request Sent Successfully",
+        error: "Withdrawal Request Failed",
+      });
+      const savedWithdrawal: TransactionProps = {
+        transactionType: "withdrawal",
+        paymentMethod: newWithdrawalData.paymentMethod,
+        amount: newWithdrawalData.amount,
+        status: newWithdrawalData.status,
+        date: newWithdrawalData.date,
+        walletAddress: newWithdrawalData.walletAddress,
+        transactionId: "",
+      };
+      // Update withdrawal
+      updateWithdrawal(savedWithdrawal);
+
+      //close Modal
+      firstDialog?.current?.close();
+      //
+    } catch (error) {
+      console.error(error);
+      toast.error("Error Occured");
+    }
   };
 
   return (
@@ -127,10 +134,10 @@ const Withdrawal = (props: Props) => {
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-semibold mb-1 text-primary">Withdrawals</h2>
-        <p className="text-gray-600">Withdrawals made by you. A total of {user?.withdrawals.length} Withdrawal(s)</p>
+        <p className="text-gray-600">Withdrawals made by you. A total of {withdrawals.length} Withdrawal(s)</p>
       </div>
       <div>
-        <DataTable columns={columnDeposit} data={user?.withdrawals || []} />
+        <DataTable columns={columnDeposit} data={withdrawals || []} />
       </div>
     </AdminLayout>
   );

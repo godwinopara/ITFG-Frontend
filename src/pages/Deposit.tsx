@@ -18,7 +18,7 @@ const Deposit = (props: Props) => {
   const thirdDialog = useRef<DialogHandle>(null);
 
   const {
-    state: { user },
+    state: { user, deposits },
     updateDeposit,
   } = useUserAdminContext();
 
@@ -36,7 +36,6 @@ const Deposit = (props: Props) => {
   };
 
   const handleOpenConfirmPaymentDialog = () => {
-    console.log(firstDialogForm);
     secondDialog?.current?.close();
     thirdDialog?.current?.open();
   };
@@ -81,7 +80,7 @@ const Deposit = (props: Props) => {
       <ReusableDialog title="Make Deposit" ref={firstDialog}>
         <div className="flex items-center justify-between py-2 text-gray-600">
           <p className="font-semibold">Wallet Balance</p>
-          <p className="font-semibold">$0.00</p>
+          <p className="font-semibold">${user?.wallet_balance.toLocaleString()}</p>
         </div>
         <div className="relative w-full">
           <label htmlFor="payment" className="block text-sm text-left font-semibold mb-3">
@@ -181,10 +180,10 @@ const Deposit = (props: Props) => {
       </ReusableDialog>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Deposits</h2>
-        <p className="text-gray-600 text-sm">Deposits made by you. A total of {user?.deposits.length} deposit(s)</p>
+        <p className="text-gray-600 text-sm">Deposits made by you. A total of {deposits.length} deposit(s)</p>
       </div>
       <div>
-        <DataTable columns={columnDeposit} data={user?.deposits || []} />
+        <DataTable columns={columnDeposit} data={deposits || []} />
       </div>
     </AdminLayout>
   );

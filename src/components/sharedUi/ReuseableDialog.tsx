@@ -23,7 +23,7 @@ const ReusableDialog = forwardRef<DialogHandle, ReuseableDialogProps>(({ title, 
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="z-[9999] w-[85%] rounded-[5px] border">
         <DialogHeader className="text-gray-600">
-          <DialogTitle className="text-primary font-semibold border-b pb-5 text-left">{title}</DialogTitle>
+          <DialogTitle className="text-primary font-maisonMedium border-b pb-5 text-left">{title}</DialogTitle>
         </DialogHeader>
         {children}
       </DialogContent>

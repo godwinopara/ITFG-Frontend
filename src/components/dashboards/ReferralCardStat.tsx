@@ -2,7 +2,7 @@ import { useUserAdminContext } from "../../context/MainContext";
 
 function ReferralCardStat() {
   const {
-    state: { user },
+    state: { user, referrals },
   } = useUserAdminContext();
 
   return (
@@ -10,7 +10,7 @@ function ReferralCardStat() {
       <div className="border px-4 py-7 text-sm text-gray-600">
         <h2 className="mb-2 text-base font-maisonMedium text-primary">Referral Statistics</h2>
         <p className="font-bold">Your Referral: {user?.referredBy ? user?.referredBy : "None"}</p>
-        <p className="font-bold">No of Referrals: {user?.referrals.length}</p>
+        <p className="font-bold">No of Referrals: {referrals.length}</p>
       </div>
       <div className="border px-4 py-7 text-sm text-gray-600">
         <h2 className="mb-2 text-base font-maisonMedium text-primary">Referral Bonus</h2>

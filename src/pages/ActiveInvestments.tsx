@@ -5,7 +5,7 @@ import { useUserAdminContext } from "../context/MainContext";
 
 function ActiveInvestments() {
   const {
-    state: { user },
+    state: { activeInvestments },
   } = useUserAdminContext();
   return (
     <AdminLayout>
@@ -15,11 +15,11 @@ function ActiveInvestments() {
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Active Investments</h2>
         <p className="text-gray-600 text-sm">
-          Your currently active investment(s). A total of {user?.investments.length} investment(s)
+          Your currently active investment(s). A total of {activeInvestments.length} investment(s)
         </p>
       </div>
       <div>
-        <DataTable columns={columnsInvestment} data={user?.investments || []} />
+        <DataTable columns={columnsInvestment} data={activeInvestments || []} />
       </div>
     </AdminLayout>
   );

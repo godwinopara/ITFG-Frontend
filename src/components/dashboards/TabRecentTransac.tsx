@@ -6,19 +6,17 @@ import { DashboardDataTable } from "../ui/dashboard-data-table";
 
 function TabRecentTransac() {
   const {
-    state: { user },
+    state: { deposits, withdrawals },
   } = useUserAdminContext();
-  const sortedDeposits = user?.deposits.sort(
-    (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  const sortedDeposits = deposits.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const sortedWithdrawals = user?.withdrawals.sort(
+  const sortedWithdrawals = withdrawals.sort(
     (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   // Get the most recent five deposits
-  const deposits: TransactionProps[] = sortedDeposits?.slice(0, 5) || [];
-  const withdrawals: TransactionProps[] = sortedWithdrawals?.slice(0, 5) || [];
+  const userDeposits: TransactionProps[] = sortedDeposits?.slice(0, 5) || [];
+  const userWithdrawals: TransactionProps[] = sortedWithdrawals?.slice(0, 5) || [];
 
   return (
     <>
@@ -41,10 +39,10 @@ function TabRecentTransac() {
           </TabsList>
         </div>
         <TabsContent value="deposits">
-          <DashboardDataTable columns={columnDeposit} data={deposits} />
+          <DashboardDataTable columns={columnDeposit} data={userDeposits} />
         </TabsContent>
         <TabsContent value="withdrawals">
-          <DashboardDataTable columns={columnDeposit} data={withdrawals} />
+          <DashboardDataTable columns={columnDeposit} data={userWithdrawals} />
         </TabsContent>
       </Tabs>
     </>

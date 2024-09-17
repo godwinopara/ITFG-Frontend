@@ -20,7 +20,7 @@ function ReferralBonus() {
       </div>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Referred Users</h2>
-        <p className="text-gray-600 text-sm">You have a total of 0 referral(s)</p>
+        <p className="text-gray-600 text-sm">You have a total of {referralBonuses.length} referral(s)</p>
       </div>
       <div>
         <DataTable columns={columnsReferralBonus} data={referralBonuses} />

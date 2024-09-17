@@ -12,10 +12,12 @@ function EndedInvestments() {
       </div>
       <div className="border rounded-t-[6px] p-4 mt-5">
         <h2 className="font-maisonBold mb-1 text-primary text-base">Ended Investments</h2>
-        <p className="text-gray-600 text-sm">Your already elasped investment(s). A total of 0 investment(s)</p>
+        <p className="text-gray-600 text-sm">
+          Your already elasped investment(s). A total of {state.endedInvestments.length} investment(s)
+        </p>
       </div>
       <div>
-        <DataTable columns={columnsInvestment} data={state.investments} />
+        <DataTable columns={columnsInvestment} data={state.endedInvestments || []} />
       </div>
     </AdminLayout>
   );

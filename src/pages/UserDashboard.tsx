@@ -17,7 +17,7 @@ const UserDashboard = (props: Props) => {
     state: { loading },
   } = useUserAdminContext();
   const {
-    state: { user },
+    state: { user, investments },
   } = useUserAdminContext();
 
   return (
@@ -41,7 +41,7 @@ const UserDashboard = (props: Props) => {
             <TabRecentTransac />
             <div>
               <h2 className="py-5 px-5 font-maisonBold text-primary border rounded-md mb-2">Recent Investments</h2>
-              <DashboardDataTable columns={columnsInvestment} data={user?.investments || []} />
+              <DashboardDataTable columns={columnsInvestment} data={investments || []} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6">

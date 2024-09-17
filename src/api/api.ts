@@ -55,7 +55,7 @@ export const getWithdrawal = async () => {
   return response.data;
 };
 
-export const investment = async (body: InvestProps) => {
+export const addInvestment = async (body: InvestProps) => {
   const response = await axiosInstance.post("/investments", body);
   return response.data;
 };
@@ -64,11 +64,26 @@ export const getInvestment = async () => {
   return response.data;
 };
 
+export const getActiveInvestments = async () => {
+  const response = await axiosInstance.get("/investments/active");
+  return response.data;
+};
+
+export const getEndedInvestments = async () => {
+  const response = await axiosInstance.get("/investments/ended");
+  return response.data;
+};
+
+export const updateUser = async (body: any) => {
+  const response = await axiosInstance.patch("/users", body);
+  return response.data;
+};
+
 export const getReferrals = async () => {
   const response = await axiosInstance.get("/referrals");
   return response.data;
 };
 export const getReferralBonus = async () => {
-  const response = await axiosInstance.get("/referral/bonus/");
+  const response = await axiosInstance.get("/referrals/referralbonus");
   return response.data;
 };

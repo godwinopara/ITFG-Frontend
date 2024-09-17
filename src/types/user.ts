@@ -1,11 +1,9 @@
-import { InvestmentProps } from "./investment";
-import { ReferralBonusProps, ReferralProps } from "./referral";
-import { TransactionProps } from "./transaction";
-
 export interface UserProps {
   id: string;
   name: string;
   email: string;
+  mobile: string;
+  nationality: string;
   password: string;
   wallet_balance: number;
   total_deposit: number;
@@ -23,11 +21,6 @@ export interface UserProps {
   referralCode: string;
   noOfReferralBonus: number;
   referralLevel: number;
-  investments: InvestmentProps[];
-  deposits: TransactionProps[];
-  withdrawals: TransactionProps[];
-  referrals: ReferralProps[];
-  referralBonuses: ReferralBonusProps[];
 }
 
 // interface WalletProps {
