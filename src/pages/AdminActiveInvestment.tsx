@@ -1,5 +1,5 @@
 import { Button } from "../components/ui/button";
-import { columnUserAccount } from "../components/dashboards/TableCol";
+import { columnsAdminInvestment } from "../components/dashboards/TableCol";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import ReusableDialog, { DialogHandle } from "../components/sharedUi/ReuseableDialog";
 import { DataTable } from "../components/ui/data-table";
@@ -7,25 +7,38 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useAdminContext } from "../context/AdminContext";
 import Loader from "../components/ui/Loader";
+import { getUsersActiveInvestments } from "../api/api";
+import { InvestmentProps } from "../types/investment";
 
-const Account = () => {
+const AdminActiveInvestment = () => {
   const firstDialog = useRef<DialogHandle>(null);
   const secondDialog = useRef<DialogHandle>(null);
   const thirdDialog = useRef<DialogHandle>(null);
 
-  const [usersAccount, setUsersAccount] = useState<any>([]);
+  const [usersActiveInvestments, setUsersActiveInvestments] = useState<InvestmentProps[]>([]);
 
   const {
-    state: { users, loading },
+    state: { loading },
+    dispatch,
   } = useAdminContext();
 
   useEffect(() => {
-    const usersAcctFilter = users.map((user) => {
-      return { fullname: user.name, balance: user.wallet_balance, profit: user.total_profit, bonus: user.bonus };
-    });
+    fetchUsersInvestments();
+    // eslint-disable-next-line
+  }, []);
 
-    setUsersAccount(usersAcctFilter);
-  }, [users]);
+  const fetchUsersInvestments = async () => {
+    dispatch({ type: "LOADING", payload: true });
+    try {
+      const investments = await getUsersActiveInvestments();
+      setUsersActiveInvestments(investments);
+      dispatch({ type: "GET_USERS_ACTIVE_INVESTMENTS", payload: investments });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({ type: "LOADING", payload: false });
+    }
+  };
 
   const [firstDialogForm, setFirstDialogForm] = useState({ paymentMethod: "bitcoin", amount: 200 });
   const [lastDialogForm, setLastDialogForm] = useState({ senderAddress: "", transactionId: "" });
@@ -63,14 +76,7 @@ const Account = () => {
       ) : (
         <>
           <div className="flex justify-between items-center">
-            <h1 className="text-slate-600  font-maisonBold text-xl">Account</h1>
-            {/* <button
-          onClick={() => firstDialog?.current?.open()}
-          className="flex items-center justify-center gap-x-2 py-2 px-3 rounded-[6px] text-white bg-primary hover:bg-primary-hover"
-        >
-          <BsCreditCard2BackFill className="text-sm" />
-
-        </button> */}
+            <h1 className="text-slate-600  font-maisonBold text-xl">Users Investments</h1>
           </div>
           <ReusableDialog title="Make Deposit" ref={firstDialog}>
             <div className="flex items-center justify-between py-2 text-gray-600">
@@ -164,11 +170,11 @@ const Account = () => {
             </form>
           </ReusableDialog>
           <div className="border rounded-t-[6px] p-4 mt-5">
-            <h2 className="font-maisonBold mb-1 text-primary text-base">Users Account Information</h2>
-            <p className="text-gray-600 text-sm">All users account informations. A total of {users.length} user(s)</p>
+            <h2 className="font-maisonBold mb-1 text-primary text-base">Active Investments </h2>
+            <p className="text-gray-600 text-sm"> A total of {usersActiveInvestments.length} Active Investment(s)</p>
           </div>
           <div>
-            <DataTable columns={columnUserAccount} data={usersAccount || []} />
+            <DataTable columns={columnsAdminInvestment} data={usersActiveInvestments || []} />
           </div>
         </>
       )}
@@ -176,4 +182,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AdminActiveInvestment;

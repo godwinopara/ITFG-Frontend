@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../images/LOGO.svg";
+import logo from "../../images/ITFG-LOGO.png";
 import { FaUsers } from "react-icons/fa";
 import { PiIdentificationBadge, PiUsersThree } from "react-icons/pi";
 import { MdOutlineUnsubscribe, MdAccountBalance, MdVerifiedUser } from "react-icons/md";
@@ -77,13 +77,13 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
 
   return (
     <aside
-      className={`absolute left-0 top-0 z-[50] flex h-screen  flex-col overflow-y-hidden duration-300 ease-linear  lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 bg-white z-[50] flex h-screen  flex-col overflow-y-hidden duration-300 ease-linear  lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       <div className="flex items-center justify-between gap-2 px-10 py-6 lg:py-7 text-white">
         <Link to={`/${currentPath}/dashboard`}>
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="Logo" className="w-[12rem]" />
         </Link>
 
         <button
@@ -91,9 +91,9 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
-          className="block lg:hidden"
+          className="block  lg:hidden"
         >
-          <HamburgerIcon />
+          {/* <HamburgerIcon /> */}
         </button>
       </div>
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
@@ -127,6 +127,19 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   Account
                 </Link>
               </li>
+              {pathname.includes("admin") && (
+                <li>
+                  <Link
+                    to={`/${currentPath}/users`}
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-maisonMedium duration-300 ease-in-out hover:text-primary-hover ${
+                      pathname.includes("users") && "text-primary-hover "
+                    }`}
+                  >
+                    <FaUsers />
+                    Manage Users
+                  </Link>
+                </li>
+              )}
 
               <ReuseableCollapseable links={["deposit", "withdrawal"]} title="Transactions" icon={<BiWallet />}>
                 <ul className="grid gap-y-3 mt-4 text-sm">
@@ -152,13 +165,15 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 icon={<TiChartBar />}
               >
                 <ul className="grid gap-y-3 mt-4 text-sm">
-                  <li
-                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("investment-options") && "text-primary-hover "
-                    }`}
-                  >
-                    <Link to={`/${currentPath}/investment-options`}>Investment Options</Link>
-                  </li>
+                  {!pathname.includes("admin") && (
+                    <li
+                      className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                        pathname.includes("investment-options") && "text-primary-hover "
+                      }`}
+                    >
+                      <Link to={`/${currentPath}/investment-options`}>Investment Options</Link>
+                    </li>
+                  )}
                   <li
                     className={`relative duration-300 ease-in-out hover:text-primary-hover ${
                       pathname.includes("active-investments") && "text-primary-hover "
@@ -231,155 +246,11 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 </ul>
               </ReuseableCollapseable>
 
-              {pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to={`/${currentPath}/users`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("users") && "text-primary-hover "
-                    }`}
-                  >
-                    <FaUsers />
-                    Manage Users
-                  </Link>
-                </li>
-              )}
-
-              {pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to={`/${currentPath}/account`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("account") && "bg-primary-hover "
-                    }`}
-                  >
-                    <FaUsers />
-                    Account
-                  </Link>
-                </li>
-              )}
-
-              {/* {!pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to={`/${currentPath}/assets`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("assets") && "text-primary-hover "
-                    }`}
-                  >
-                    <CopyPlus />
-                    Assets
-                  </Link>
-                </li>
-              )} */}
-
-              {/* <li>
-                <Link
-                  to={`/${currentPath}/deposit`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                    pathname.includes("deposit") && "text-primary-hover "
-                  }`}
-                >
-                  <CirclePlus />
-                  Deposits
-                </Link>
-              </li>
-              {status === "active" && !pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to={`/user/withdrawal`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("withdrawal") && "text-primary-hover "
-                    }`}
-                  >
-                    <CircleMinus />
-                    Withdrawals
-                  </Link>
-                </li>
-              )} */}
-              {pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to={`/${currentPath}/withdrawal`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("withdrawal") && "text-primary-hover "
-                    }`}
-                  >
-                    <CircleMinus />
-                    Withdrawals
-                  </Link>
-                </li>
-              )}
-              {pathname.includes("buy-bitcoin") && (
-                <li>
-                  <Link
-                    to={`/${currentPath}/buy-bitcoin`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("buy-bitcoin") && "text-primary-hover "
-                    }`}
-                  >
-                    <BiMoneyWithdraw />
-                    Buy Bitcoin
-                  </Link>
-                </li>
-              )}
-              {pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to="/admin/trades"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("trades") && "text-primary-hover "
-                    }`}
-                  >
-                    <TbChartCandle />
-                    Trade Sessions
-                  </Link>
-                </li>
-              )}
-
-              {/* <li>
-                <Link
-                  to={`/${currentPath}/subscriptions`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                    pathname.includes("subscription") && "text-primary-hover "
-                  }`}
-                >
-                  <MdOutlineUnsubscribe />
-                  Subscriptions
-                </Link>
-              </li> */}
-              {pathname.includes("admin") && (
-                <li>
-                  <Link
-                    to="/admin/verification"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("verification") && "text-primary-hover "
-                    }`}
-                  >
-                    <PiIdentificationBadge />
-                    Identity Verification
-                  </Link>
-                </li>
-              )}
-              {/* {pathname.includes("user") && (
-                <li>
-                  <Link
-                    to={`/user/user-verify`}
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-boxdark  duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("user-verify") && "text-primary-hover "
-                    }`}
-                  >
-                    <MdAccountBalance />
-                    Verify Account
-                  </Link>
-                </li>
-              )} */}
-
-              {pathname.includes("admin") && (
+              {/* {pathname.includes("admin") && (
                 <li>
                   <Link
                     to="/admin/notifications"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-dark duration-300 ease-in-out hover:text-primary-hover ${
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-maisonMedium duration-300 ease-in-out hover:text-primary-hover ${
                       pathname.includes("/admin/notifications") && "text-primary-hover "
                     }`}
                   >
@@ -387,7 +258,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     Notification
                   </Link>
                 </li>
-              )}
+              )} */}
             </ul>
           </div>
         </nav>

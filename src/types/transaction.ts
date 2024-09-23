@@ -1,4 +1,5 @@
 export interface TransactionProps {
+  user?: { id: string; name: string };
   transactionType: string;
   paymentMethod: string;
   amount: number;

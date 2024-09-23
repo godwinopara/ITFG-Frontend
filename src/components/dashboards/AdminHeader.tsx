@@ -1,5 +1,6 @@
 import React from "react";
 import DropdownAdmin from "./DropdownAdmin";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 type Props = {
   sidebarOpen: boolean;
@@ -18,9 +19,9 @@ export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
               e.stopPropagation();
               setSidebarOpen(!sidebarOpen);
             }}
-            className="z-[99999] block rounded-sm border p-1.5 shadow-sm lg:hidden"
+            className="z-[99999] text-xl block rounded-sm border p-1.5 shadow-sm lg:hidden"
           >
-            <span className="relative block h-5 w-5 cursor-pointer">
+            {/* <span className="relative block h-5 w-5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
                 <span
                   className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm duration-200 ease-in-out bg-white ${
@@ -50,7 +51,8 @@ export const AdminHeader = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   }`}
                 ></span>
               </span>
-            </span>
+            </span> */}
+            <GiHamburgerMenu />
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
         </div>

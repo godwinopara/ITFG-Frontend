@@ -3,8 +3,16 @@ export interface UserProps {
   name: string;
   email: string;
   mobile: string;
+  status: string;
   nationality: string;
   password: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  address: string;
+  IDFront?: string;
+  IDBack?: string;
+  verified: string;
   wallet_balance: number;
   total_deposit: number;
   total_withdrawal: number;

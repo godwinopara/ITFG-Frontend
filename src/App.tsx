@@ -6,6 +6,7 @@ import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import { UserAdminProvider } from "./context/MainContext";
+import { AdminProvider } from "./context/AdminContext";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -47,6 +48,12 @@ const PasswordSettings = lazy(() => import("./pages/PasswordSetting"));
 const ReferralList = lazy(() => import("./pages/ReferralList"));
 const ReferralBonus = lazy(() => import("./pages/ReferralBonus"));
 const KycApplications = lazy(() => import("./pages/KycApplication"));
+const Users = lazy(() => import("./pages/Users"));
+const AdminKycApplications = lazy(() => import("./pages/AdminKycApplications"));
+const AdminActiveInvestments = lazy(() => import("./pages/AdminActiveInvestment"));
+const AdminEndedInvestments = lazy(() => import("./pages/AdminEndedInvestment"));
+const AdminReferralList = lazy(() => import("./pages/AdminReferralList"));
+const AdminReferralBonus = lazy(() => import("./pages/AdminReferralBonus"));
 
 const router = createBrowserRouter([
   {
@@ -141,7 +148,10 @@ const router = createBrowserRouter([
         path: "admin/dashboard",
         element: <Dashboard />,
       },
-
+      {
+        path: "admin/users",
+        element: <Users />,
+      },
       {
         path: "admin/account",
         element: <Account />,
@@ -154,10 +164,25 @@ const router = createBrowserRouter([
         path: "admin/withdrawal",
         element: <AdminWithdrawal />,
       },
-
       {
-        path: "admin/verification",
-        element: <AdminVerifications />,
+        path: "admin/referral-list",
+        element: <AdminReferralList />,
+      },
+      {
+        path: "admin/referral-bonus",
+        element: <AdminReferralBonus />,
+      },
+      {
+        path: "admin/kyc-application",
+        element: <AdminKycApplications />,
+      },
+      {
+        path: "admin/active-investments",
+        element: <AdminActiveInvestments />,
+      },
+      {
+        path: "admin/ended-investments",
+        element: <AdminEndedInvestments />,
       },
       {
         path: "admin/notifications",
@@ -236,10 +261,12 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Suspense fallback={<Loader />}>
-      <UserAdminProvider>
-        <Toaster position="top-right" reverseOrder={false} />
-        <RouterProvider router={router} />
-      </UserAdminProvider>
+      <AdminProvider>
+        <UserAdminProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+          <RouterProvider router={router} />
+        </UserAdminProvider>
+      </AdminProvider>
     </Suspense>
   );
 }

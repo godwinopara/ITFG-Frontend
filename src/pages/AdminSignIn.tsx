@@ -20,38 +20,16 @@ export default function AdminSignIn() {
     }));
   };
 
-  // const confirmAdmin = async () => {
-  //   try {
-  //     const data = await signInWithEmailAndPassword(
-  //       auth,
-  //       formData.email,
-  //       formData.password
-  //     );
-
-  //     const adminRef = doc(db, "admin", "iLOKFyIVfGUQuu07XGLIiJ7g73w2");
-  //     const adminSnap = await getDoc(adminRef);
-  //     const adminData = adminSnap.data();
-
-  //     const userEmail = data.user.email;
-  //     if (userEmail === adminData?.email) {
-  //       localStorage.setItem("adminToken", data.user.refreshToken);
-  //       navigate("/admin/dashboard");
-  //       return true;
-  //     } else {
-  //       throw new Error("Invalid Email or Password");
-  //     }
-  //   } catch (error) {
-  //     throw new Error("Invalid Email or Password");
-  //   }
-  // };
-
   const handleSubmitSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // toast.promise(confirmAdmin(), {
-    //   loading: "Hold on, we're signing  you in!",
-    //   success: "Sign in Successful",
-    //   error: (error) => error.message,
-    // });
+
+    if (formData.email !== "godwinopara62@gmail.com" && formData.password !== "godon2009") {
+      toast.error("Invalid Email or Password");
+      return;
+    }
+
+    toast.success("Signin Successful");
+    navigate("/admin/dashboard");
   };
 
   return (

@@ -10,7 +10,7 @@ interface UseFormFieldProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const useFormField = ({ id, label, placeholder, type = "text", value, onChange }: UseFormFieldProps) => {
+export const useFormField = ({ id, label, placeholder, type, value, onChange }: UseFormFieldProps) => {
   return (
     <div className="grid w-full items-center gap-3 mb-8">
       <Label htmlFor={id} className="font-maisonMedium">
@@ -23,6 +23,7 @@ export const useFormField = ({ id, label, placeholder, type = "text", value, onC
         className="rounded-[5px] border-gray-300"
         value={value}
         onChange={onChange}
+        required
       />
     </div>
   );
