@@ -13,10 +13,10 @@ export default function Contact() {
           <div>
             <div className="text-lg mb-8">
               <h1 className="text-5xl font-bold mb-8">Contact Us</h1>
-              <p className="max-w-72 text-lg mb-10">Email or Call to learn how InvestInspire can help you invest</p>
+              <p className="max-w-72 text-lg mb-10">Email or Call to learn how IFTG can help you invest</p>
               <div className="flex items-center mb-3  gap-x-3">
                 <MdEmail />
-                <p>info@investinspireltd.com</p>
+                <p>info@indextradefinancialgroup.com</p>
               </div>
               <div className="flex items-center gap-x-3 mb-16">
                 <FaPhoneAlt />
@@ -34,8 +34,8 @@ export default function Contact() {
               <div>
                 <h3 className="font-bold text-xl mb-3">Feedback and Suggestion</h3>
                 <p className="max-w-[400px] text-lg">
-                  We value your feedback and are continuously working to improve InvestInspire. Your input is crucial in
-                  shaping the future of InvestInspire.
+                  We value your feedback and are continuously working to improve Index Trade Financial Group. Your input
+                  is crucial in shaping the future of Index Trade Financial Group.
                 </p>
               </div>
             </div>

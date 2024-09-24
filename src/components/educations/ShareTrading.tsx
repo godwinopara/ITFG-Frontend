@@ -30,9 +30,9 @@ export const ShareTrading = ({ details }: Props) => {
         <Contents desc="Share CFDs are based on the underlying market where traders buy or sell contracts which represent an amount per point in that share price. This is similar to what you do when share investing, but you do not have any ownership of the company." />
       </div>
       <div className="flex flex-col gap-3 ">
-        <Question title="What instruments can you trade with InvestInspire.?" />
-        <Contents desc="Non-leveraged trading (the trading and ownership of physical stocks) is not offered through InvestInspire. " />
-        <Contents desc="Leveraged trading via share CFDs and spread betting is offered through InvestInspire, which will allow you to speculate on the price movements of well-known US and Australian companies. Spread betting instruments are only offered to residents of the UK and Ireland through our FCA regulated entity. " />
+        <Question title="What instruments can you trade with Index Trade Financial Group.?" />
+        <Contents desc="Non-leveraged trading (the trading and ownership of physical stocks) is not offered through Index Trade Financial Group. " />
+        <Contents desc="Leveraged trading via share CFDs and spread betting is offered through Index Trade Financial Group, which will allow you to speculate on the price movements of well-known US and Australian companies. Spread betting instruments are only offered to residents of the UK and Ireland through our FCA regulated entity. " />
         <Contents desc="Instruments on offer include megacaps in some of the biggest companies in the world, like Amazon and Facebook. Domestic multinationals include mining giant BHP Group and banking and financial services groups like National Australia Bank and Westpac Banking Corporation." />
       </div>
 

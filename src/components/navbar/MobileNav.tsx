@@ -28,7 +28,7 @@ export default function MobileNav() {
       <nav className="flex items-center justify-between">
         <div className="w-[50%]">
           <Link to="/">
-            <img src={logo} alt="" />
+            <img src={logo} alt="" className="w-[150px]" />
           </Link>
         </div>
         <div className="text-2xl cursor-pointer xl:hidden" onClick={() => setIsNavOpen(!isNavOpen)}>

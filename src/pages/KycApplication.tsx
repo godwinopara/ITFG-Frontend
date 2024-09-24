@@ -129,14 +129,6 @@ function KycApplication() {
   };
 
   useEffect(() => {
-    // fullname: "",
-    // email: "",
-    // mobile: "",
-    // city: "",
-    // state: "",
-    // address: "",
-    // zipcode: "",
-    // nationality: "",
     if (user) {
       setKycData({
         ...kycData,

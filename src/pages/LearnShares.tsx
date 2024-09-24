@@ -12,9 +12,7 @@ const LearnShares = (props: Props) => {
     <MainLayout>
       <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col gap-10">
         <div className="flex flex-col gap-3 ">
-          <Question
-            title="Learn to trade Share CFDs with InvestInspire "
-          />
+          <Question title="Learn to trade Share CFDs with Index Trade Financial Group " />
           <Contents desc="Learn to trade our wide range of Share CFD instruments, including Apple, Tesla and Microsoft." />
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-5">

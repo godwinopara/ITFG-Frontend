@@ -9,9 +9,7 @@ export default function Steps() {
   return (
     <section className="max-w-7xl mx-auto py-24 px-6 xl:px-0">
       <div className="flex flex-col justify-center items-center mb-10">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-5">
-          We Make Trading Easy
-        </h2>
+        <h2 className="text-3xl lg:text-4xl font-bold mb-5">We Make Trading Easy</h2>
         <p className="text-xl mb-5">Get started in 3 simple steps</p>
       </div>
       <div className="grid gap-y-10 xl:grid-cols-3 xl:gap-y-0 xl:gap-x-10 xl:my-20">
@@ -20,7 +18,7 @@ export default function Steps() {
           title="Step1: Create Account"
           url="/signup"
           btnText="Sign Up"
-          description="Simply create your InvestInspire account with one click and claim exclusive welcome rewards worth up to USDT $1000!"
+          description="Simply create your account with one click and claim exclusive welcome rewards worth up to USDT $1000!"
         />
         <StepsCard
           img={depositImg}
@@ -49,13 +47,7 @@ interface StepsCardProps {
   btnText: string;
 }
 
-const StepsCard = ({
-  img,
-  title,
-  description,
-  url,
-  btnText,
-}: StepsCardProps) => {
+const StepsCard = ({ img, title, description, url, btnText }: StepsCardProps) => {
   return (
     <div className=" bg-secondary p-8 rounded-lg flex flex-col justify-center">
       <div className="text-3xl text-white inline-flex mb-5  items-center">
@@ -64,9 +56,7 @@ const StepsCard = ({
             <img src={img} alt={img} className="w-8" />
           </div>
         )}
-        {typeof img !== "string" && (
-          <div className="bg-primary inline-block p-3 rounded-xl">{img}</div>
-        )}
+        {typeof img !== "string" && <div className="bg-primary inline-block p-3 rounded-xl">{img}</div>}
       </div>
       <div>
         <h3 className="font-extrabold text-2xl mb-5 ">{title}</h3>

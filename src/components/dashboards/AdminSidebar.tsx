@@ -190,28 +190,30 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </li>
                 </ul>
               </ReuseableCollapseable>
-              <ReuseableCollapseable
-                links={["password-settings", "profile-settings"]}
-                title="Profile"
-                icon={<RxDashboard />}
-              >
-                <ul className="grid gap-y-3 mt-4 text-sm">
-                  <li
-                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("profile-settings") && "text-primary-hover "
-                    }`}
-                  >
-                    <Link to={`/${currentPath}/profile-settings`}>Profile Settings</Link>
-                  </li>
-                  <li
-                    className={`relative duration-300 ease-in-out hover:text-primary-hover ${
-                      pathname.includes("password-setting") && "text-primary-hover "
-                    }`}
-                  >
-                    <Link to={`/${currentPath}/password-settings`}>Password Settings</Link>
-                  </li>
-                </ul>
-              </ReuseableCollapseable>
+              {!pathname.includes("admin") && (
+                <ReuseableCollapseable
+                  links={["password-settings", "profile-settings"]}
+                  title="Profile"
+                  icon={<RxDashboard />}
+                >
+                  <ul className="grid gap-y-3 mt-4 text-sm">
+                    <li
+                      className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                        pathname.includes("profile-settings") && "text-primary-hover "
+                      }`}
+                    >
+                      <Link to={`/${currentPath}/profile-settings`}>Profile Settings</Link>
+                    </li>
+                    <li
+                      className={`relative duration-300 ease-in-out hover:text-primary-hover ${
+                        pathname.includes("password-setting") && "text-primary-hover "
+                      }`}
+                    >
+                      <Link to={`/${currentPath}/password-settings`}>Password Settings</Link>
+                    </li>
+                  </ul>
+                </ReuseableCollapseable>
+              )}
               <ReuseableCollapseable
                 links={["referral-list", "referral-bonus"]}
                 title="Referral"

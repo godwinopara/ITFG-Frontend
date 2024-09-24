@@ -1,80 +1,117 @@
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 // import toast, { Toaster } from "react-hot-toast";
 import { useDropzone } from "react-dropzone";
 import { FaUser } from "react-icons/fa";
 import loader from "../images/spinner.svg";
 // import upload from "../lib/upload";
 import { AdminLayout } from "../components/layouts/AdminLayout";
+import { useUserAdminContext } from "../context/MainContext";
+import { updateUser } from "../api/api";
+import toast from "react-hot-toast";
+import { uploadFile } from "../lib/upload";
 
 const Settings = () => {
-  const [image, setImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<string>("");
+  const [fileProfileImg, setFileProfileImg] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState({
-    username: "",
     email: "",
-    firstname: "",
-    lastname: "",
+    name: "",
     mobile: "",
-    country: "",
+    nationality: "",
   });
 
-  const [resetPassword, setResetPassword] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const {
+    state: { user },
+    updateUserProfile,
+  } = useUserAdminContext();
+
+  useEffect(() => {
+    if (user) {
+      setUserInfo({
+        ...userInfo,
+        name: user?.name,
+        email: user.email,
+        mobile: user.mobile,
+        nationality: user.nationality,
+      });
+
+      setImage(user?.profileImgUrl || "");
+    }
+
+    // eslint-disable-next-line
+  }, [user]);
 
   const onDrop = useCallback(async (acceptedFiles: any) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
-      setLoading(true);
-
       const file = acceptedFiles[0];
-      // const imgUrl = await upload(file);
-
-      // if (imgUrl) {
-      //   setLoading(false);
-      //   setImage(imgUrl);
-      // }
+      if (file) {
+        setFileProfileImg(file);
+        setPreviewImage(URL.createObjectURL(file));
+      }
     }
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const handleUpdateProfilePic = (e: FormEvent<HTMLFormElement>) => {
+  const handleUpdateProfilePic = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  };
 
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    if (fileProfileImg) {
+      const uploadPromise = new Promise(async (resolve, reject) => {
+        try {
+          const uploadProfilePic = await uploadFile(
+            fileProfileImg,
+            `profileImages/${fileProfileImg.name + Date.now()}`
+          );
+          updateUser({ profileImgUrl: uploadProfilePic });
+          updateUserProfile({ ...user, profileImgUrl: uploadProfilePic });
 
-    setResetPassword((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+          setImage(uploadProfilePic);
+          setPreviewImage(null);
 
-  const handleChangePassword = async () => {
-    if (resetPassword.password !== resetPassword.confirmPassword) {
-      return;
+          resolve("Profile Image Updated Successfully");
+        } catch (error) {
+          reject(error);
+        }
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: "Updating Profile Image...",
+        success: "Profile Image Updated Successfully!",
+        error: "Error Updating Profile Image",
+      });
     }
   };
 
-  const handleUpdateUserInfo = (e: FormEvent<HTMLFormElement>) => {
+  const handleUpdateUserInfo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
+      const updatedData = await toast.promise(updateUser(userInfo), {
+        loading: "Updating User Profile",
+        success: "User Profile Updated Successfully",
+        error: "Error Updating User Profile",
+      });
+      updateUserProfile(updatedData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <AdminLayout>
-        <div className="mx-auto max-w-270 text-white">
+        <div className="mx-auto max-w-270 text-slate-600">
           <div className="grid grid-cols-5 gap-8">
-            <div className="col-span-5 xl:col-span-3 bg-boxdark py-5 rounded-md">
-              <div className="rounded-sm bg-box-dark ">
-                <div className="py-4 px-7 dark:dark">
-                  <h3 className="font-bold text-lg text-white">Personal Information</h3>
+            <div className="col-span-5 xl:col-span-3 py-5 rounded-md">
+              <div className="rounded-sm">
+                <div className="py-4 px-7">
+                  <h3 className="font-bold text-lg">Personal Information</h3>
                 </div>
                 <form onSubmit={handleUpdateUserInfo} className="p-7">
                   <div className="mb-5 flex flex-col gap-5 sm:flex-row">
-                    <div className="w-full sm:w-1/2">
+                    <div className="w-full">
                       <label className="mb-3 block text-sm font-medium" htmlFor="firstname">
                         First Name
                       </label>
@@ -108,52 +145,11 @@ const Settings = () => {
                           className="w-full rounded border bg-transparent bg-gray py-3 pl-10 pr-5  focus:border-primary  focus-visible:outline-none"
                           type="text"
                           name="firstname"
-                          value={userInfo.firstname}
+                          value={userInfo.name}
                           placeholder="First Name"
                           onChange={(e) => {
-                            setUserInfo({ ...userInfo, firstname: e.target.value });
+                            setUserInfo({ ...userInfo, name: e.target.value });
                           }}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full sm:w-1/2">
-                      <label className="mb-3 block text-sm font-medium" htmlFor="lastname">
-                        Last Name
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-2 top-3">
-                          <svg
-                            className="fill-current"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g opacity="0.8">
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M3.72039 12.887C4.50179 12.1056 5.5616 11.6666 6.66667 11.6666H13.3333C14.4384 11.6666 15.4982 12.1056 16.2796 12.887C17.061 13.6684 17.5 14.7282 17.5 15.8333V17.5C17.5 17.9602 17.1269 18.3333 16.6667 18.3333C16.2064 18.3333 15.8333 17.9602 15.8333 17.5V15.8333C15.8333 15.1703 15.5699 14.5344 15.1011 14.0655C14.6323 13.5967 13.9964 13.3333 13.3333 13.3333H6.66667C6.00363 13.3333 5.36774 13.5967 4.8989 14.0655C4.43006 14.5344 4.16667 15.1703 4.16667 15.8333V17.5C4.16667 17.9602 3.79357 18.3333 3.33333 18.3333C2.8731 18.3333 2.5 17.9602 2.5 17.5V15.8333C2.5 14.7282 2.93899 13.6684 3.72039 12.887Z"
-                                fill=""
-                              />
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M9.99967 3.33329C8.61896 3.33329 7.49967 4.45258 7.49967 5.83329C7.49967 7.214 8.61896 8.33329 9.99967 8.33329C11.3804 8.33329 12.4997 7.214 12.4997 5.83329C12.4997 4.45258 11.3804 3.33329 9.99967 3.33329ZM5.83301 5.83329C5.83301 3.53211 7.69849 1.66663 9.99967 1.66663C12.3009 1.66663 14.1663 3.53211 14.1663 5.83329C14.1663 8.13448 12.3009 9.99996 9.99967 9.99996C7.69849 9.99996 5.83301 8.13448 5.83301 5.83329Z"
-                                fill=""
-                              />
-                            </g>
-                          </svg>
-                        </span>
-                        <input
-                          className="w-full rounded border bg-transparent  bg-gray py-3 pl-10 pr-4  focus:border-primary text-white focus-visible:outline-none"
-                          type="text"
-                          name="lastname"
-                          required
-                          value={userInfo.lastname}
-                          placeholder="Last Name"
-                          onChange={(e) => setUserInfo({ ...userInfo, lastname: e.target.value })}
                         />
                       </div>
                     </div>
@@ -164,7 +160,7 @@ const Settings = () => {
                         Phone Number
                       </label>
                       <input
-                        className="w-full rounded border  bg-transparent py-3 px-4  focus:border-primary text-white focus-visible:outline-none"
+                        className="w-full rounded border  bg-transparent py-3 px-4  focus:border-primary focus-visible:outline-none"
                         type="text"
                         name="mobile"
                         required
@@ -183,9 +179,8 @@ const Settings = () => {
                           type="text"
                           name="country"
                           required
-                          value={userInfo.country}
+                          value={userInfo.nationality}
                           placeholder="Country"
-                          onChange={(e) => setUserInfo({ ...userInfo, country: e.target.value })}
                         />
                       </div>
                     </div>
@@ -232,7 +227,7 @@ const Settings = () => {
                     </div>
                   </div>
 
-                  <div className="mb-5">
+                  {/* <div className="mb-5">
                     <label className="mb-3 block text-sm font-medium" htmlFor="Username">
                       Username
                     </label>
@@ -244,7 +239,7 @@ const Settings = () => {
                       placeholder="Username"
                       onChange={(e) => setUserInfo({ ...userInfo, username: e.target.value })}
                     />
-                  </div>
+                  </div> */}
                   <div className="flex gap-4 mt-6">
                     <button
                       className="flex justify-center rounded  text-white bg-primary py-2 px-6 font-medium  hover:bg-opacity-95"
@@ -256,9 +251,9 @@ const Settings = () => {
                 </form>
               </div>
             </div>
-            <div className="col-span-5 xl:col-span-2 bg-boxdark rounded-md">
+            <div className="col-span-5 xl:col-span-2 rounded-md">
               <div className="rounded-sm">
-                <div className="py-4 px-7 dark:dark">
+                <div className="py-4 px-7">
                   <h3 className="font-bold text-lg">Your Photo</h3>
                 </div>
                 <div className="p-7">
@@ -279,7 +274,9 @@ const Settings = () => {
                         <div>
                           <span className="mb-1.5">Edit your photo</span>
                           <span className="flex gap-2.5">
-                            <button className="text-sm hover:text-primary-hover">Delete</button>
+                            <button className="text-sm hover:text-primary-hover">
+                              Delete
+                            </button>
                             <button className="text-sm hover:text-primary-hover">Update</button>
                           </span>
                         </div>
@@ -288,7 +285,7 @@ const Settings = () => {
                       <div
                         id="FileUpload"
                         {...getRootProps()}
-                        className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-meta3text-meta-3 bg-gray py-4 px-4 dark:bg-meta-4 sm:py-7.5"
+                        className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-meta3text-meta-3 bg-gray py-4 px-4 sm:py-7.5"
                       >
                         <input
                           type="file"
@@ -297,62 +294,52 @@ const Settings = () => {
                           className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none bg-transparent"
                         />
 
-                        {loading && (
-                          <div className="flex justify-center items-center mb-8 mt-5">
-                            <img src={loader} alt="" className="h-[50px] w-[50px]" />
+                        {previewImage ? (
+                          <img
+                            src={previewImage}
+                            alt="Selected profile"
+                            className="max-w-full mx-auto mb-8 max-h-20 object-cover"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center space-y-3">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-full border  bg-white">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M1.99967 9.33337C2.36786 9.33337 2.66634 9.63185 2.66634 10V12.6667C2.66634 12.8435 2.73658 13.0131 2.8616 13.1381C2.98663 13.2631 3.1562 13.3334 3.33301 13.3334H12.6663C12.8431 13.3334 13.0127 13.2631 13.1377 13.1381C13.2628 13.0131 13.333 12.8435 13.333 12.6667V10C13.333 9.63185 13.6315 9.33337 13.9997 9.33337C14.3679 9.33337 14.6663 9.63185 14.6663 10V12.6667C14.6663 13.1971 14.4556 13.7058 14.0806 14.0809C13.7055 14.456 13.1968 14.6667 12.6663 14.6667H3.33301C2.80257 14.6667 2.29387 14.456 1.91879 14.0809C1.54372 13.7058 1.33301 13.1971 1.33301 12.6667V10C1.33301 9.63185 1.63148 9.33337 1.99967 9.33337Z"
+                                  fill="#0064fa"
+                                />
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M7.5286 1.52864C7.78894 1.26829 8.21106 1.26829 8.4714 1.52864L11.8047 4.86197C12.0651 5.12232 12.0651 5.54443 11.8047 5.80478C11.5444 6.06513 11.1223 6.06513 10.8619 5.80478L8 2.94285L5.13807 5.80478C4.87772 6.06513 4.45561 6.06513 4.19526 5.80478C3.93491 5.54443 3.93491 5.12232 4.19526 4.86197L7.5286 1.52864Z"
+                                  fill="#0064fa"
+                                />
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M7.99967 1.33337C8.36786 1.33337 8.66634 1.63185 8.66634 2.00004V10C8.66634 10.3682 8.36786 10.6667 7.99967 10.6667C7.63148 10.6667 7.33301 10.3682 7.33301 10V2.00004C7.33301 1.63185 7.63148 1.33337 7.99967 1.33337Z"
+                                  fill="#0064fa"
+                                />
+                              </svg>
+                            </span>
+                            <p>
+                              <span className="text-primary">Click to upload</span> or drag and drop
+                            </p>
+                            <p className="mt-1.5">SVG, PNG, JPG or GIF</p>
+                            <p>(max, 800 X 800px)</p>
                           </div>
                         )}
-                        {/* {image && (
-												<img
-													src={image}
-													alt="Selected Image"
-													className="max-w-full mx-auto mb-8 max-h-48 object-cover"
-												/>
-											)} */}
-                        <div className="flex flex-col items-center justify-center space-y-3">
-                          <span className="flex h-10 w-10 items-center justify-center rounded-full border  bg-white dark:dark dark:bg-boxdark">
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M1.99967 9.33337C2.36786 9.33337 2.66634 9.63185 2.66634 10V12.6667C2.66634 12.8435 2.73658 13.0131 2.8616 13.1381C2.98663 13.2631 3.1562 13.3334 3.33301 13.3334H12.6663C12.8431 13.3334 13.0127 13.2631 13.1377 13.1381C13.2628 13.0131 13.333 12.8435 13.333 12.6667V10C13.333 9.63185 13.6315 9.33337 13.9997 9.33337C14.3679 9.33337 14.6663 9.63185 14.6663 10V12.6667C14.6663 13.1971 14.4556 13.7058 14.0806 14.0809C13.7055 14.456 13.1968 14.6667 12.6663 14.6667H3.33301C2.80257 14.6667 2.29387 14.456 1.91879 14.0809C1.54372 13.7058 1.33301 13.1971 1.33301 12.6667V10C1.33301 9.63185 1.63148 9.33337 1.99967 9.33337Z"
-                                fill="#0064fa"
-                              />
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M7.5286 1.52864C7.78894 1.26829 8.21106 1.26829 8.4714 1.52864L11.8047 4.86197C12.0651 5.12232 12.0651 5.54443 11.8047 5.80478C11.5444 6.06513 11.1223 6.06513 10.8619 5.80478L8 2.94285L5.13807 5.80478C4.87772 6.06513 4.45561 6.06513 4.19526 5.80478C3.93491 5.54443 3.93491 5.12232 4.19526 4.86197L7.5286 1.52864Z"
-                                fill="#0064fa"
-                              />
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M7.99967 1.33337C8.36786 1.33337 8.66634 1.63185 8.66634 2.00004V10C8.66634 10.3682 8.36786 10.6667 7.99967 10.6667C7.63148 10.6667 7.33301 10.3682 7.33301 10V2.00004C7.33301 1.63185 7.63148 1.33337 7.99967 1.33337Z"
-                                fill="#0064fa"
-                              />
-                            </svg>
-                          </span>
-                          <p>
-                            <span className="text-primary">Click to upload</span> or drag and drop
-                          </p>
-                          <p className="mt-1.5">SVG, PNG, JPG or GIF</p>
-                          <p>(max, 800 X 800px)</p>
-                        </div>
                       </div>
 
                       <div className="flex justify-end gap-x-5 mt-8">
-                        <button
-                          className="flex justify-center rounded bg-primary hover:bg-primary-hover  py-2 px-6 font-medium text-white hover:shadow-1 "
-                          type="submit"
-                        >
-                          Cancel
-                        </button>
                         <button
                           className="flex justify-center rounded border border-primary text-primary bg-meta3text-meta-3 py-2 px-6 font-medium text-gray hover:bg-opacity-95"
                           type="submit"
@@ -360,58 +347,6 @@ const Settings = () => {
                           Save
                         </button>
                       </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-5 gap-8 mt-10">
-            <div className="col-span-5 xl:col-span-3 bg-boxdark py-5">
-              <div className="rounded-sm  shadow-default dark:dark dark:bg-boxdark">
-                <div className="py-4 px-7 dark:dark">
-                  <h3 className="font-bold text-lg">Update Password</h3>
-                </div>
-                <div className="p-7">
-                  <form onSubmit={handleChangePassword}>
-                    <div className="mb-5.5 flex flex-col gap-5.5 ">
-                      <div className="mb-5">
-                        <label className="mb-3 block text-sm font-medium" htmlFor="Username">
-                          Password
-                        </label>
-                        <input
-                          className="w-full rounded border bg-transparent  bg-gray py-3 px-4  focus:border-meta3text-meta-3 focus-visible:outline-none"
-                          type="text"
-                          name="password"
-                          onChange={handlePasswordChange}
-                          value={resetPassword.password}
-                          placeholder="Password"
-                        />
-                      </div>
-
-                      <div className="mb-55">
-                        <label className="mb-3 block text-sm font-medium" htmlFor="Username">
-                          Confirm Password
-                        </label>
-                        <input
-                          className="w-full rounded border bg-transparent py-3 px-4  focus:border-meta3text-meta-3 focus-visible:outline-none"
-                          type="text"
-                          name="confirmPassword"
-                          onChange={handlePasswordChange}
-                          value={resetPassword.confirmPassword}
-                          placeholder="Confirm Password"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 mt-6">
-                      <button
-                        className="flex justify-center rounded  text-white bg-primary py-2 px-6 font-medium  hover:bg-opacity-95"
-                        type="submit"
-                      >
-                        Change Password
-                      </button>
                     </div>
                   </form>
                 </div>

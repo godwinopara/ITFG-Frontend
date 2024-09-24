@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
-import logo from "../images/LOGO.svg";
+import logo from "../images/ITFG-LOGO.png";
 import { login } from "../api/api";
 import { useUserAdminContext } from "../context/MainContext";
 

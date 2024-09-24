@@ -27,7 +27,7 @@ export default function DesktopNav() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="w-[30%]">
           <Link to="/">
-            <img src={logo} alt="" />
+            <img src={logo} alt="" className="w-[200px]" />
           </Link>
         </div>
         <ul className="flex items-center justify-center gap-x-10 mx-auto w-[40%]">

@@ -12,6 +12,7 @@ export interface UserProps {
   address: string;
   IDFront?: string;
   IDBack?: string;
+  profileImgUrl?: string;
   verified: string;
   wallet_balance: number;
   total_deposit: number;

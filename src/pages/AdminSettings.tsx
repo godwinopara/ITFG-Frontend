@@ -42,12 +42,12 @@ export default function AdminSettings() {
   return (
     <>
       <AdminLayout>
-        <div className="mx-auto max-w-270 text-white">
+        <div className="mx-auto max-w-270 ">
           <div className="grid grid-cols-5 gap-8">
-            <div className="col-span-5  bg-boxdark py-5 rounded-md">
+            <div className="col-span-5 py-5 rounded-md">
               <div className="rounded-sm bg-box-dark ">
                 <div className="py-4 px-7 dark:dark">
-                  <h3 className="font-bold text-lg text-white">Payment Method</h3>
+                  <h3 className="font-bold text-lg ">Payment Method</h3>
                 </div>
                 <form onSubmit={handleUpdatePaymentMethod} className="p-7">
                   <div className="mb-5">
@@ -94,8 +94,8 @@ export default function AdminSettings() {
           </div>
 
           <div className="grid grid-cols-5 gap-8 mt-10">
-            <div className="col-span-5 bg-boxdark py-5">
-              <div className="rounded-sm  shadow-default dark:dark dark:bg-boxdark">
+            <div className="col-span-5 py-5">
+              <div className="rounded-sm ">
                 <div className="py-4 px-7 dark:dark">
                   <h3 className="font-bold text-lg">Update Password</h3>
                 </div>
