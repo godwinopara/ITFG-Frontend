@@ -51,9 +51,21 @@ const DropdownAdmin = () => {
     <div className="relative">
       <Link ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-4" to="#">
         {!pathname.includes("admin") && (
-          <div className="hidden text-right lg:block">
+          <div className="hidden  lg:block">
             <span className="block  font-semibold mb-1">
               {loading && "Loading..."} {!loading && user?.name}{" "}
+            </span>
+            <span className="block  font-maisonMedium text-[0.85rem] mb-1">
+              {loading && "Loading..."}{" "}
+              {!loading ? (
+                user?.verified ? (
+                  <span className="text-green-700">verified</span>
+                ) : (
+                  <span className="text-red-400">unverified</span>
+                )
+              ) : (
+                ""
+              )}
             </span>
           </div>
         )}
@@ -66,7 +78,11 @@ const DropdownAdmin = () => {
         )}
         <div className="relative w-[50px] h-[50px] bg-boxdark-2 rounded-full overflow-hidden flex items-center justify-center">
           {!loading ? (
-            <img src="" alt="user profie pic" className="rounded-[100%] w-full h-full object-cover" />
+            <img
+              src={user?.profileImgUrl}
+              alt="user profie pic"
+              className="rounded-[100%] w-full h-full object-cover"
+            />
           ) : (
             <FaUser />
           )}

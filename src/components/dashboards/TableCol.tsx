@@ -2,7 +2,8 @@ import { AdminReferralProps, ReferralBonusProps, ReferralProps } from "../../typ
 import { InvestmentProps } from "../../types/investment";
 import { TransactionProps } from "../../types/transaction";
 import { ColumnDef } from "@tanstack/react-table";
-import { UserProps } from "@/types/user";
+import { UserProps } from "../../types/user";
+import { formatDate } from "../../lib/formatDate";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -36,6 +37,9 @@ export const columnsReferralBonus: ColumnDef<ReferralBonusProps>[] = [
   {
     accessorKey: "date",
     header: "Date Received",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
 ];
 
@@ -57,6 +61,9 @@ export const columnsReferral: ColumnDef<ReferralProps>[] = [
   {
     accessorKey: "date",
     header: "Date Registered",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
   {
     accessorKey: "status",
@@ -101,6 +108,9 @@ export const columnsAdminReferral: ColumnDef<AdminReferralProps>[] = [
   {
     accessorKey: "date",
     header: "Date Registered",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
   {
     accessorKey: "status",
@@ -144,10 +154,16 @@ export const columnsInvestment: ColumnDef<InvestmentProps>[] = [
   {
     accessorKey: "start",
     header: "Start",
+    cell({ row }) {
+      return formatDate(row.original.start);
+    },
   },
   {
     accessorKey: "end",
     header: "Elapse",
+    cell({ row }) {
+      return formatDate(row.original.end);
+    },
   },
   {
     accessorKey: "status",
@@ -190,10 +206,16 @@ export const columnsAdminInvestment: ColumnDef<InvestmentProps>[] = [
   {
     accessorKey: "start",
     header: "Start",
+    cell({ row }) {
+      return formatDate(row.original.start);
+    },
   },
   {
     accessorKey: "end",
     header: "Elapse",
+    cell({ row }) {
+      return formatDate(row.original.end);
+    },
   },
   {
     accessorKey: "status",
@@ -282,6 +304,9 @@ export const columnDeposit: ColumnDef<TransactionProps>[] = [
   {
     accessorKey: "date",
     header: "Date",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
 ];
 
@@ -342,6 +367,9 @@ export const columnAdminDeposit: ColumnDef<TransactionProps>[] = [
   {
     accessorKey: "date",
     header: "Date",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
   {
     accessorKey: "",
@@ -371,6 +399,9 @@ export const columnAdminWithdrawal: ColumnDef<TransactionProps>[] = [
   {
     accessorKey: "date",
     header: "Date",
+    cell({ row }) {
+      return formatDate(row.original.date);
+    },
   },
 
   {
