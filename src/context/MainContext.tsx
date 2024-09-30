@@ -111,11 +111,10 @@ export const UserAdminProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (!token && window.location.pathname !== "/signin") {
-      window.location.href = "/signin";
+    if (token) {
+      fetchUserData();
     }
 
-    fetchUserData();
     //eslint-disable-next-line
   }, []);
 

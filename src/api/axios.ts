@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
     const { response } = error;
 
     // Check if the error is a 401 Unauthorized or token is expired
-    if (response && response.status === 401) {
+    if (response && response.status === 404) {
       // Token is missing or expired, clear localStorage
       localStorage.removeItem("token");
 
