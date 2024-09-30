@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logo from "../images/ITFG-LOGO.png";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { FaGlobe } from "react-icons/fa6";
+import { signUp } from "../api/api";
 
 interface Country {
   name: string;
@@ -14,17 +16,24 @@ interface Country {
 export default function SignUp() {
   const [countries, setCountries] = useState<Country[] | null>(null);
 
+  const { referralCode } = useParams();
+
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    gender: "",
+    name: "",
     email: "",
-    country: "",
-    mobile: "",
+    nationality: "",
     password: "",
+    referral: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    if (referralCode) {
+      setFormData((prevFormData) => ({ ...prevFormData, referralCode: referralCode }));
+    }
+
+    //eslint-disable-next-line
+  }, []);
 
   const navigate = useNavigate();
 
@@ -36,9 +45,33 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmitSignUp = () => {};
+  const handleSubmitSignUp = async (e: FormEvent) => {
+    e.preventDefault();
+    if (formData.confirmPassword !== formData.password) {
+      toast.error("Password does not match");
+      return;
+    }
+    const body = {
+      name: formData.name,
+      email: formData.email,
+      nationality: formData.nationality,
+      password: formData.password,
+      referral: formData?.referral,
+    };
+    try {
+      const addUser = await toast.promise(signUp(body), {
+        loading: "Creating Account..",
+        success: "Account Created Successfully",
+        error: "Error Creating Account",
+      });
 
-  const handleGoogleSignUp = () => {};
+      if (addUser) {
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const getCountries = async () => {
@@ -61,60 +94,19 @@ export default function SignUp() {
           <img src={logo} alt="" className="w-[50%]" />
         </Link>
         <form onSubmit={handleSubmitSignUp}>
-          <div className="mb-4 xl:flex gap-x-3">
+          <div className="mb-4 gap-x-3 w-full">
             <div>
-              <label className="mb-2.5 block font-medium text-black">First Name</label>
+              <label className="mb-2.5 block font-medium text-black">Full Name</label>
               <div className="relative">
                 <input
                   type="text"
-                  name="firstname"
+                  name="name"
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter your First Name"
+                  placeholder="John Doe"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                 />
               </div>
-            </div>
-            <div>
-              <label className="mb-2.5 block font-medium text-black">Last Name</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  required
-                  name="lastname"
-                  onChange={handleInputChange}
-                  placeholder="Enter your Last Name"
-                  className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="mb-4 xl:flex gap-x-3">
-            <div className="w-full">
-              <label className="mb-2.5 block font-medium text-black">Username</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="username"
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter your Username"
-                  className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                />
-              </div>
-            </div>
-            <div className="w-full relative z-20 bg-transparent mb-4">
-              <label className="mb-2.5 block text-black dark:text-white">Gender</label>
-              <select
-                name="gender"
-                onChange={handleInputChange}
-                required
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
             </div>
           </div>
 
@@ -126,7 +118,7 @@ export default function SignUp() {
                 required
                 name="email"
                 onChange={handleInputChange}
-                placeholder="Enter your email"
+                placeholder="example@email.com"
                 className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
               />
 
@@ -149,25 +141,25 @@ export default function SignUp() {
               </span>
             </div>
           </div>
-
-          <div className="mb-6 xl:flex gap-x-3">
-            <div>
-              <label className="mb-2.5 block font-medium text-black">Mobile Number</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  required
-                  name="mobile"
-                  onChange={handleInputChange}
-                  placeholder="Mobile (Whatsapp Preferred)"
-                  className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                />
-              </div>
+          <div className="mb-4">
+            <label className="mb-2.5 block font-medium text-black ">Referral Code</label>
+            <div className="relative">
+              <input
+                type="text"
+                name="referral"
+                onChange={handleInputChange}
+                placeholder="Enter Referral Code"
+                value={formData.referral}
+                className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+              />
             </div>
+          </div>
+
+          <div className="mb-6 w-full gap-x-3">
             <div className="relative z-20 bg-transparent mb-4">
               <label className="mb-2.5 block text-black dark:text-white">Select Country</label>
               <select
-                name="country"
+                name="nationality"
                 onChange={handleInputChange}
                 required
                 className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3"
@@ -177,6 +169,9 @@ export default function SignUp() {
                   return <option key={key}>{country.name}</option>;
                 })}
               </select>
+              <div className="absolute right-4 top-12 text-slate-600 text-xl">
+                <FaGlobe />
+              </div>
             </div>
           </div>
 
@@ -215,13 +210,10 @@ export default function SignUp() {
               className="flex justify-center items-center gap-x-2 w-full cursor-pointer rounded-lg border border-meta-3 bg-primary hover:bg-primary-hover p-4 text-white transition hover:bg-opacity-90"
             >
               Create Account
-              {/* {loading && (
-							<Image className="border" src={loader} alt="loading icon" height={20} width={20} />
-						)} */}
             </button>
           </div>
 
-          <button
+          {/* <button
             onClick={handleGoogleSignUp}
             className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50"
           >
@@ -253,7 +245,7 @@ export default function SignUp() {
               </svg>
             </span>
             Sign up with Google
-          </button>
+          </button> */}
 
           <div className="mt-6 text-center">
             <p>

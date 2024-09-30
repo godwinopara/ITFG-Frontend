@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "./axios";
 
 interface Body {
@@ -28,8 +29,21 @@ interface InvestProps {
   end: string;
 }
 
+interface SignupProp {
+  name: string;
+  email: string;
+  password: string;
+  nationality: string;
+  referral: string;
+}
+
 export const login = async ({ email, password }: Body) => {
   const response = await axiosInstance.post("/auth/login", { email, password });
+  return response.data;
+};
+
+export const signUp = async (body: SignupProp) => {
+  const response = await axiosInstance.post("/auth/signup", body);
   return response.data;
 };
 

@@ -133,6 +133,11 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
+    path: "signup/:referralCode",
+    element: <SignUp />,
+  },
+
+  {
     path: "signin",
     element: <SignIn />,
   },

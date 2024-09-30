@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://itfg-backend.onrender.com/api",
 });
 
 // Request interceptor to include JWT in headers
@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem("token");
 
       // Redirect to login page
-      window.location.href = "/login"; // Change to your login route
+      //window.location.href = "/signin"; // Change to your login route
 
       // Optionally display an error message
       toast.error("Session expired");
