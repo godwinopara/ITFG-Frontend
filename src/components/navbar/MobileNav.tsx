@@ -1,6 +1,6 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import logo from "../../images/LOGO.svg";
+import logo from "../../images/ITFG-LOGO.png";
 import { useEffect, useState } from "react";
 
 export default function MobileNav() {
