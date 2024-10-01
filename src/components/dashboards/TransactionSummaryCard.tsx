@@ -11,7 +11,7 @@ export default function TransactionSummaryCard() {
         <CardHeader>
           <CardTitle className="text-base text-primary">Transaction Analytics</CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-2">
+        <CardContent className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2">
           <div></div>
           <div>
             <div className="mb-6">

@@ -30,11 +30,11 @@ const UserDashboard = (props: Props) => {
             <p className="text-slate-600 mb-1">Welcome!</p>
             <h2 className="text-3xl font-maisonMedium text-slate-600">{user?.name}</h2>
           </div>
-          <div className="grid grid-cols-4 gap-x-2">
+          <div className="grid gap-y-2 xl:gap-y-0 xl:grid-cols-4 xl:gap-x-2">
             <AccountStatistics />
           </div>
           <TickerTape></TickerTape>
-          <div className="grid grid-cols-12 gap-4 md:gap-6">
+          <div className="grid xl:grid-cols-12 gap-4 md:gap-6">
             <InvestmentSummary />
           </div>
           <div className="grid grid-cols-1 gap-x-6">
@@ -44,7 +44,7 @@ const UserDashboard = (props: Props) => {
               <DashboardDataTable columns={columnsInvestment} data={investments || []} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-6">
+          <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-x-6">
             <ReferralCard />
             <ReferralCardStat />
           </div>

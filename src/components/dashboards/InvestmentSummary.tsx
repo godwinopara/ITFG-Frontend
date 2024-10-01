@@ -19,11 +19,11 @@ export default function InvestmentSummary() {
 
   return (
     <>
-      <Card className="col-span-4">
+      <Card className="xl:col-span-4">
         <CardHeader>
           <CardTitle className="text-base text-primary font-maisonMedium">Wallet Balance</CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-2">
+        <CardContent className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2">
           <div></div>
           <div className="text-slate-600">
             <div className="mb-5">
@@ -63,12 +63,12 @@ export default function InvestmentSummary() {
           </div>
         </CardContent>
       </Card>
-      <Card className="col-span-5">
+      <Card className="xl:col-span-5">
         <CardHeader>
           <CardTitle className="text-base text-primary font-maisonMedium">Investment Overview</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 mb-6">
+          <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 mb-6">
             <div>
               <div className="mb-8">
                 <h3 className="mb-1">Total Invested Amount</h3>
@@ -119,7 +119,7 @@ export default function InvestmentSummary() {
           </div>
         </CardContent>
       </Card>
-      <Card className="col-span-3 bg-primary text-white">
+      <Card className="xl:col-span-3 bg-primary text-white">
         <CardHeader>
           <CardDescription className="flex justify-center items-center mb-3">
             <div className="bg-blue-500 text-white h-[50px] w-[50px] rounded-full flex items-center justify-center text-2xl">

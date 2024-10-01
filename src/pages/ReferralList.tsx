@@ -15,7 +15,7 @@ function ReferralList() {
       <div className="flex justify-between items-center mb-5">
         <h1 className="text-slate-600 font-maisonBold  text-xl">Referrals</h1>
       </div>
-      <div className="grid grid-cols-2 gap-x-6">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-x-6">
         <ReferralCard />
         <ReferralCardStat />
       </div>

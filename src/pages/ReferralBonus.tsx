@@ -14,7 +14,7 @@ function ReferralBonus() {
       <div className="flex justify-between items-center mb-5">
         <h1 className="text-slate-600 font-maisonBold text-xl">Referrals Bonus</h1>
       </div>
-      <div className="grid grid-cols-2 gap-x-6 mb-5">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-x-6 mb-5">
         <ReferralCard />
         <ReferralCardStat />
       </div>

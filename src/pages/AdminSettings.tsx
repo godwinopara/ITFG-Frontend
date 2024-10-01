@@ -43,7 +43,7 @@ export default function AdminSettings() {
     <>
       <AdminLayout>
         <div className="mx-auto max-w-270 ">
-          <div className="grid grid-cols-5 gap-8">
+          <div className="grid gap-y-4 xl:grid-cols-5 gap-8">
             <div className="col-span-5 py-5 rounded-md">
               <div className="rounded-sm bg-box-dark ">
                 <div className="py-4 px-7 dark:dark">

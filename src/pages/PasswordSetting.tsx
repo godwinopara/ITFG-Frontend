@@ -41,7 +41,7 @@ export default function PasswordSetting() {
         <h2 className="font-maisonBold mb-1 text-primary text-base">Your Password</h2>
         <p className="text-gray-600 text-sm">Change Your Account Password</p>
       </div>
-      <div className="grid grid-cols-2 border gap-10 p-8">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 border gap-10 p-8">
         <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-3 mb-8">
             <Label htmlFor="lastname" className="font-maisonMedium">

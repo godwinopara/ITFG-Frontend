@@ -16,12 +16,12 @@ export default function UserAccount() {
   return (
     <AdminLayout>
       <TickerTape></TickerTape>
-      <div className="grid grid-cols-12 gap-6 my-8">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-12 gap-6 my-8">
         <InvestmentSummary />
       </div>
-      <div className="grid grid-cols-3 gap-x-6 mb-8">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-3 gap-x-6 mb-8">
         <TransactionSummaryCard />
-        <div className="col-span-2 grid grid-cols-2 gap-6">
+        <div className="xl:col-span-2 grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-6">
           <StatiscticsCard
             title="Confirmed Deposit"
             amount={`${user?.total_confirmed_deposits_amount.toLocaleString()}`}
@@ -59,7 +59,7 @@ export default function UserAccount() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-x-6">
+      <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-x-6">
         <ReferralCard />
         <ReferralCardStat />
       </div>

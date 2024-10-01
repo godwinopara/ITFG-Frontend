@@ -103,7 +103,7 @@ const Settings = () => {
     <>
       <AdminLayout>
         <div className="mx-auto max-w-270 text-slate-600">
-          <div className="grid grid-cols-5 gap-8">
+          <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-5 gap-8">
             <div className="col-span-5 xl:col-span-3 py-5 rounded-md">
               <div className="rounded-sm">
                 <div className="py-4 px-7">
@@ -274,9 +274,7 @@ const Settings = () => {
                         <div>
                           <span className="mb-1.5">Edit your photo</span>
                           <span className="flex gap-2.5">
-                            <button className="text-sm hover:text-primary-hover">
-                              Delete
-                            </button>
+                            <button className="text-sm hover:text-primary-hover">Delete</button>
                             <button className="text-sm hover:text-primary-hover">Update</button>
                           </span>
                         </div>

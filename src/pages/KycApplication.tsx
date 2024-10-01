@@ -192,7 +192,7 @@ function KycApplication() {
               <h2 className="font-maisonBold mb-1 text-primary text-base">KYC/AML Verification</h2>
               <p className="text-gray-600 text-sm">Submit application for KYC/AML verification</p>
             </div>
-            <div className="grid grid-cols-4 border gap-10 p-8">
+            <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-4 border gap-10 p-8">
               <form onSubmit={handleSubmit} className="col-span-3">
                 <div className="grid ">{fullname}</div>
                 <div className="grid lg:grid-cols-2 gap-6">
@@ -208,7 +208,7 @@ function KycApplication() {
                   {zipcode}
                 </div>
                 <div className="grid">{address}</div>
-                <div className="grid grid-cols-2 gap-8 mb-5">
+                <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 gap-8 mb-5">
                   <div className="w-full mx-auto p-8 border rounded-lg">
                     <h2 className="text-xl font-semibold text-gray-800 mb-4">Upload Your ID(Front)</h2>
 

@@ -56,7 +56,7 @@ export default function ProfileSetting() {
               <h2 className="font-maisonBold mb-1 text-primary text-base">Your Profile Details</h2>
               <p className="text-gray-600 text-sm">Profile details provided on sign up</p>
             </div>
-            <div className="grid grid-cols-2 border gap-10 p-8">
+            <div className="grid gap-y-4 xl:gap-y-0 xl:grid-cols-2 border gap-10 p-8">
               <form onSubmit={handleSubmit}>
                 <div className="grid w-full items-center gap-3 mb-8">
                   <Label htmlFor="firstname" className="font-maisonMedium">
